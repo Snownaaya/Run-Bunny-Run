@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Roader : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   [SerializeField] private float _speed;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private void FixedUpdate() => Move();
+
+    public void SetSpeed(float speed) => _speed = speed;
+
+    private void Move() => transform.Translate(Vector3.back * _speed * Time.fixedDeltaTime);
 }

@@ -1,25 +1,32 @@
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RoadPlaces : MonoBehaviour
 {
-    [SerializeField] private Roader[] _roads;
-    [SerializeField] private Player _player;
+    [SerializeField] private Roader _tilePrefabs;
+    [SerializeField] private float _speed;
+    [SerializeField] private int _count;
+    [SerializeField] private List<Roader> _listRoad = new List<Roader>();
 
-    private List<Roader> _spawnRoad = new List<Roader>();
+    private void Awake()
+    {
+        _listRoad.First().SetSpeed(_speed);
+
+        for (int i = 0; i < _count; i++)
+            GenerateTile();
+    }
 
     private void Update()
     {
-        RoadSpawner();
+        if (_listRoad.Count < _count)
+            GenerateTile();
     }
 
-    private void RoadSpawner()
+    private void GenerateTile()
     {
-        Roader newRoad = Instantiate(_roads[Random.Range(0, _roads.Length)]);
-
-        _spawnRoad.Add(newRoad);
-
-
+        Roader roader = Instantiate(_tilePrefabs, _listRoad.Last().transform.position + transform.forward * _tilePrefabs.transform.localScale.z, Quaternion.identity);
+        Roader newRoader = roader.GetComponent<Roader>();
+        _listRoad.Add(newRoader);
     }
 }

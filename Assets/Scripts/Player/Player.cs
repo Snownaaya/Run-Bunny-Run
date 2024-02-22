@@ -20,7 +20,10 @@ public class Player : MonoBehaviour
     private void Update()
     {
         if (_characterController.isGrounded)
+        {
             Move();
+            Jump();
+        }
     }
 
     private void Move()
@@ -28,11 +31,7 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxis(Horizontal);
         float vertical = Input.GetAxis(Vertical);
 
-        Vector3 inputDirection = new Vector3(horizontal, 0.0f, vertical);
-        inputDirection = transform.TransformDirection(inputDirection);
-        _moveDirection = inputDirection * _speed;
-
-        _characterController.Move(_moveDirection * Time.deltaTime);
+        
     }
 
     private void Jump()
