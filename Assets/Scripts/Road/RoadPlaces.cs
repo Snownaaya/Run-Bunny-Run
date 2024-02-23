@@ -10,7 +10,8 @@ public class RoadPlaces : MonoBehaviour
 
     private List<Roader> _roadersList = new List<Roader>();
 
-    private float _spawnDistance = 15;
+    private float _spawnDistance = 15f;
+    private int _checkSpawnCount = 3;
 
     private void Awake()
     {
@@ -28,5 +29,11 @@ public class RoadPlaces : MonoBehaviour
         Roader newRoader = Instantiate(_roaders[Random.Range(0, _roaders.Length)]);
         newRoader.transform.position = _roadersList[_roadersList.Count - 1].End.position - newRoader.Begin.localPosition;
         _roadersList.Add(newRoader);
+
+        if (_roadersList.Count >= _checkSpawnCount)
+        {
+            Destroy(_roadersList[0].gameObject);
+            _roadersList.RemoveAt(0);
+        }
     }
 }
