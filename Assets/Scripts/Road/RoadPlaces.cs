@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class RoadPlaces : MonoBehaviour
 {
-    [SerializeField] private Roader _tilePrefabs;
-    [SerializeField] private float _speed;
-    [SerializeField] private int _count;
-    [SerializeField] private List<Roader> _listRoad = new List<Roader>();
+    [SerializeField] private Transform _player;
+    [SerializeField] private Roader[] _roaders;
+    [SerializeField] private Roader _firstRoader;
+
+    private List<Roader> _roadersList = new List<Roader>();
+
+    private float _spawnDistance = 15;
 
     private void Awake()
     {
-        _listRoad.First().SetSpeed(_speed);
-
-        for (int i = 0; i < _count; i++)
-            GenerateTile();
+        _roadersList.Add(_firstRoader);
     }
 
     private void Update()
     {
-        if (_listRoad.Count < _count)
-            GenerateTile();
+        if (_player.position.z > _roadersList[_roadersList.Count - 1].End.position.z - _spawnDistance)
+            Spawn();
     }
 
-    private void GenerateTile()
+    private void Spawn()
     {
-        Roader roader = Instantiate(_tilePrefabs, _listRoad.Last().transform.position + transform.forward * _tilePrefabs.transform.localScale.z, Quaternion.identity);
-        Roader newRoader = roader.GetComponent<Roader>();
-        _listRoad.Add(newRoader);
+        Roader newRoader = Instantiate(_roaders[Random.Range(0, _roaders.Length)]);
+        newRoader.transform.position = _roadersList[_roadersList.Count - 1].End.position - newRoader.Begin.localPosition;
+        _roadersList.Add(newRoader);
     }
 }
