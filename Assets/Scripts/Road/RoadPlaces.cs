@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoadPlaces : MonoBehaviour
 {
     [SerializeField] private Transform _player;
-    [SerializeField] private Roader[] _roaders;
+    [SerializeField] private Roader[] _roaderPrefabs;
     [SerializeField] private Roader _firstRoader;
 
     private List<Roader> _roadersList = new List<Roader>();
@@ -26,7 +26,7 @@ public class RoadPlaces : MonoBehaviour
 
     private void Spawn()
     {
-        Roader newRoader = Instantiate(_roaders[Random.Range(0, _roaders.Length)]);
+        Roader newRoader = Instantiate(_roaderPrefabs[Random.Range(0, _roaderPrefabs.Length)]);
         newRoader.transform.position = _roadersList[_roadersList.Count - 1].End.position - newRoader.Begin.localPosition;
         _roadersList.Add(newRoader);
 
