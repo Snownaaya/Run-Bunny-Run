@@ -4,7 +4,7 @@ public class CameraContoller : MonoBehaviour
 {
     [SerializeField] Player _player;
 
-    private float _distance = 0f;
+    private float _distance = 0.7f;
     private float _maxDistance = 6.541f;
 
     private void Awake() => _player = FindObjectOfType<Player>();
