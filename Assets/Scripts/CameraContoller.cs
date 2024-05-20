@@ -7,6 +7,4 @@ public class CameraContoller : MonoBehaviour
     private Vector3 _offset;
 
     private void Awake() => _offset = transform.position - _player.transform.position;
-
-
 }

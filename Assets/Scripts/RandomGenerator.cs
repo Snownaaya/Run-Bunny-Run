@@ -8,14 +8,14 @@ public static class RandomGenerator
 
     public static int Range(int minimum, int maximum) => s_random.Next(minimum, maximum);
 
-    public static T Choose<T>(List<T> list)
-    {
-        if (list == null || list.Count == 0)
-        {
-            return default(T);
-        }
+    //public static T Choose<T>(List<T> list)
+    //{
+    //    if (list == null || list.Count == 0)
+    //    {
+    //        return default(T);
+    //    }
 
-        int index = Range(0, list.Count);
-        return list[index];
-    }
+    //    int index = Range(0, list.Count);
+    //    return list[index];
+    //}
 }

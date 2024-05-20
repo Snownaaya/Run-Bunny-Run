@@ -1,34 +1,44 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinSpawner : MonoBehaviour
+public class CoinSpawner : PoolCoin<Coin>
 {
-    [SerializeField] Coin _coin;
-    [SerializeField] List<Transform> _points = new List<Transform>();
-    [SerializeField] private float _nextCoolDown = 4f;
-    [SerializeField] private Transform _coinParent;
+    [SerializeField] private float _delay;
+
+    [SerializeField] private int _horizontalBounds;
+    [SerializeField] private int _verticalBounds;
 
     private Coroutine _coroutine;
-    private Vector3 _offsetCoin;
 
-    private float _nextSpawnCoin = 1f;
-
-    private void Awake() => StartCoroutine(Spawn());
-
-    private IEnumerator Spawn()
+    private void Start()
     {
-        _nextSpawnCoin = Time.time + _nextSpawnCoin;
+        _coroutine = StartCoroutine(CoinGenerator());
+    }
 
-        while (Time.time < _nextSpawnCoin)
+
+    private IEnumerator CoinGenerator()
+    {
+        var wait = new WaitForSeconds(_delay);
+
+        while (enabled)
         {
-            int randomIndex = RandomGenerator.Range(0, _points.Count);
-            Vector3 spawnPosition = _points[randomIndex].position + _offsetCoin;
-
-            Coin newCoin = Instantiate(_coin, spawnPosition, Quaternion.identity);
-            newCoin.transform.SetParent(_coinParent);
-
-            yield return null;
+            Spawn();
+            yield return wait;
         }
+    }
+
+    private void Spawn()
+    {
+        Coin coin = GetCoin();
+        coin.transform.position = RandomCoinPosition();
+        coin.gameObject.SetActive(true);
+    }
+
+    private Vector3 RandomCoinPosition()
+    {
+        float positionX = RandomGenerator.Range(_horizontalBounds, _verticalBounds);
+        float positionZ = RandomGenerator.Range(_horizontalBounds, _verticalBounds); 
+
+        return new Vector3(positionX, transform.position.y, positionZ);
     }
 }

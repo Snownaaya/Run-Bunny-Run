@@ -128,6 +128,8 @@ GameObject:
   - component: {fileID: 5401998658951322498}
   - component: {fileID: 5229260660685198284}
   - component: {fileID: 5366180446778027716}
+  - component: {fileID: 1361058839965709484}
+  - component: {fileID: 8635236418001377045}
   m_Layer: 6
   m_Name: road (1)
   m_TagString: Untagged
@@ -209,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a715f6b3d770d444be18475c78253e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  _speed: 5
   _end: {fileID: 7292537199498311998}
   _begin: {fileID: 4294363295863016233}
 --- !u!65 &5366180446778027716
@@ -231,8 +233,50 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.121527, y: 0.21970037, z: 25.670898}
-  m_Center: {x: -0.007817507, y: -0.07468785, z: 6.626629}
+  m_Size: {x: 4.121527, y: 0.21970037, z: 25.410568}
+  m_Center: {x: -0.006341696, y: -0.1385584, z: 6.6566086}
+--- !u!65 &1361058839965709484
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4584465679109574373}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1140728, y: 2.4442232, z: 11.761954}
+  m_Center: {x: 1.4965067, y: 1.1241187, z: -0.040552616}
+--- !u!65 &8635236418001377045
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4584465679109574373}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1644144, y: 2.3505225, z: 11.627981}
+  m_Center: {x: -1.5297084, y: 1.281493, z: 0.27318096}
 --- !u!1 &6457315886542844669
 GameObject:
   m_ObjectHideFlags: 0
