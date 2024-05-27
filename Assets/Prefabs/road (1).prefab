@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 5366180446778027716}
   - component: {fileID: 1361058839965709484}
   - component: {fileID: 8635236418001377045}
+  - component: {fileID: 5614124394339111956}
   m_Layer: 6
   m_Name: road (1)
   m_TagString: Untagged
@@ -233,8 +234,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.121527, y: 0.21970037, z: 25.410568}
-  m_Center: {x: -0.006341696, y: -0.1385584, z: 6.6566086}
+  m_Size: {x: 4.121527, y: 0.45726714, z: 13.510277}
+  m_Center: {x: -0.006341696, y: -0.20313148, z: 0.8483}
 --- !u!65 &1361058839965709484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -277,6 +278,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1644144, y: 2.3505225, z: 11.627981}
   m_Center: {x: -1.5297084, y: 1.281493, z: 0.27318096}
+--- !u!65 &5614124394339111956
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4584465679109574373}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.465619, y: 0.1306574, z: 1.7694626}
+  m_Center: {x: -0.25905085, y: -0.095395565, z: 18.539043}
 --- !u!1 &6457315886542844669
 GameObject:
   m_ObjectHideFlags: 0

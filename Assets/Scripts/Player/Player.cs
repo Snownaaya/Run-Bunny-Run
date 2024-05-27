@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
@@ -6,16 +7,24 @@ public class Player : MonoBehaviour
     public const string Horizontal = nameof(Horizontal);
     public const KeyCode Space = KeyCode.Space;
 
+    [SerializeField] private Transform _camera;
+
     [SerializeField] private float _speed = 5.0f;
-    [SerializeField] private float _jumpForce = 8.0f;
-    [SerializeField] private float _gravity = 9.8f;
+    [SerializeField] private float _jumpForce = 10.0f;
 
     private CharacterController _characterController;
-    private Vector3 _moveDirection = Vector3.zero;
+    private Vector3 _moveDirection;
+    // private PlayerCollisionHandler _playerCollision;
+    private Vector3 _verticalVelocity;
 
-    private float _verticalVelocity;
 
-    private void Awake() => _characterController = GetComponent<CharacterController>();
+    public event Action GameOver;
+
+    private void Awake()
+    {
+        _characterController = GetComponent<CharacterController>();
+        // _playerCollision = GetComponent<PlayerCollisionHandler>();
+    }
 
     private void Update()
     {
@@ -23,16 +32,13 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(Space))
             Jump();
+
+        ApplyGravity();
     }
 
-    private void FixedUpdate()
-    {
-        _verticalVelocity += _gravity * Time.fixedDeltaTime;
-        _moveDirection.y = _verticalVelocity;
-        _characterController.Move(_moveDirection * Time.fixedDeltaTime);
-    }
+    //private void OnEnable() => _playerCollision.CollisionDetected += ProcessCollision;
 
-
+    //private void OnDisable() => _playerCollision.CollisionDetected -= ProcessCollision; 
 
     private void Move()
     {
@@ -42,5 +48,24 @@ public class Player : MonoBehaviour
         _characterController.Move(_moveDirection * _speed * Time.deltaTime);
     }
 
-    private void Jump() => _verticalVelocity = _jumpForce;
+    private void Jump()
+    {
+        _verticalVelocity = Vector3.up * _jumpForce;
+    }
+
+    private void ApplyGravity()
+    {
+        if (_characterController.isGrounded == false)
+        {
+            _verticalVelocity += Physics.gravity * Time.deltaTime;
+        }
+
+        _characterController.Move(_verticalVelocity * Time.deltaTime);
+    }
+
+    //private void ProcessCollision(IInteractable interactable)
+    //{
+    //    if (interactable is GameOverZone)
+    //        GameOver?.Invoke();
+    //}
 }
