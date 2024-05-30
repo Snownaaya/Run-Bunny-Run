@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadPlaces : MonoBehaviour
+public class RoadSpawner : ObjectPool<Roader>
 {
     [SerializeField] private Transform _player;
     [SerializeField] private Roader[] _roaderPrefabs;
@@ -36,4 +36,21 @@ public class RoadPlaces : MonoBehaviour
             _roadersList.RemoveAt(0);
         }
     }
+
+    //private void Spawn()
+    //{
+    //    Roader newRoader = GetObject();
+    //    Vector3 newPosiotion = _roadersList[_roadersList.Count - 1].End.position - newRoader.Begin.localPosition;
+
+    //    newPosiotion.y = _roadersList[_roadersList.Count - 1].Begin.position.y;
+    //    newRoader.transform.position = newPosiotion;
+
+    //    _roadersList.Add(newRoader);
+
+    //    if (_roadersList.Count >= _checkSpawnCount && _roadersList.Count > 0)
+    //    {
+    //        ReturnObject(newRoader);
+    //        _roadersList.RemoveAt(0);
+    //    }
+    //}
 }

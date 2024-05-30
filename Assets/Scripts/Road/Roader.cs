@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Roader : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Roader : MonoBehaviour
     public Transform Begin => _begin;
     public Transform End => _end;
 
-    private void FixedUpdate() => Move();
+    private void Update() => Move();
 
     private void Move() => transform.Translate(Vector3.back * _speed * Time.fixedDeltaTime);
 }
