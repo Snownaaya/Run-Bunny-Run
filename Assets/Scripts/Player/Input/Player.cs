@@ -6,7 +6,7 @@ using System;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 5.0f;
-    [SerializeField] private float _jumpForce = 10.0f;
+    [SerializeField] private float _jumpForce;
 
     public event Action GameOver;
 

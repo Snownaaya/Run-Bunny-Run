@@ -7,15 +7,7 @@ public abstract class ObjectPool<T> : MonoBehaviour, IResetteble where T : MonoB
     [SerializeField] private T _prefab;
     [SerializeField] private Transform _container;
 
-    private Queue<T> _pool;
-
-    public IEnumerable<T> PoolObject { get; private set; }
-
-    private void Awake()
-    {
-        _pool = new Queue<T>();
-        PoolObject = _pool;
-    }
+    private Queue<T> _pool = new Queue<T>();
 
     public T GetObject()
     {
@@ -25,9 +17,7 @@ public abstract class ObjectPool<T> : MonoBehaviour, IResetteble where T : MonoB
             return newObject;
         }
 
-        T pooledObject = _pool.Dequeue();
-        pooledObject.gameObject.SetActive(false);
-        return pooledObject;
+        return _pool.Dequeue();
     }
 
     public void ReturnObject(T newObject)

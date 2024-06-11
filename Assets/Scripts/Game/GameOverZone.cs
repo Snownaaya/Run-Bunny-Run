@@ -1,6 +1,3 @@
 using UnityEngine;
 
-public class GameOverZone : MonoBehaviour, IInteractable
-{
-   
-}
+public class GameOverZone : MonoBehaviour, IInteractable { }

@@ -28,8 +28,8 @@ public class CoinSpawner : ObjectPool<Coin>
     private void Spawn()
     {
         Coin coin = GetObject();
-        coin.transform.position = RandomCoinPosition();
         coin.gameObject.SetActive(true);
+        coin.transform.position = RandomCoinPosition();
     }
 
     private Vector3 RandomCoinPosition()
