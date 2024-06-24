@@ -350,9 +350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a715f6b3d770d444be18475c78253e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _end: {fileID: 1592924765002551536}
-  _begin: {fileID: 6981195044523783903}
-  _speed: 30
+  <End>k__BackingField: {fileID: 6981195044523783903}
+  <Begin>k__BackingField: {fileID: 1592924765002551536}
+  _speed: 0.5
+  _delay: 5
 --- !u!65 &2243638347209306394
 BoxCollider:
   m_ObjectHideFlags: 0

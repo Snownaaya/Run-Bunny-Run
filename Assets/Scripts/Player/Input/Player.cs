@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        _playerInput = new PlayerInput(); 
+        _playerInput = new PlayerInput();
         _rigidbody = GetComponent<Rigidbody>();
         //_playerCollision = GetComponent<PlayerCollisionHandler>();
 
@@ -30,23 +31,33 @@ public class Player : MonoBehaviour
         _playerInput.Player.Jump.canceled -= OnJump;
     }
 
-    private void Update()
-    {
-        Move();
+    private void Start() => StartCoroutine(Movement());
 
-        if (_jump)
+    private IEnumerator Movement()
+    {
+
+        while (enabled)
         {
-            Jump();
-            _jump = false;
+            Move();
+
+            if (_jump)
+            {
+                Jump();
+                _jump = false;
+            }
+
+            yield return null;
         }
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         _playerInput.Enable();
         //_playerCollision.CollisionDetected += ProcessCollision;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         _playerInput.Disable();
         //_playerCollision.CollisionDetected -= ProcessCollision;
     }

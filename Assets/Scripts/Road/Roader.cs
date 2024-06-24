@@ -1,29 +1,29 @@
+using System.Collections;
 using UnityEngine;
-using System;
 
 public class Roader : MonoBehaviour
 {
-    [SerializeField] private Transform _end;
-    [SerializeField] private Transform _begin;
+   [field: SerializeField] public Transform End {get; protected set;}
+   [field: SerializeField] public Transform Begin { get; protected set; }
 
     [SerializeField] private float _speed;
+    //[SerializeField] private float _delay;
 
-    private int _roadIndex = 0;
+    private ScoreCounter _scoreCounter;
 
-    public event Action<int> RoadMoving;
+    private void Start() => StartCoroutine(Move());
 
-    public int ScoreChange { get; private set; }
+    public void Init(ScoreCounter scoreCounter) => _scoreCounter = scoreCounter;
 
-    public Transform Begin => _begin;
-    public Transform End => _end;
-
-    private void Update() => Move();
-
-    private void Move()
+    private IEnumerator Move()
     {
-        ScoreChange++;
-        RoadMoving?.Invoke(_roadIndex);
+        while (enabled)
+        {
+            //var waitForSecond = new WaitForSeconds(_delay);
 
-        transform.Translate(Vector3.back * _speed * Time.fixedDeltaTime);
+            transform.Translate(Vector3.back);
+            _scoreCounter?.IncrementScore();
+            yield return null;
+        }
     }
 }

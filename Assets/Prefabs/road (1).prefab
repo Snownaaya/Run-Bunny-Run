@@ -130,8 +130,7 @@ GameObject:
   - component: {fileID: 5366180446778027716}
   - component: {fileID: 1361058839965709484}
   - component: {fileID: 8635236418001377045}
-  - component: {fileID: 5614124394339111956}
-  - component: {fileID: 7737400134423194813}
+  - component: {fileID: 7901571733847488357}
   m_Layer: 6
   m_Name: road (1)
   m_TagString: Untagged
@@ -213,9 +212,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a715f6b3d770d444be18475c78253e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _end: {fileID: 7292537199498311998}
-  _begin: {fileID: 4294363295863016233}
-  _speed: 30
+  <End>k__BackingField: {fileID: 4294363295863016233}
+  <Begin>k__BackingField: {fileID: 7292537199498311998}
+  _speed: 0.5
+  _delay: 5
 --- !u!65 &5366180446778027716
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -235,8 +235,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.662959, y: 0.37759355, z: 13.544868}
-  m_Center: {x: -0.0031256676, y: -0.16750593, z: 1.2066755}
+  m_Size: {x: 2.662959, y: 0.37759355, z: 13.150649}
+  m_Center: {x: -0.0031256676, y: -0.16750593, z: 1.0095658}
 --- !u!65 &1361058839965709484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -279,7 +279,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1644144, y: 2.3505225, z: 11.952498}
   m_Center: {x: -1.5297084, y: 1.281493, z: 0.11092234}
---- !u!65 &5614124394339111956
+--- !u!65 &7901571733847488357
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,29 +298,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.349188, y: 0.1306574, z: 1.7191219}
-  m_Center: {x: -0.02469635, y: -0.095395565, z: 18.826694}
---- !u!65 &7737400134423194813
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4584465679109574373}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.4973469, y: 0.47058964, z: 1.7053776}
-  m_Center: {x: -1.5073242, y: -0.26470518, z: 9.767161}
+  m_Size: {x: 2.513568, y: 0.14934522, z: 2.1537971}
+  m_Center: {x: -0.12919855, y: -0.08546156, z: 18.344488}
 --- !u!1 &6457315886542844669
 GameObject:
   m_ObjectHideFlags: 0
