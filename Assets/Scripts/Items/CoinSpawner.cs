@@ -10,9 +10,7 @@ public class CoinSpawner : ObjectPool<Coin>
     [SerializeField] private float _verticalMinBounds;
     [SerializeField] private float _verticalMaxBounds;
 
-    private Coroutine _coroutine;
-
-    private void Start() => _coroutine = StartCoroutine(CoinGenerator());
+    private void Start() => StartCoroutine(CoinGenerator());
 
     private IEnumerator CoinGenerator()
     {
@@ -20,14 +18,14 @@ public class CoinSpawner : ObjectPool<Coin>
 
         while (enabled)
         {
-            Spawn();
+            //Spawn();
             yield return wait;
         }
     }
 
-    private void Spawn()
+    private void Spawn(Coin coin)
     {
-        Coin coin = GetObject();
+        //Coin coin = GetObject(coin);
         coin.gameObject.SetActive(true);
         coin.transform.position = RandomCoinPosition();
     }
@@ -36,6 +34,7 @@ public class CoinSpawner : ObjectPool<Coin>
     {
         float positionX = RandomGenerator.Range(_horizontalMinBounds, _horizontalMaxBounds);
         float positionZ = RandomGenerator.Range(_verticalMinBounds, _verticalMaxBounds);
+
         Vector3 loacPosition = new Vector3(positionX, 0f, positionZ);
 
         return transform.TransformPoint(loacPosition);

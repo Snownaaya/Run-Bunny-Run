@@ -15,8 +15,9 @@ public class ScoreCounter : MonoBehaviour, IResetteble
         OnScoreChanged?.Invoke(_score);
     }
 
-    private void Reset()
+    public void Reset()
     {
-
+        _score = 0;
+        OnScoreChanged.Invoke(_score);
     }
 }

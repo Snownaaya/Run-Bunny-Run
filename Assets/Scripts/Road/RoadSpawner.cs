@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class RoadSpawner : ObjectPool<Roader>
 {
-    [SerializeField] private Transform _player;
-    [SerializeField] private List<Roader> _roadersList;
+    [SerializeField] private Player _player;
+    [SerializeField] private List<Roader> _roadersList = new List<Roader>();
     [SerializeField] private Roader _firstRoader;
     [SerializeField] private ScoreCounter _scoreCounter;
 
-    private float _spawnDistance = 13f;
+    private float _spawnDistance = 35f;
     private int _checkSpawnCount = 3;
 
-    private void Awake()
-    {
-        _roadersList = new List<Roader>();
+    private void Awake() =>
         _roadersList.Add(_firstRoader);
-    }
 
     private void Start() => StartCoroutine(GeneratorRoad());
 
@@ -24,34 +21,33 @@ public class RoadSpawner : ObjectPool<Roader>
     {
         while (enabled)
         {
-            if (_player.position.z > _roadersList[_roadersList.Count - 1].End.position.z - _spawnDistance)
-                Spawn();
+            if (_player.transform.position.z >= _roadersList[_roadersList.Count - 1].Begin.position.z - _spawnDistance)
+            {
+                foreach (Roader roader in _roadersList)
+                {
+                    Spawn(roader);
+                    break;
+                }
+            }
+
             yield return null;
         }
     }
 
-    private void Spawn()
+    private void Spawn(Roader roader)
     {
-        Roader newRoader = GetObject();
+        Roader newRoader = GetObject(roader);
+        _roadersList.Add(newRoader);
+        newRoader.transform.position = _roadersList[_roadersList.Count - 1].Begin.localPosition - newRoader.End.localPosition;
         newRoader.gameObject.SetActive(true);
+
         newRoader.Init(_scoreCounter);
 
-        SpawnPosition(newRoader);
-    }
-
-    private void SpawnPosition(Roader roader)
-    {
-        Vector3 newPosiotion = _roadersList[_roadersList.Count - 1].End.position - roader.Begin.localPosition;
-        newPosiotion.y = _roadersList[_roadersList.Count - 1].Begin.position.y;
-
-        roader.transform.position = newPosiotion;
-
-        _roadersList.Add(roader);
-
-        if (_roadersList.Count >= _checkSpawnCount)
+        if (_roadersList.Count < _checkSpawnCount)
         {
-            ReturnObject(_roadersList[0]);
+            Roader oldRoader = _roadersList[3];
             _roadersList.RemoveAt(0);
+            ReturnObject(oldRoader);
         }
     }
 }

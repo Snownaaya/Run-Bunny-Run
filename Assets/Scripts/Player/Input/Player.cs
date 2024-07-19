@@ -1,28 +1,35 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 5.0f;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private float _checkRaduis;
+    [SerializeField] private float _fallTime = 5f;
 
-    public event Action GameOver;
+    [SerializeField] public LayerMask _groundMask;
+    [SerializeField] private Transform _targetPoint;
 
-    //private PlayerCollisionHandler _playerCollision;
     private PlayerInput _playerInput;
     private Rigidbody _rigidbody;
 
     private Vector2 _moveDirection;
-    private bool _jump = false;
+    private Vector3 _startPosition;
+    private Quaternion _startRotation;
+
+    private bool _isFalling = true;
+    private float _currentFallTime;
+
+    public event Action GameOver;
 
     private void Awake()
     {
         _playerInput = new PlayerInput();
         _rigidbody = GetComponent<Rigidbody>();
-        //_playerCollision = GetComponent<PlayerCollisionHandler>();
 
         _playerInput.Player.Move.performed += OnMove;
         _playerInput.Player.Move.canceled -= OnMove;
@@ -31,43 +38,51 @@ public class Player : MonoBehaviour
         _playerInput.Player.Jump.canceled -= OnJump;
     }
 
-    private void Start() => StartCoroutine(Movement());
+    private void Start()
+    {
+        StartCoroutine(Movement());
+
+        _startPosition = transform.position;
+        _startRotation = transform.rotation;
+
+        _currentFallTime = _fallTime;
+    }
+
+    private void FixedUpdate()
+    {
+        CheckFalling();
+    }
+
+    public void Reset()
+    {
+        transform.position = _startPosition;
+        transform.rotation = _startRotation;
+        _isFalling = false;
+    }
 
     private IEnumerator Movement()
     {
-
         while (enabled)
         {
             Move();
-
-            if (_jump)
-            {
-                Jump();
-                _jump = false;
-            }
-
             yield return null;
         }
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() =>
         _playerInput.Enable();
-        //_playerCollision.CollisionDetected += ProcessCollision;
-    }
 
-    private void OnDisable()
-    {
+    private void OnDisable() =>
         _playerInput.Disable();
-        //_playerCollision.CollisionDetected -= ProcessCollision;
-    }
+
+    private bool IsGrounded() => Physics.CheckSphere(_targetPoint.position, _checkRaduis, _groundMask);
 
     private void OnMove(InputAction.CallbackContext context) => _moveDirection = context.action.ReadValue<Vector2>();
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            _jump = true;
+        if (context.performed && IsGrounded())
+            Jump();
     }
 
     private void Move()
@@ -83,9 +98,22 @@ public class Player : MonoBehaviour
 
     private void Jump() => _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
 
-    //private void ProcessCollision(IInteractable interactable)
-    //{
-    //    if (interactable is GameOverZone)
-    //        GameOver?.Invoke();
-    //}
+    private void CheckFalling()
+    {
+        if (IsGrounded() == false)
+        {
+            if (_isFalling == false)
+            {
+                _isFalling = true;
+                _currentFallTime = _fallTime;
+            }
+
+            _currentFallTime -= Time.deltaTime;
+
+            if (_currentFallTime < 0)
+            {
+                GameOver?.Invoke();
+            }
+        }
+    }
 }

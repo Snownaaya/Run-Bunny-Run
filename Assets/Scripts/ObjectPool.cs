@@ -4,16 +4,15 @@ using System.Linq;
 
 public abstract class ObjectPool<T> : MonoBehaviour, IResetteble where T : MonoBehaviour
 {
-    [SerializeField] private T _prefab;
     [SerializeField] private Transform _container;
 
     private Queue<T> _pool = new Queue<T>();
 
-    public T GetObject()
+    public T GetObject(T prefab)
     {
         if (_pool.Count == 0)
         {
-            T newObject = Instantiate(_prefab, _container);
+            T newObject = Instantiate(prefab, _container);
             return newObject;
         }
 
