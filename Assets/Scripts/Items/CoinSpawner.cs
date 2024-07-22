@@ -1,14 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinSpawner : ObjectPool<Coin>
 {
     [SerializeField] private float _delay;
+    [SerializeField] private Coin _coin;
 
     [SerializeField] private float _horizontalMinBounds;
     [SerializeField] private float _horizontalMaxBounds;
-    [SerializeField] private float _verticalMinBounds;
-    [SerializeField] private float _verticalMaxBounds;
 
     private void Start() => StartCoroutine(CoinGenerator());
 
@@ -18,25 +18,26 @@ public class CoinSpawner : ObjectPool<Coin>
 
         while (enabled)
         {
-            //Spawn();
+            Spawn(_coin);
             yield return wait;
         }
     }
 
     private void Spawn(Coin coin)
     {
-        //Coin coin = GetObject(coin);
-        coin.gameObject.SetActive(true);
-        coin.transform.position = RandomCoinPosition();
+        Coin coins = GetObject(coin);
+        coins.gameObject.SetActive(true);
+        coins.transform.position = RandomCoinPosition();
     }
 
     private Vector3 RandomCoinPosition()
     {
-        float positionX = RandomGenerator.Range(_horizontalMinBounds, _horizontalMaxBounds);
-        float positionZ = RandomGenerator.Range(_verticalMinBounds, _verticalMaxBounds);
+        float positionX = Random.Range(_horizontalMinBounds, _horizontalMaxBounds);
 
-        Vector3 loacPosition = new Vector3(positionX, 0f, positionZ);
+        float positionZ = 0;
 
-        return transform.TransformPoint(loacPosition);
+        Vector3 localPosition = new Vector3(positionX, 0f, positionZ);
+
+        return localPosition;
     }
 }

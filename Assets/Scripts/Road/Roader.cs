@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
-public class Roader : MonoBehaviour
+public class Roader : MonoBehaviour, IResetteble
 {
     [SerializeField] private float _speed;
 
@@ -10,9 +11,18 @@ public class Roader : MonoBehaviour
 
     private ScoreCounter _scoreCounter;
 
+    private Vector3 _startPosition;
+    private Quaternion _startRotation;
+
     private bool _isMove = true;
 
-    private void Start() => StartCoroutine(Move());
+    private void Start()
+    {
+        StartCoroutine(Move());
+
+        _startPosition = transform.position;
+        _startRotation = transform.rotation;
+    }
 
     public void Init(ScoreCounter scoreCounter) => _scoreCounter = scoreCounter;
 
@@ -24,5 +34,11 @@ public class Roader : MonoBehaviour
             _scoreCounter?.IncrementScore();
             yield return null;
         }
+    }
+
+    public void Reset()
+    {
+        transform.position = _startPosition;
+        transform.rotation = _startRotation;
     }
 }

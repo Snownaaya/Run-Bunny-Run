@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadSpawner : ObjectPool<Roader>
+public class RoadSpawner : ObjectPool<Roader>, IResetteble
 {
     [SerializeField] private Player _player;
     [SerializeField] private List<Roader> _roadersList = new List<Roader>();
