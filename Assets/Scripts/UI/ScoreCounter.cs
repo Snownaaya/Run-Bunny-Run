@@ -3,7 +3,7 @@ using System;
 
 public class ScoreCounter : MonoBehaviour, IResetteble
 {
-    public event Action<int> OnScoreChanged;
+    public event Action<int> ScoreChanged;
 
     private int _score = 0;
 
@@ -12,12 +12,12 @@ public class ScoreCounter : MonoBehaviour, IResetteble
     public void IncrementScore()
     {
         _score++;
-        OnScoreChanged?.Invoke(_score);
+        ScoreChanged?.Invoke(_score);
     }
 
     public void Reset()
     {
         _score = 0;
-        OnScoreChanged.Invoke(_score);
+        ScoreChanged.Invoke(_score);
     }
 }

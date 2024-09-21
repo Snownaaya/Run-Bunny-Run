@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class StartScreen : Window
 {
@@ -8,6 +9,7 @@ public class StartScreen : Window
     public override void Open()
     {
         CanvasGroup.alpha = 1;
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
         Button.interactable = true;
     }
 

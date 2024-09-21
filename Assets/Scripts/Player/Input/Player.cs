@@ -3,10 +3,10 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(PlayerInput), typeof(PlayerCollisionHandler))]
 public class Player : MonoBehaviour, IResetteble
 {
-    [SerializeField] private float _speed = 5.0f;
+    [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _checkRaduis;
 
@@ -21,6 +21,10 @@ public class Player : MonoBehaviour, IResetteble
     private Vector3 _startPosition;
     private Quaternion _startRotation;
 
+    private float _maxJumpTime = 0.01f;
+    private float _jumpTime;
+    private bool _isJumping;
+
     public event Action GameOver;
 
     private void Awake()
@@ -28,9 +32,6 @@ public class Player : MonoBehaviour, IResetteble
         _playerInput = new PlayerInput();
         _rigidbody = GetComponent<Rigidbody>();
         _playerCollision = GetComponent<PlayerCollisionHandler>();
-
-        _playerInput.Player.Jump.performed += OnJump;
-        _playerInput.Player.Jump.canceled -= OnJump;
 
         _startPosition = transform.position;
         _startRotation = transform.rotation;
@@ -41,7 +42,14 @@ public class Player : MonoBehaviour, IResetteble
 
     private void Update()
     {
-        _moveDirection = _playerInput.Player.Move.ReadValue<Vector2>();
+        _playerInput.Player.Jump.performed += OnJump;
+        _playerInput.Player.Move.performed += OnMove;
+    }
+
+    private void FixedUpdate()
+    {
+        if (_rigidbody.velocity.y < 0)
+            _rigidbody.AddForce(Vector3.down * 5f, ForceMode.Acceleration);
     }
 
 
@@ -67,8 +75,19 @@ public class Player : MonoBehaviour, IResetteble
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed && IsGrounded())
+        if (context.performed)
+        {
+            _jumpTime = 0f;
+            _isJumping = true;
             Jump();
+        }
+        else if (context.canceled)
+            _isJumping = false;
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        _moveDirection = context.action.ReadValue<Vector2>();
     }
 
     private void Move()
@@ -79,10 +98,20 @@ public class Player : MonoBehaviour, IResetteble
         float scaledMoveSpeed = _speed * Time.deltaTime;
         Vector3 offset = new Vector3(_moveDirection.x, 0f, _moveDirection.y) * scaledMoveSpeed;
 
-        _rigidbody.MovePosition(_rigidbody.position + offset);
+        transform.Translate(offset);
     }
 
-    private void Jump() => _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+    private void Jump()
+    {
+        if (_isJumping && IsGrounded())
+        {
+            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse); 
+            _jumpTime += Time.deltaTime; 
+
+            if (_jumpTime >= _maxJumpTime)
+                _isJumping = false; 
+        }
+    }
 
     private void ProccesColision(IInteractable interactable)
     {
@@ -95,6 +124,7 @@ public class Player : MonoBehaviour, IResetteble
         while (enabled)
         {
             Move();
+            Jump();
             yield return null;
         }
     }

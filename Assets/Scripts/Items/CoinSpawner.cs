@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinSpawner : ObjectPool<Coin>
@@ -10,34 +8,26 @@ public class CoinSpawner : ObjectPool<Coin>
     [SerializeField] private float _horizontalMinBounds;
     [SerializeField] private float _horizontalMaxBounds;
 
-    private void Start() => StartCoroutine(CoinGenerator());
-
-    private IEnumerator CoinGenerator()
-    {
-        var wait = new WaitForSeconds(_delay);
-
-        while (enabled)
-        {
-            Spawn(_coin);
-            yield return wait;
-        }
-    }
-
-    private void Spawn(Coin coin)
+    public void Spawn(Coin coin, Transform parent)
     {
         Coin coins = GetObject(coin);
         coins.gameObject.SetActive(true);
-        coins.transform.position = RandomCoinPosition();
+
+        coins.transform.SetParent(parent);
+        float positionZ = parent.position.z;
+
+        Vector3 worldPosition = RandomCoinPosition(positionZ);
+        coins.transform.position = worldPosition;
     }
 
-    private Vector3 RandomCoinPosition()
+    private Vector3 RandomCoinPosition(float positionZ)
     {
-        float positionX = Random.Range(_horizontalMinBounds, _horizontalMaxBounds);
+        positionZ = RandomGenerator.Range(_horizontalMinBounds ,_horizontalMaxBounds);
+        float positionX = RandomGenerator.Range(_horizontalMinBounds, _horizontalMaxBounds);
+        float positionY = RandomGenerator.Range(_horizontalMinBounds, _horizontalMaxBounds);
 
-        float positionZ = 0;
+        Vector3 worldPosition = new Vector3(positionX, positionY, positionZ);
 
-        Vector3 localPosition = new Vector3(positionX, 0f, positionZ);
-
-        return localPosition;
+        return worldPosition;
     }
 }

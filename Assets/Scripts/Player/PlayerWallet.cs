@@ -1,4 +1,4 @@
-using UnityEngine;
+ using UnityEngine;
 
 public class PlayerWallet : MonoBehaviour
 {
@@ -6,7 +6,8 @@ public class PlayerWallet : MonoBehaviour
 
     public int Money { get; private set; }
 
-    private void Collected() => Money++;
+    private void Collected() => 
+        Money++;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,7 @@ public class PlayerWallet : MonoBehaviour
         {
             Collected();
             _coinSpawner.ReturnObject(coin);
+            print("is collected");
         }
     }
 }

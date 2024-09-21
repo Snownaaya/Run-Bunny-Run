@@ -10,13 +10,15 @@ public abstract class ObjectPool<T> : MonoBehaviour, IResetteble where T : MonoB
 
     public T GetObject(T prefab)
     {
-        if (_pool.Count == 0)
+        if (_pool.Count > 0)
         {
-            T newObject = Instantiate(prefab, _container);
-            return newObject;
+            T obj = _pool.Dequeue();
+            obj.gameObject.SetActive(true);
+            return obj;
         }
 
-        return _pool.Dequeue();
+        T newObj = Instantiate(prefab);
+        return newObj;
     }
 
     public void ReturnObject(T newObject)
