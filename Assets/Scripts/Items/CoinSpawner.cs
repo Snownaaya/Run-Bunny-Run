@@ -5,7 +5,7 @@ public class CoinSpawner : ObjectPool<Coin>
     [SerializeField] private float _delay;
     [SerializeField] private Coin _coin;
 
-    [SerializeField] private float _horizontalMinBounds;
+    [SerializeField] private int _horizontalMinBounds;
     [SerializeField] private float _horizontalMaxBounds;
 
     public void Spawn(Coin coin, Transform parent)

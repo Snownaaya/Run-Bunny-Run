@@ -4,43 +4,68 @@ using UnityEngine;
 
 public class RoadSpawner : ObjectPool<Roader>, IResetteble
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private List<Roader> _roadersList = new List<Roader>();
-    [SerializeField] private CoinSpawner _coinSpawner;
-
+    [SerializeField] private List<Roader> _roadersPrefabs;
     [SerializeField] private ScoreCounter _scoreCounter;
+    [SerializeField] private CoinSpawner _coinSpawner;
+    [SerializeField] private Roader _roader;
 
-    private float _spawnDistance = 35f;
+    private List<Roader> _roadersList = new List<Roader>();
+
+    private float _spawnInterval = 25f;
     private int _checkSpawnCount = 3;
 
+    private void Start()
+    {
+        _roadersList.Add(_roader);
 
-    private void Start() =>
         StartCoroutine(GeneratorRoad());
+    }
 
     private IEnumerator GeneratorRoad()
     {
+        var waitForSecond = new WaitForSeconds(_spawnInterval);
+
         while (enabled)
         {
-            yield return null;
             if (_roadersList.Count > 0)
-            {
-                if (_player.transform.position.z >= _roadersList[_roadersList.Count - 1].Begin.position.z - _spawnDistance)
-                    Spawn(_roadersList[0]);
-            }
+                Spawn();
+
+            CheckAndReturnOldRoader();
+            yield return waitForSecond;
         }
     }
 
-    private void Spawn(Roader roader)
+    private void Spawn()
     {
-        Roader newRoader = GetObject(roader);
-        _roadersList.Add(newRoader);
+        Roader randomRoad = GetRandomRoad();
+        Roader newRoader = GetObject(randomRoad);
 
-        newRoader.transform.position = _roadersList[_roadersList.Count - 1].Begin.localPosition - newRoader.End.localPosition;
+        newRoader.transform.position = CalculateRoadPosition();
         newRoader.gameObject.SetActive(true);
 
         newRoader.Init(_scoreCounter, _coinSpawner);
+        _roadersList.Add(newRoader);
+    }
 
-        CheckAndReturnOldRoader();
+    private Roader GetRandomRoad()
+    {
+        int randomIndex = Random.Range(0, _roadersPrefabs.Count);
+        return _roadersPrefabs[randomIndex];
+    }
+
+    private Vector3 CalculateRoadPosition()
+    {
+        Roader lastRoader = _roadersList[_roadersList.Count - 1];
+
+        Vector3 lastEndPosition = lastRoader.End.position;
+
+        Vector3 direction = (lastRoader.End.position - lastRoader.Begin.position).normalized;
+
+        float roadLength = 10f;
+
+        Vector3 newPosition = lastEndPosition + direction * roadLength;
+
+        return newPosition;
     }
 
     private void CheckAndReturnOldRoader()
@@ -48,8 +73,8 @@ public class RoadSpawner : ObjectPool<Roader>, IResetteble
         if (_roadersList.Count > _checkSpawnCount)
         {
             Roader oldRoader = _roadersList[0];
-            _roadersList.RemoveAt(0);
             ReturnObject(oldRoader);
+            _roadersList.RemoveAt(0);
         }
     }
 }

@@ -17,14 +17,14 @@ public abstract class ObjectPool<T> : MonoBehaviour, IResetteble where T : MonoB
             return obj;
         }
 
-        T newObj = Instantiate(prefab);
+        T newObj = Instantiate(prefab, _container);
         return newObj;
     }
 
-    public void ReturnObject(T newObject)
+    public void ReturnObject(T @object)
     {
-        newObject.gameObject.SetActive(false);
-        _pool.Enqueue(newObject);
+        @object.gameObject.SetActive(false);
+        _pool.Enqueue(@object);
     }
 
     public void Reset()

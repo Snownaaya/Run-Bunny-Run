@@ -2,11 +2,10 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
-public class Roader : MonoBehaviour, IResetteble
+public class Roader : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
-    [SerializeField] private List<Transform> _point;
     [SerializeField] private Coin _coin;
 
     [field: SerializeField] public Transform End { get; protected set; }
@@ -15,20 +14,16 @@ public class Roader : MonoBehaviour, IResetteble
     private ScoreCounter _scoreCounter;
     private CoinSpawner _coinSpawner;
 
-    private Vector3 _startPosition;
-    private Quaternion _startRotation;
-
     private float _spawnInterval = 2f;
     private float _lastCoinSpawnTime = 0f;
 
     private bool _isMove = true;
 
+    public float Speed => _speed;
+
     private void Start()
     {
         StartCoroutine(Move());
-
-        _startPosition = transform.position;
-        _startRotation = transform.rotation;
     }
 
     public void Init(ScoreCounter scoreCounter, CoinSpawner coinSpawner)
@@ -52,11 +47,5 @@ public class Roader : MonoBehaviour, IResetteble
             _scoreCounter?.IncrementScore();
             yield return null;
         }
-    }
-
-    public void Reset()
-    {
-        transform.position = _startPosition;
-        transform.rotation = _startRotation;
     }
 }

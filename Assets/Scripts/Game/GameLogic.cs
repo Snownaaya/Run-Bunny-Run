@@ -6,7 +6,6 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private EndScreen _endScreen;
     [SerializeField] private Player _player;
     [SerializeField] private ScoreCounter _scoreCounter;
-    [SerializeField] private Roader _roader;
     [SerializeField] private RoadSpawner _roadSpawner;
 
     private void OnEnable()
@@ -37,7 +36,7 @@ public class GameLogic : MonoBehaviour
 
     private void OnRestartButtonClicked() =>
         StartGame();
-    
+
     private void StopGame()
     {
         Time.timeScale = 0;
@@ -47,7 +46,6 @@ public class GameLogic : MonoBehaviour
     private void StartGame()
     {
         Time.timeScale = 1;
-        _roader.Reset();
         _player.Reset();
         _scoreCounter.Reset();
         _roadSpawner.Reset();
