@@ -1,6 +1,3 @@
-using UnityEngine;
-using System;
-
 public class WalletPresenter
 {
     private ClampedAmountWithIcon _view;
@@ -12,15 +9,11 @@ public class WalletPresenter
         _model = model;
     }
 
-    public void Enable()
-    {
+    public void Enable() =>
         _model.CoinChanges += OnCoinChanges;
-    }
 
-    public void Disable()
-    {
+    public void Disable() =>
         _model.CoinChanges += OnCoinChanges;
-    }
 
     private void OnCoinChanges() =>
         _view.SetAmount(_model.Coin);

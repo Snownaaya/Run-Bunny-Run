@@ -26,7 +26,6 @@ public class WalletSetup : MonoBehaviour
         {
             _model.AddCoin();
             _spawner.ReturnObject(coin);
-            print("is collected");
         }
     }
 }

@@ -12,7 +12,6 @@ public class PlayerWallet
     public void AddCoin()
     {
         Coin += 1;
-
         CoinChanges?.Invoke();
     }
 }
