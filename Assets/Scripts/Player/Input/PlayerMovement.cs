@@ -57,8 +57,8 @@ public class PlayerMovement
     {
         if (_isJumping && IsGrounded())
         {
-            _rigidbiody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             _isJumping = true;
+            _rigidbiody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }
 
@@ -75,8 +75,6 @@ public class PlayerMovement
             _isJumping = false;
     }
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
+    public void OnMove(InputAction.CallbackContext context) =>
         _moveDirection = context.action.ReadValue<Vector2>();
-    }
 }

@@ -22,7 +22,7 @@ public class CoinSpawner : ObjectPool<Coin>
 
     private Vector3 RandomCoinPosition(float positionZ)
     {
-        positionZ = RandomGenerator.Range(_horizontalMinBounds ,_horizontalMaxBounds);
+        positionZ = RandomGenerator.Range(_horizontalMinBounds, _horizontalMaxBounds);
         float positionX = RandomGenerator.Range(_horizontalMinBounds, _horizontalMaxBounds);
         float positionY = RandomGenerator.Range(_horizontalMinBounds, _horizontalMaxBounds);
 

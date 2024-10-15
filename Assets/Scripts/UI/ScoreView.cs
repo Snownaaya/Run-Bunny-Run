@@ -1,8 +1,10 @@
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
 public class ScoreView : MonoBehaviour
 {
+    [SerializeField] private Image _icon;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private ScoreCounter _scoreCounter;
 
