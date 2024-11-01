@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, IResetteble
     private PlayerInput _playerInput;
     private PlayerCollisionHandler _playerCollision;
     private PlayerMovement _playerMovement;
+    private PlayerJumper _playerJumper;
 
     private Vector2 _moveDirection;
     private Vector3 _startPosition;
@@ -27,8 +28,8 @@ public class Player : MonoBehaviour, IResetteble
     {
         _playerInput = new PlayerInput();
         _playerCollision = GetComponent<PlayerCollisionHandler>();
-        _playerMovement = new PlayerMovement(GetComponent<Rigidbody>(), transform, _playerInput, _groundMask, _targetPoint, _speed, _jumpForce,
-        _checkRaduis, _moveDirection, _isJumping);
+        _playerMovement = new PlayerMovement(transform, _playerInput, _speed, _moveDirection);
+        _playerJumper = new PlayerJumper(_playerInput, _groundMask, _targetPoint, GetComponent<Rigidbody>(), _isJumping, _checkRaduis, _jumpForce);
     }
 
     private void Start()
@@ -41,9 +42,9 @@ public class Player : MonoBehaviour, IResetteble
     {
         _playerMovement.Move();
 
-        if (_isJumping && _playerMovement.IsGrounded())
+        if (_isJumping && _playerJumper.IsGrounded())
         {
-            _playerMovement.Jump();
+            _playerJumper.Jump();
             _isJumping = false;
         }
     }
@@ -51,12 +52,14 @@ public class Player : MonoBehaviour, IResetteble
     private void OnEnable()
     {
         _playerMovement.Enable();
+        _playerJumper.Enable();
         _playerCollision.CollisionDetected += ProccesColision;
     }
 
     private void OnDisable()
     {
         _playerMovement.Disable();
+        _playerJumper.Disable();
         _playerCollision.CollisionDetected -= ProccesColision;
     }
 

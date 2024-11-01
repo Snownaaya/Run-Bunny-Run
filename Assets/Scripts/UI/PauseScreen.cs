@@ -17,15 +17,18 @@ public class PauseScreen : MonoBehaviour
     {
         try
         {
-            if (Time.timeScale == 1)
-                PauseGame();
-            else
-                ResumeGame();
-        }
-        catch
-        {
             Validate();
         }
+        catch(Exception e)
+        {
+            enabled = false;
+            throw e;
+        }
+
+        if (Time.timeScale == 1)
+            PauseGame();
+        else
+            ResumeGame();
     }
 
     private void PauseGame() =>

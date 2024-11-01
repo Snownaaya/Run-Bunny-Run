@@ -17,35 +17,28 @@ public class Roader : MonoBehaviour
     private float _spawnInterval = 2f;
     private float _lastCoinSpawnTime = 0f;
 
-    private bool _isMove = true;
-
     public float Speed => _speed;
 
-    private void Start()
+    private void Awake()
     {
-        StartCoroutine(Move());
+        _scoreCounter = new ScoreCounter();
     }
 
-    public void Init(ScoreCounter scoreCounter, CoinSpawner coinSpawner)
+    private void Update()
     {
-        _scoreCounter = scoreCounter;
-        _coinSpawner = coinSpawner;
-    }
+        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
 
-    private IEnumerator Move()
-    {
-        while (_isMove)
+        if (_coinSpawner != null && Time.time - _lastCoinSpawnTime > _spawnInterval)
         {
-            transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-
-            if (_coinSpawner != null && Time.time - _lastCoinSpawnTime > _spawnInterval)
-            {
-                _coinSpawner.Spawn(_coin, transform);
-                _lastCoinSpawnTime = Time.time;
-            }
-
-            _scoreCounter?.IncrementScore();
-            yield return null;
+            _coinSpawner.Spawn(_coin, transform);
+            _lastCoinSpawnTime = Time.time;
         }
+
+        _scoreCounter.IncrementScore(1);
+    }
+
+    public void Init(CoinSpawner coinSpawner)
+    {
+        _coinSpawner = coinSpawner;
     }
 }

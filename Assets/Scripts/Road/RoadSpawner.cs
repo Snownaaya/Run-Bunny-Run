@@ -5,7 +5,6 @@ using UnityEngine;
 public class RoadSpawner : ObjectPool<Roader>, IResetteble
 {
     [SerializeField] private List<Roader> _roadersPrefabs;
-    [SerializeField] private ScoreCounter _scoreCounter;
     [SerializeField] private CoinSpawner _coinSpawner;
     [SerializeField] private Roader _roader;
 
@@ -30,7 +29,9 @@ public class RoadSpawner : ObjectPool<Roader>, IResetteble
             if (_roadersList.Count > 0)
                 Spawn();
 
-            CheckAndReturnOldRoader();
+            if (_roadersList.Count > _checkSpawnCount)
+                CheckAndReturnOldRoader();
+
             yield return waitForSecond;
         }
     }
@@ -43,7 +44,7 @@ public class RoadSpawner : ObjectPool<Roader>, IResetteble
         newRoader.transform.position = CalculateRoadPosition();
         newRoader.gameObject.SetActive(true);
 
-        newRoader.Init(_scoreCounter, _coinSpawner);
+        newRoader.Init(_coinSpawner);
         _roadersList.Add(newRoader);
     }
 
@@ -56,25 +57,14 @@ public class RoadSpawner : ObjectPool<Roader>, IResetteble
     private Vector3 CalculateRoadPosition()
     {
         Roader lastRoader = _roadersList[_roadersList.Count - 1];
-
-        Vector3 lastEndPosition = lastRoader.End.position;
-
-        Vector3 direction = (lastRoader.End.position - lastRoader.Begin.position).normalized;
-
-        float roadLength = 10f;
-
-        Vector3 newPosition = lastEndPosition + direction * roadLength;
-
-        return newPosition;
+        Vector3 direction = (lastRoader.End.position - lastRoader.Begin.localPosition);
+        return direction;
     }
 
     private void CheckAndReturnOldRoader()
     {
-        if (_roadersList.Count > _checkSpawnCount)
-        {
-            Roader oldRoader = _roadersList[0];
-            ReturnObject(oldRoader);
-            _roadersList.RemoveAt(0);
-        }
+        Roader oldRoader = _roadersList[0];
+        ReturnObject(oldRoader);
+        _roadersList.RemoveAt(0);
     }
 }
