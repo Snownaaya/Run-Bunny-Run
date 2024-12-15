@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(Rigidbody), typeof(PlayerInput), typeof(PlayerCollisionHandler))]
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour, IResetteble
 {
     [SerializeField] private float _speed;
@@ -26,10 +27,12 @@ public class Player : MonoBehaviour, IResetteble
 
     private void Awake()
     {
+        _targetPoint = transform;
         _playerInput = new PlayerInput();
         _playerCollision = GetComponent<PlayerCollisionHandler>();
         _playerMovement = new PlayerMovement(transform, _playerInput, _speed, _moveDirection);
-        _playerJumper = new PlayerJumper(_playerInput, _groundMask, _targetPoint, GetComponent<Rigidbody>(), _isJumping, _checkRaduis, _jumpForce);
+        _playerJumper = new PlayerJumper(_playerInput, _groundMask, _targetPoint, GetComponent<Rigidbody>(), _isJumping,
+        _checkRaduis, _jumpForce, GetComponent<Animator>());
     }
 
     private void Start()

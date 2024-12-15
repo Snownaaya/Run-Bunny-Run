@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClampedAmountWithIcon : MonoBehaviour
+public class ClampedAmountWithIcon : MonoBehaviour, IView
 {
     [SerializeField] private Image _icon;
     [SerializeField] private TMP_Text _text;
@@ -30,6 +30,6 @@ public class ClampedAmountWithIcon : MonoBehaviour
             throw new InvalidOperationException();
     }
 
-    public void SetAmount(int amount) =>
+    public void UpdateDisplay(int amount) =>
         _text.text = $"{amount}";
 }

@@ -5,12 +5,11 @@ using UnityEngine;
 public class RoadSpawner : ObjectPool<Roader>, IResetteble
 {
     [SerializeField] private List<Roader> _roadersPrefabs;
-    [SerializeField] private CoinSpawner _coinSpawner;
     [SerializeField] private Roader _roader;
 
     private List<Roader> _roadersList = new List<Roader>();
 
-    private float _spawnInterval = 25f;
+    private float _spawnInterval = 18f;
     private int _checkSpawnCount = 3;
 
     private void Start()
@@ -42,9 +41,6 @@ public class RoadSpawner : ObjectPool<Roader>, IResetteble
         Roader newRoader = GetObject(randomRoad);
 
         newRoader.transform.position = CalculateRoadPosition();
-        newRoader.gameObject.SetActive(true);
-
-        newRoader.Init(_coinSpawner);
         _roadersList.Add(newRoader);
     }
 

@@ -2,18 +2,18 @@ using System;
 
 public class ScoreCounter : IResetteble
 {
-    public event Action ScoreChanged;
+    public event Action<int> ScoreChanged;
 
     public int Score { get; private set; }
 
-    public void IncrementScore(int amount)
+    public void IncrementScore()
     {
-        Score += amount;
-        ScoreChanged?.Invoke();
+        ScoreChanged?.Invoke(Score++);
     }
 
     public void Reset()
     {
         Score = 0;
+        ScoreChanged?.Invoke(0);
     }
 }

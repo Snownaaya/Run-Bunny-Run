@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class GameLogic : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private EndScreen _endScreen;
     [SerializeField] private Player _player;
     [SerializeField] private RoadSpawner _roadSpawner;
+    [SerializeField] private ScoreView scoreView;
+    [SerializeField] private Roader _road;
 
     private ScoreCounter _scoreCounter;
     private ScorePresenter _scorePresenter;
@@ -14,22 +17,18 @@ public class GameLogic : MonoBehaviour
     private void Awake()
     {
         _scoreCounter = new ScoreCounter();
-        _scorePresenter = new ScorePresenter(_scoreCounter, _scoreView);
 
-        if (_scoreCounter == null && _scoreView == null && _scorePresenter == null)
-            print($"{_scoreCounter} == score null, {_scoreView} == view null, {_scorePresenter} == presenter null");
+        _scorePresenter = new ScorePresenter(_scoreCounter, scoreView);
+
+        _road.Initialize(_scoreCounter);
     }
 
     private void OnEnable()
     {
-        if (_scorePresenter == null)
-        {
-            _scorePresenter.Enable();
-            print("is null");
-        }
         _startScreen.PlayerButtonClicked += OnPlayButtonClicked;
         _endScreen.RestartButtonClicked += OnPlayButtonClicked;
         _player.GameOver += StopGame;
+        _scorePresenter.Enable();
     }
 
     private void OnDisable()
@@ -37,6 +36,7 @@ public class GameLogic : MonoBehaviour
         _startScreen.PlayerButtonClicked -= OnRestartButtonClicked;
         _endScreen.RestartButtonClicked -= OnRestartButtonClicked;
         _player.GameOver -= StopGame;
+        _scorePresenter.Disable();
     }
 
     private void Start()
@@ -58,14 +58,12 @@ public class GameLogic : MonoBehaviour
     {
         Time.timeScale = 0;
         _endScreen.Open();
-        _scoreCounter.Reset();
     }
 
     private void StartGame()
     {
         Time.timeScale = 1;
         _player.Reset();
-        _scoreCounter.Reset();
         _roadSpawner.Reset();
         _endScreen.Close();
     }

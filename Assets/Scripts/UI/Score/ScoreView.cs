@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class ScoreView : MonoBehaviour, IScoreView
+public class ScoreView : MonoBehaviour, IView
 {
     [SerializeField] private Image _icon;
     [SerializeField] private TMP_Text _text;
@@ -30,6 +30,6 @@ public class ScoreView : MonoBehaviour, IScoreView
             throw new InvalidOperationException();
     }
 
-    public void UpdateScore(int amount) =>
-        _text.text = $"Score: {amount}";
+    public void UpdateDisplay(int amount) =>
+        _text.text = $"{amount}";
 }

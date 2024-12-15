@@ -1,4 +1,4 @@
 public interface IResetteble
 {
-    public void Reset() { }
+    void Reset();
 }

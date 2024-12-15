@@ -1,9 +1,9 @@
 public class ScorePresenter
 {
     private ScoreCounter _scoreCounter;
-    private IScoreView _scoreView;
+    private IView _scoreView;
 
-    public ScorePresenter(ScoreCounter scoreCounter, IScoreView scoreView)
+    public ScorePresenter(ScoreCounter scoreCounter, IView scoreView)
     {
         _scoreCounter = scoreCounter;
         _scoreView = scoreView;
@@ -15,8 +15,8 @@ public class ScorePresenter
     public void Disable() =>
         _scoreCounter.ScoreChanged -= OnScoreChanged;
 
-    private void OnScoreChanged()
+    private void OnScoreChanged(int amount)
     {
-        _scoreView.UpdateScore(_scoreCounter.Score);
+        _scoreView.UpdateDisplay(amount);
     }
 }

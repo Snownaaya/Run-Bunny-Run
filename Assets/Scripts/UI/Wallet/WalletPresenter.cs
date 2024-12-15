@@ -13,8 +13,8 @@ public class WalletPresenter
         _model.CoinChanges += OnCoinChanges;
 
     public void Disable() =>
-        _model.CoinChanges += OnCoinChanges;
+        _model.CoinChanges -= OnCoinChanges;
 
     private void OnCoinChanges() =>
-        _view.SetAmount(_model.Coin);
+        _view.UpdateDisplay(_model.Coin);
 }

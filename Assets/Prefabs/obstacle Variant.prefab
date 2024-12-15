@@ -263,8 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a715f6b3d770d444be18475c78253e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 80
-  _coin: {fileID: -1410288753930279847, guid: 9c42a710e5cbe604f850e3ca944162ca, type: 3}
+  _speed: 110
   <End>k__BackingField: {fileID: 7207460243299815394}
   <Begin>k__BackingField: {fileID: 404559476326347764}
 --- !u!4 &4177998506266137335 stripped

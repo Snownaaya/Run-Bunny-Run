@@ -1,44 +1,51 @@
-using System.Collections.Generic;
-using System.Collections;
+using System;
 using UnityEngine;
 
 public class Roader : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    private ScoreCounter _scoreCounter;
 
-    [SerializeField] private Coin _coin;
+    [SerializeField] private float _speed;
 
     [field: SerializeField] public Transform End { get; protected set; }
     [field: SerializeField] public Transform Begin { get; protected set; }
 
-    private ScoreCounter _scoreCounter;
-    private CoinSpawner _coinSpawner;
+    private Transform _transform;
+    private float _distanceTraveled;
 
-    private float _spawnInterval = 2f;
-    private float _lastCoinSpawnTime = 0f;
+    public event Action RoadMoved;
 
-    public float Speed => _speed;
-
-    private void Awake()
-    {
-        _scoreCounter = new ScoreCounter();
-    }
+    private void Awake() =>
+        _transform = transform;
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-
-        if (_coinSpawner != null && Time.time - _lastCoinSpawnTime > _spawnInterval)
-        {
-            _coinSpawner.Spawn(_coin, transform);
-            _lastCoinSpawnTime = Time.time;
-        }
-
-        _scoreCounter.IncrementScore(1);
+        Move();
     }
 
-    public void Init(CoinSpawner coinSpawner)
+    private void Move()
     {
-        _coinSpawner = coinSpawner;
+        float move = _speed * Time.deltaTime;
+
+        _transform.Translate(_transform.forward * move);
+        CalculateScore();
+        RoadMoved?.Invoke();
     }
+
+    private void CalculateScore()
+    {
+        if (_scoreCounter == null)
+            return;
+
+        _distanceTraveled += _speed * Time.deltaTime;
+
+        if (_distanceTraveled >= 1f)
+        {
+            _scoreCounter.IncrementScore();
+            _distanceTraveled = 0f;
+        }
+    }
+
+    internal void Initialize(ScoreCounter scoreCounter) =>
+        _scoreCounter = scoreCounter;
 }

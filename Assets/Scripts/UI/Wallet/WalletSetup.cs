@@ -1,9 +1,12 @@
 using UnityEngine;
+using Zenject;
 
 public class WalletSetup : MonoBehaviour
 {
+    [Inject]
+    private CoinSpawner _spawner;
+
     [SerializeField] private ClampedAmountWithIcon _view;
-    [SerializeField] private CoinSpawner _spawner;
 
     private WalletPresenter _presenter;
     private PlayerWallet _model;

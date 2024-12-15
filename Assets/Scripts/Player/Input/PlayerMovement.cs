@@ -21,22 +21,26 @@ public class PlayerMovement : IPlayerAction
     {
         _playerInput.Enable();
         _playerInput.Player.Move.performed += OnMove;
+        _playerInput.Player.Move.canceled += OnMoveCanceled;
     }
 
     public void Disable()
     {
         _playerInput.Disable();
         _playerInput.Player.Move.performed -= OnMove;
+        _playerInput.Player.Move.canceled -= OnMoveCanceled;
     }
 
     public void Move()
     {
         float scaledMoveSpeed = _speed * Time.deltaTime;
         Vector3 offset = new Vector3(_moveDirection.x, 0f, _moveDirection.y) * scaledMoveSpeed;
-
         _transform.Translate(offset);
     }
 
     public void OnMove(InputAction.CallbackContext context) =>
         _moveDirection = context.action.ReadValue<Vector2>();
+
+    private void OnMoveCanceled(InputAction.CallbackContext context) =>
+        _moveDirection = Vector2.zero; 
 }

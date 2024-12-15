@@ -1,35 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinSpawner : ObjectPool<Coin>
 {
-    [SerializeField] private float _delay;
-    [SerializeField] private Coin _coin;
+    private const string Position = nameof(Position);
 
+    [SerializeField] private int _delay;
+    [SerializeField] private List<Transform> _points;
+
+    [field: SerializeField] public Coin Coin { get; private set; }
+
+    [Header(Position)]
+    [SerializeField] private float _verticalMinBounds;
+    [SerializeField] private float _verticalMaxBounds;
     [SerializeField] private float _horizontalMinBounds;
     [SerializeField] private float _horizontalMaxBounds;
 
-    [SerializeField] private float _verticalMinBounds;
-    [SerializeField] private float _verticalMaxBounds;
-
-    public void Spawn(Coin coin, Transform parent)
+    private void Start()
     {
-        Coin coins = GetObject(coin);
-        coins.gameObject.SetActive(true);
-
-        coins.transform.SetParent(parent);
-        float positionZ = parent.position.z;
-
-        Vector3 worldPosition = RandomCoinPosition(positionZ);
-        coins.transform.position = worldPosition;
+        StartCoroutine(Spawn());
     }
 
-    private Vector3 RandomCoinPosition(float positionZ)
+    public IEnumerator Spawn()
     {
-        positionZ = RandomGenerator.Range(_horizontalMinBounds, _horizontalMaxBounds);
-        float positionY = RandomGenerator.Range(_verticalMinBounds, _verticalMaxBounds);
+        foreach (var pair in _points)
+        {
+            Coin coin = GetObject(Coin);
+            coin.transform.position = pair.position;
+            yield return new WaitWhile(() => Coin.MinCoin >= Coin.MaxCoin);
+        }
+    }
 
-        Vector3 worldPosition = new Vector3(0, positionY, positionZ);
-
-        return worldPosition;
+    public void ReturnCoin(Coin coin)
+    {
+        ReturnObject(coin);
     }
 }
