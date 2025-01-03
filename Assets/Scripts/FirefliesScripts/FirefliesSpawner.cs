@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirefliesSpawner : ObjectPool<Fireflies>, IResetteble
+public class FirefliesSpawner : ObjectPool<Fireflies>
 {
     [SerializeField] private Fireflies _fireflies;
     [SerializeField] private List<Transform> _points = new List<Transform>();

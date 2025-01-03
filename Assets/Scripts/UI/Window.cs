@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,4 +22,10 @@ public abstract class Window : MonoBehaviour
     public abstract void Open();
 
     public abstract void Close();
+
+    public virtual void Reset()
+    {
+        Close();
+        Button.interactable = true;
+    }
 }

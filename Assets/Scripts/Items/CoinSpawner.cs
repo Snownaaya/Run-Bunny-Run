@@ -7,7 +7,7 @@ public class CoinSpawner : ObjectPool<Coin>
     private const string Position = nameof(Position);
 
     [SerializeField] private int _delay;
-    [SerializeField] private List<Transform> _points;
+    [SerializeField] private Transform[] _points;
 
     [field: SerializeField] public Coin Coin { get; private set; }
 
@@ -24,11 +24,14 @@ public class CoinSpawner : ObjectPool<Coin>
 
     public IEnumerator Spawn()
     {
+        var wait = new WaitForSeconds(_delay);
+
         foreach (var pair in _points)
         {
             Coin coin = GetObject(Coin);
             coin.transform.position = pair.position;
             yield return new WaitWhile(() => Coin.MinCoin >= Coin.MaxCoin);
+            yield return wait;
         }
     }
 

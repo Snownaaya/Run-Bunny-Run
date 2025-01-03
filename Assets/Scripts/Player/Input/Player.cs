@@ -3,7 +3,7 @@ using System;
 
 [RequireComponent(typeof(Rigidbody), typeof(PlayerInput), typeof(PlayerCollisionHandler))]
 [RequireComponent(typeof(Animator))]
-public class Player : MonoBehaviour, IResetteble
+public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
@@ -19,7 +19,6 @@ public class Player : MonoBehaviour, IResetteble
 
     private Vector2 _moveDirection;
     private Vector3 _startPosition;
-    private Quaternion _startRotation;
 
     private bool _isJumping;
 
@@ -27,18 +26,11 @@ public class Player : MonoBehaviour, IResetteble
 
     private void Awake()
     {
-        _targetPoint = transform;
         _playerInput = new PlayerInput();
         _playerCollision = GetComponent<PlayerCollisionHandler>();
         _playerMovement = new PlayerMovement(transform, _playerInput, _speed, _moveDirection);
         _playerJumper = new PlayerJumper(_playerInput, _groundMask, _targetPoint, GetComponent<Rigidbody>(), _isJumping,
         _checkRaduis, _jumpForce, GetComponent<Animator>());
-    }
-
-    private void Start()
-    {
-        _startPosition = transform.position;
-        _startRotation = transform.rotation;
     }
 
     private void FixedUpdate()
@@ -64,12 +56,6 @@ public class Player : MonoBehaviour, IResetteble
         _playerMovement.Disable();
         _playerJumper.Disable();
         _playerCollision.CollisionDetected -= ProccesColision;
-    }
-
-    public void Reset()
-    {
-        transform.position = _startPosition;
-        transform.rotation = _startRotation;
     }
 
     private void ProccesColision(IInteractable interactable)

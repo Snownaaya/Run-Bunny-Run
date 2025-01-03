@@ -2,11 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public abstract class ObjectPool<T> : MonoBehaviour, IResetteble where T : MonoBehaviour
+public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
 {
     [SerializeField] private Transform _container;
 
     private Queue<T> _pool = new Queue<T>();
+
+    private Vector3 _startPosition;
+
+    private void Start()
+    {
+        _startPosition = transform.position;
+    }
 
     public T GetObject(T prefab)
     {
@@ -25,15 +32,5 @@ public abstract class ObjectPool<T> : MonoBehaviour, IResetteble where T : MonoB
     {
         @object.gameObject.SetActive(false);
         _pool.Enqueue(@object);
-    }
-
-    public void Reset()
-    {
-        foreach (var objectSpawn in _pool.ToList())
-        {
-            objectSpawn.gameObject.SetActive(false);
-        }
-
-        _pool.Clear();
     }
 }

@@ -17,8 +17,6 @@ public class EndScreen : Window
         Button.interactable = false;
     }
 
-    protected override void OnButtonClick()
-    {
+    protected override void OnButtonClick() =>
         RestartButtonClicked?.Invoke();
-    }
 }

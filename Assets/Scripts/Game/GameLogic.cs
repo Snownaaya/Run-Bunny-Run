@@ -1,70 +1,77 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
+using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
 {
     [SerializeField] private ScoreView _scoreView;
-    [SerializeField] private StartScreen _startScreen;
     [SerializeField] private EndScreen _endScreen;
     [SerializeField] private Player _player;
-    [SerializeField] private RoadSpawner _roadSpawner;
     [SerializeField] private ScoreView scoreView;
-    [SerializeField] private Roader _road;
 
+    [SerializeField] private Roader[] _road;
+
+    private PlayerWallet _wallet;
     private ScoreCounter _scoreCounter;
     private ScorePresenter _scorePresenter;
 
     private void Awake()
     {
         _scoreCounter = new ScoreCounter();
+        _wallet = new PlayerWallet();
 
         _scorePresenter = new ScorePresenter(_scoreCounter, scoreView);
 
-        _road.Initialize(_scoreCounter);
-    }
-
-    private void OnEnable()
-    {
-        _startScreen.PlayerButtonClicked += OnPlayButtonClicked;
-        _endScreen.RestartButtonClicked += OnPlayButtonClicked;
-        _player.GameOver += StopGame;
-        _scorePresenter.Enable();
-    }
-
-    private void OnDisable()
-    {
-        _startScreen.PlayerButtonClicked -= OnRestartButtonClicked;
-        _endScreen.RestartButtonClicked -= OnRestartButtonClicked;
-        _player.GameOver -= StopGame;
-        _scorePresenter.Disable();
+        foreach (Roader road in _road)
+            road.Initialize(_scoreCounter);
     }
 
     private void Start()
     {
-        Time.timeScale = 0;
-        _startScreen.Open();
+        PauseGame();
     }
 
-    private void OnPlayButtonClicked()
+    private void OnEnable()
     {
-        StartGame();
-        _startScreen.Close();
+        _player.GameOver += OnGameOver;
+        _scorePresenter.Enable();
+        _endScreen.RestartButtonClicked += OnRestartButtonClicked;
     }
 
-    private void OnRestartButtonClicked() =>
-        StartGame();
-
-    private void StopGame()
+    private void OnDisable()
     {
-        Time.timeScale = 0;
+        _player.GameOver -= OnGameOver;
+        _scorePresenter.Disable();
+        _endScreen.RestartButtonClicked -= OnRestartButtonClicked;
+    }
+
+    private void OnStartGame()
+    {
+        ResumeGame();
+    }
+
+    private void OnRestartButtonClicked()
+    {
+        ResetGame();
+    }
+
+    private void OnGameOver()
+    {
         _endScreen.Open();
+        PauseGame();
     }
 
-    private void StartGame()
+    private void ResetGame()
     {
-        Time.timeScale = 1;
-        _player.Reset();
-        _roadSpawner.Reset();
         _endScreen.Close();
+        Time.timeScale = 1;
+        int currentInexScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentInexScene);
     }
+
+    private void PauseGame() =>
+        Time.timeScale = 0;
+
+    private void ResumeGame() =>
+        Time.timeScale = 1;
 }
