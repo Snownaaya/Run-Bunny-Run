@@ -8,14 +8,16 @@ public class PlayerJumper : IPlayerAction
     private Transform _targetPoint;
     private Rigidbody _rigidbody;
     private Animator _animator;
+    private Vector2 _touchpadJumpDirection;
 
     private bool _isJumping;
     private float _jumpForce;
     private float _checkRaduis;
 
-    public PlayerJumper(PlayerInput playerInput, LayerMask groundMask, Transform targetPoint, Rigidbody rigidbody, bool isJumping, float jumpForce, float checkRaduis, Animator animator)
+    public PlayerJumper(PlayerInput playerInput, Vector2 jumpDirection, LayerMask groundMask, Transform targetPoint, Rigidbody rigidbody, bool isJumping, float jumpForce, float checkRaduis, Animator animator)
     {
         _playerInput = playerInput;
+        _touchpadJumpDirection = jumpDirection;
         _groundMask = groundMask;
         _targetPoint = targetPoint;
         _rigidbody = rigidbody;
@@ -49,12 +51,20 @@ public class PlayerJumper : IPlayerAction
         }
     }
 
-    public bool IsGrounded() => Physics.CheckSphere(_targetPoint.position, _checkRaduis, _groundMask);
+    public bool IsGrounded() =>
+        Physics.CheckSphere(_targetPoint.position, _checkRaduis, _groundMask);
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
         {
+            _touchpadJumpDirection = Touchscreen.current.position.ReadValue();
+            _isJumping = true;
+            Jump();
+        }
+        else if (Mouse.current.rightButton.isPressed)
+        {
+            _touchpadJumpDirection = Mouse.current.position.ReadValue();
             _isJumping = true;
             Jump();
         }

@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private PlayerJumper _playerJumper;
 
     private Vector2 _moveDirection;
+    private Vector2 _jumpDirection;
     private Vector3 _startPosition;
 
     private bool _isJumping;
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour
         _playerInput = new PlayerInput();
         _playerCollision = GetComponent<PlayerCollisionHandler>();
         _playerMovement = new PlayerMovement(transform, _playerInput, _speed, _moveDirection);
-        _playerJumper = new PlayerJumper(_playerInput, _groundMask, _targetPoint, GetComponent<Rigidbody>(), _isJumping,
+        _playerJumper = new PlayerJumper(_playerInput, _jumpDirection, _groundMask, _targetPoint, GetComponent<Rigidbody>(), _isJumping,
         _checkRaduis, _jumpForce, GetComponent<Animator>());
     }
 

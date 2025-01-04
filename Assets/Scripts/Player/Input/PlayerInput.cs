@@ -49,47 +49,47 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""659ac03d-12c0-4c86-96c4-9e50943ffce3"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""e06bd567-6b16-4645-aed4-6eee722ffb28"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
+                    ""groups"": """",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""f968dc28-291d-4579-8422-0c7eb960517f"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""ac72bfc6-ab00-4a66-b994-23f960e5d2e9"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""left"",
-                    ""id"": ""f5b33158-c6e4-4cd2-9e26-55b5ff31b56e"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""name"": """",
+                    ""id"": ""f09801bb-6d9e-4ba2-a1f0-97a4c125bd71"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
+                    ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""right"",
-                    ""id"": ""65e6b9fb-90d4-4390-99f2-26e37ed60fbe"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""name"": """",
+                    ""id"": ""4e5cfd7d-90c0-42f6-b921-df75a4e914ed"",
+                    ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
+                    ""isPartOfComposite"": false
                 }
             ]
         }

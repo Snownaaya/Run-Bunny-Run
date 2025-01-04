@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -65,8 +65,8 @@ public class GameLogic : MonoBehaviour
     {
         _endScreen.Close();
         Time.timeScale = 1;
-        int currentInexScene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentInexScene);
+        int currentIndexScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentIndexScene);
     }
 
     private void PauseGame() =>
