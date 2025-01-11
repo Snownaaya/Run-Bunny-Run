@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,12 +10,13 @@ public class PlayerJumper : IPlayerAction
     private Rigidbody _rigidbody;
     private Animator _animator;
     private Vector2 _touchpadJumpDirection;
+    private PlayerAudio _audio;
 
     private bool _isJumping;
     private float _jumpForce;
     private float _checkRaduis;
 
-    public PlayerJumper(PlayerInput playerInput, Vector2 jumpDirection, LayerMask groundMask, Transform targetPoint, Rigidbody rigidbody, bool isJumping, float jumpForce, float checkRaduis, Animator animator)
+    public PlayerJumper(PlayerInput playerInput, Vector2 jumpDirection, LayerMask groundMask, Transform targetPoint, Rigidbody rigidbody, bool isJumping, float jumpForce, float checkRaduis, Animator animator, PlayerAudio audio)
     {
         _playerInput = playerInput;
         _touchpadJumpDirection = jumpDirection;
@@ -25,6 +27,7 @@ public class PlayerJumper : IPlayerAction
         _jumpForce = jumpForce;
         _checkRaduis = checkRaduis;
         _animator = animator;
+        _audio = audio;
     }
 
     public void Enable()
@@ -47,6 +50,7 @@ public class PlayerJumper : IPlayerAction
         {
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             _animator.SetTrigger(AnimatorData.Parameters.Jump);
+            _audio.PlayJumpSound();
             _isJumping = false;
         }
     }

@@ -6,5 +6,6 @@ public static class AnimatorData
     {
         public static readonly int Jump = Animator.StringToHash(nameof(Jump));
         public static readonly int Fall = Animator.StringToHash(nameof(Fall));
+        public static readonly int Run = Animator.StringToHash(nameof(Run));
     }
 }

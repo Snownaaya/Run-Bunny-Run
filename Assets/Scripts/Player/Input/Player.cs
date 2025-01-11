@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(Rigidbody), typeof(PlayerInput), typeof(PlayerCollisionHandler))]
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator), typeof(PlayerAudio))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -12,10 +12,12 @@ public class Player : MonoBehaviour
     [SerializeField] public LayerMask _groundMask;
     [SerializeField] private Transform _targetPoint;
 
+    private PlayerAudio _playerAudio;
     private PlayerInput _playerInput;
     private PlayerCollisionHandler _playerCollision;
     private PlayerMovement _playerMovement;
     private PlayerJumper _playerJumper;
+    private Animator _animator;
 
     private Vector2 _moveDirection;
     private Vector2 _jumpDirection;
@@ -29,20 +31,24 @@ public class Player : MonoBehaviour
     {
         _playerInput = new PlayerInput();
         _playerCollision = GetComponent<PlayerCollisionHandler>();
+        _playerAudio = GetComponent<PlayerAudio>();
+        _animator = GetComponent<Animator>();
+
         _playerMovement = new PlayerMovement(transform, _playerInput, _speed, _moveDirection);
         _playerJumper = new PlayerJumper(_playerInput, _jumpDirection, _groundMask, _targetPoint, GetComponent<Rigidbody>(), _isJumping,
-        _checkRaduis, _jumpForce, GetComponent<Animator>());
+        _checkRaduis, _jumpForce, _animator, _playerAudio);
+        _playerAudio.Initialize(_animator);
     }
 
     private void FixedUpdate()
     {
-        _playerMovement.Move();
-
         if (_isJumping && _playerJumper.IsGrounded())
         {
             _playerJumper.Jump();
             _isJumping = false;
         }
+
+        _playerMovement.Move();
     }
 
     private void OnEnable()
@@ -63,5 +69,11 @@ public class Player : MonoBehaviour
     {
         if (interactable is GameOverZone)
             GameOver?.Invoke();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, _checkRaduis);
     }
 }

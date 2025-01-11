@@ -19,15 +19,11 @@ public class Roader : MonoBehaviour
     private void Awake() =>
         _transform = transform;
 
-    private void Update()
-    {
+    private void Update() =>
         Move();
-    }
 
-    public void IncreaseSpeed(float increment)
-    {
+    public void IncreaseSpeed(float increment) =>
         _speed += increment;
-    }
 
     private void Move()
     {
@@ -52,8 +48,6 @@ public class Roader : MonoBehaviour
         }
     }
 
-    internal void Initialize(ScoreCounter scoreCounter)
-    {
+    public void Initialize(ScoreCounter scoreCounter) =>
         _scoreCounter = scoreCounter;
-    }
 }

@@ -52,7 +52,8 @@ public class GameLogic : MonoBehaviour
 
     private void OnRestartButtonClicked()
     {
-        ResetGame();
+        if (Time.timeScale != 1)
+            ResetGame();
     }
 
     private void OnGameOver()

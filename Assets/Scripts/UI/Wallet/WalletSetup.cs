@@ -1,6 +1,7 @@
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(PlayerAudio))]
 public class WalletSetup : MonoBehaviour
 {
     [Inject]
@@ -8,6 +9,7 @@ public class WalletSetup : MonoBehaviour
 
     [SerializeField] private ClampedAmountWithIcon _view;
 
+    private PlayerAudio _playerAudio;
     private WalletPresenter _presenter;
     private PlayerWallet _model;
 
@@ -15,6 +17,7 @@ public class WalletSetup : MonoBehaviour
     {
         _model = new PlayerWallet();
         _presenter = new WalletPresenter(_view, _model);
+        _playerAudio = GetComponent<PlayerAudio>();
     }
 
     private void OnEnable() =>
@@ -29,6 +32,7 @@ public class WalletSetup : MonoBehaviour
         {
             _model.AddCoin();
             _spawner.ReturnObject(coin);
+            _playerAudio.Play();
         }
     }
 }

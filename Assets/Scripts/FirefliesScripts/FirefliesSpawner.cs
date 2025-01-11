@@ -1,28 +1,34 @@
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
-public class FirefliesSpawner : ObjectPool<Fireflies>
+namespace Assets.Scripts.FirefliesScripts
 {
-    [SerializeField] private Fireflies _fireflies;
-    [SerializeField] private List<Transform> _points = new List<Transform>();
-
-    private void Start()
+    internal class FirefliesSpawner : ObjectPool<Fireflies>
     {
-        _points.Add(transform);
-        Spawn();
-    }
+        [SerializeField] private FireflyData _data;
+        [SerializeField] private Transform[] _points;
 
-    public void Spawn()
-    {
-        foreach (Transform point in _points)
+        private void Start() =>
+            StartCoroutine(SpawnFireflies());
+
+        public IEnumerator SpawnFireflies()
         {
-            Fireflies fireflies = GetObject(_fireflies);
-            fireflies.transform.position = point.position;
+            foreach (var point in _points)
+            {
+                Spawn(point.position);
+                yield return null;
+            }
         }
-    }
 
-    private void RerturnObjectFireflies(Fireflies fireflies)
-    {
-        ReturnObject(fireflies);
+        public void Return()
+        {
+            ReturnObject(_data.Fireflies);
+        }
+
+        private void Spawn(Vector3 position)
+        {
+            Fireflies fireflies = GetObject(_data.Fireflies);
+            fireflies.transform.position = position;
+        }
     }
 }

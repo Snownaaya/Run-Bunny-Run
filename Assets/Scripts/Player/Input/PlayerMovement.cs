@@ -1,6 +1,6 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Zenject;
 
 public class PlayerMovement : IPlayerAction
 {

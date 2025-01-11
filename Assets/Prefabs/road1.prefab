@@ -31,6 +31,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5648342626558519488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2008388610984185606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5564256304643467769}
+  - component: {fileID: 4569792246123908610}
+  m_Layer: 0
+  m_Name: Fireflies (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5564256304643467769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008388610984185606}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -64.2, y: 5.4, z: -272.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2891037971478702940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4569792246123908610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008388610984185606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4150e64b7f837e64884d05b4a7487eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _container: {fileID: 2891037971478702940}
+  _data: {fileID: 11400000, guid: de09f8fc76d238b46b20e7b877037c6f, type: 2}
+  _points:
+  - {fileID: 5564256304643467769}
 --- !u!1 &2141005335816829108
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,6 +270,156 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2891037971478702940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5186919159049810608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8270171237417515757}
+  - component: {fileID: 5698957322430314845}
+  m_Layer: 0
+  m_Name: Fireflies (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8270171237417515757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186919159049810608}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 55.7, y: 5.4, z: -108.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2891037971478702940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5698957322430314845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186919159049810608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4150e64b7f837e64884d05b4a7487eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _container: {fileID: 2891037971478702940}
+  _data: {fileID: 11400000, guid: de09f8fc76d238b46b20e7b877037c6f, type: 2}
+  _points:
+  - {fileID: 8270171237417515757}
+  - {fileID: 502643739494101270}
+  - {fileID: 5564256304643467769}
+  - {fileID: 5564256304643467769}
+--- !u!1 &6226667900190725907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6584351082642124929}
+  - component: {fileID: 517747336344005900}
+  m_Layer: 0
+  m_Name: Fireflies (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6584351082642124929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6226667900190725907}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -76.2, y: 5.4, z: -151.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2891037971478702940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &517747336344005900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6226667900190725907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4150e64b7f837e64884d05b4a7487eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _container: {fileID: 2891037971478702940}
+  _data: {fileID: 11400000, guid: de09f8fc76d238b46b20e7b877037c6f, type: 2}
+  _points:
+  - {fileID: 6584351082642124929}
+  - {fileID: 502643739494101270}
+  - {fileID: 5564256304643467769}
+  - {fileID: 8270171237417515757}
+--- !u!1 &6891690414036359365
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 502643739494101270}
+  - component: {fileID: 2416368635205325281}
+  m_Layer: 0
+  m_Name: Fireflies
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &502643739494101270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891690414036359365}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 49.2, y: 5.4, z: -323}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2891037971478702940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2416368635205325281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891690414036359365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4150e64b7f837e64884d05b4a7487eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _container: {fileID: 2891037971478702940}
+  _data: {fileID: 11400000, guid: de09f8fc76d238b46b20e7b877037c6f, type: 2}
+  _points:
+  - {fileID: 502643739494101270}
 --- !u!1 &7638240217049003359
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +451,109 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5648342626558519488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8225095883691724825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7872706946209268048}
+  - component: {fileID: 5528404562639023870}
+  m_Layer: 0
+  m_Name: Fireflies (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7872706946209268048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8225095883691724825}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 55.7, y: 5.4, z: -1850}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2891037971478702940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5528404562639023870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8225095883691724825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4150e64b7f837e64884d05b4a7487eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _container: {fileID: 2891037971478702940}
+  _data: {fileID: 11400000, guid: de09f8fc76d238b46b20e7b877037c6f, type: 2}
+  _points:
+  - {fileID: 7872706946209268048}
+  - {fileID: 502643739494101270}
+  - {fileID: 5564256304643467769}
+  - {fileID: 5564256304643467769}
+--- !u!1 &8545063612948774189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8720727570910838542}
+  - component: {fileID: 3501888984632926801}
+  m_Layer: 0
+  m_Name: Fireflies (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8720727570910838542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8545063612948774189}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -45, y: 5.4, z: -1659}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2891037971478702940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3501888984632926801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8545063612948774189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4150e64b7f837e64884d05b4a7487eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _container: {fileID: 2891037971478702940}
+  _data: {fileID: 11400000, guid: de09f8fc76d238b46b20e7b877037c6f, type: 2}
+  _points:
+  - {fileID: 8720727570910838542}
+  - {fileID: 502643739494101270}
+  - {fileID: 5564256304643467769}
+  - {fileID: 7872706946209268048}
+  - {fileID: 8720727570910838542}
 --- !u!1001 &3428856469403602103
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,6 +686,24 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5648342626558519488}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 502643739494101270}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5564256304643467769}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6584351082642124929}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8270171237417515757}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7872706946209268048}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8720727570910838542}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
       insertIndex: -1
