@@ -12,6 +12,7 @@ public class Roader : MonoBehaviour
     private Transform _transform;
     private Vector3 _startPosition;
 
+    public float Speed => _speed;
     private float _distanceTraveled;
 
     public event Action RoadMoved;

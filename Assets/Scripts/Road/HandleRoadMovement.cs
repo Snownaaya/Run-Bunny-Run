@@ -9,6 +9,11 @@ public class HandleRoadMovement
 
     private float _delay = 5f;
 
+    //private void Start()
+    //{
+    //    StartCoroutine(IncreasSpeed());
+    //}
+
     public HandleRoadMovement(ScoreCounter scoreCounter) =>
         _scoreCounter = scoreCounter;
 
@@ -32,17 +37,17 @@ public class HandleRoadMovement
     private void OnRoadMoved() =>
         _scoreCounter.IncrementScore();
 
-    //private IEnumerator IncreasSpeed()
-    //{
-    //    //yield return new WaitForSeconds(_delay);
-    //    //IncreaseSpeedOfAllRoads();
-    //}
+    private IEnumerator IncreasSpeed()
+    {
+        yield return new WaitForSeconds(_delay);
+        IncreaseSpeedOfAllRoads();
+    }
 
-    public void IncreaseSpeedOfAllRoads(float increment)
+    public void IncreaseSpeedOfAllRoads()
     {
         foreach (var roader in _roaders)
         {
-            roader.IncreaseSpeed(increment);
+            roader.IncreaseSpeed(roader.Speed);
         }
     }
 }

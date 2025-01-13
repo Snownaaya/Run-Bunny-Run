@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class RoaderStorage : MonoBehaviour
+public class RoaderStorage : MonoBehaviour 
 {
     [SerializeField] private List<Roader> _activeRoaders = new List<Roader>();
 
@@ -14,7 +14,7 @@ public class RoaderStorage : MonoBehaviour
 
     public IReadOnlyList<Roader> ActiveRoads => _activeRoaders;
 
-    private void Awake()
+    public RoaderStorage()
     {
         _scoreCounter = new ScoreCounter();
         _road = new HandleRoadMovement(_scoreCounter);
