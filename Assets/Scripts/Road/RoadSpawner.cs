@@ -31,20 +31,8 @@ public class RoadSpawner : ObjectPool<Roader>
                 Spawn();
 
             yield return waitForSecond;
-            //StartCoroutine(RemoveRoads());
         }
     }
-
-    //private IEnumerator RemoveRoads()
-    //{
-    //    var waitForSecond = new WaitForSeconds(_checkInterval);
-
-    //    while (enabled)
-    //    {
-    //        yield return waitForSecond;
-    //        ReturnOldRoad();
-    //    }
-    //}
 
     private void Spawn()
     {
@@ -69,7 +57,7 @@ public class RoadSpawner : ObjectPool<Roader>
             return Vector3.zero;
 
         Roader lastRoader = _storage.ActiveRoads[_storage.ActiveRoads.Count - 1];
-        Vector3 position = lastRoader.End.position - (newRoader.Begin.position - newRoader.transform.position);
+        Vector3 position = lastRoader.End.position - newRoader.Begin.localPosition;
 
         return position;
     }
