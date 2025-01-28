@@ -1,34 +1,39 @@
-using System;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class RoaderStorage : MonoBehaviour 
+public class RoaderStorage : MonoBehaviour
 {
-    [SerializeField] private List<Roader> _activeRoaders = new List<Roader>();
+    [SerializeField] private List<Roader> _activeRoads = new List<Roader>();
 
-    private HandleRoadMovement _road;
-    private ScoreCounter _scoreCounter;
+    public IReadOnlyList<Roader> ActiveRoads => _activeRoads;
 
-    private float _speedIncreaseInterval = 1f;
-    private float _speedIncreaseAmount = 1f;
-
-    public IReadOnlyList<Roader> ActiveRoads => _activeRoaders;
-
-    public RoaderStorage()
+    public void AddRoad(Roader road)
     {
-        _scoreCounter = new ScoreCounter();
-        _road = new HandleRoadMovement(_scoreCounter);
+        if (!_activeRoads.Contains(road))
+        {
+            _activeRoads.Add(road);
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
     }
 
-    public void AddRoad(Roader roader)
+    public void RemoveRoad(Roader road)
     {
-        _activeRoaders.Add(roader);
-        _road.AddRoad(roader);
+        if (_activeRoads.Contains(road))
+        {
+            _activeRoads.Remove(road);
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+#endif
+        }
     }
 
-    public void RemoveRoad(Roader roader)
+    public void ResetStorage()
     {
-        _activeRoaders.Remove(roader);
-        _road.RemoveRoad(roader);
+        _activeRoads.Clear();
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this);
+#endif
     }
 }

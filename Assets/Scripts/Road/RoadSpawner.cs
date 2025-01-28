@@ -5,10 +5,12 @@ public class RoadSpawner : ObjectPool<Roader>
 {
     [SerializeField] private Roader _roader;
 
+    [SerializeField] private int _maxRoads = 10;
+    [SerializeField] private float _spawnOffsetZ = 20f;
+
     private RoaderStorage _storage;
 
-    private float _spawnInterval = 15f;
-    private float _checkInterval = 15f;
+    private float _spawnInterval = 10f;
 
     private void Awake()
     {
@@ -16,10 +18,8 @@ public class RoadSpawner : ObjectPool<Roader>
         _storage.AddRoad(_roader);
     }
 
-    private void Start()
-    {
+    private void Start() =>
         StartCoroutine(GeneratorRoad());
-    }
 
     private IEnumerator GeneratorRoad()
     {
@@ -27,17 +27,21 @@ public class RoadSpawner : ObjectPool<Roader>
 
         while (enabled)
         {
-            if (_storage.ActiveRoads.Count > 0)
-                Spawn();
-
+            Spawn();
             yield return waitForSecond;
         }
     }
 
     private void Spawn()
     {
+        if (_storage.ActiveRoads.Count > _maxRoads)
+            ReturnRoad();
+
         Roader randomRoad = GetRandomRoad();
         Roader newRoader = GetObject(randomRoad);
+
+        if (newRoader == null)
+            return;
 
         Vector3 spawnPosition = CalculateRoadPosition(newRoader);
 
@@ -53,18 +57,21 @@ public class RoadSpawner : ObjectPool<Roader>
 
     private Vector3 CalculateRoadPosition(Roader newRoader)
     {
-        if (_storage.ActiveRoads.Count == 0)
+        if (_storage.ActiveRoads.Count == 1)
             return Vector3.zero;
 
         Roader lastRoader = _storage.ActiveRoads[_storage.ActiveRoads.Count - 1];
-        Vector3 position = lastRoader.End.position - newRoader.Begin.localPosition;
 
-        return position;
+        Vector3 direction = lastRoader.End.position - newRoader.Begin.localPosition;
+
+        return direction;
     }
 
-    public void ReturnRoad(Roader road)
+    public void ReturnRoad()
     {
-        ReturnObject(road);
-        _storage.RemoveRoad(road);
+        Roader firstRoader = _storage.ActiveRoads[1];
+
+        _storage.RemoveRoad(firstRoader);
+        ReturnObject(firstRoader);
     }
 }

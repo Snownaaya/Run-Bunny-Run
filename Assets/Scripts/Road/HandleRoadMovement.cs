@@ -1,53 +1,53 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HandleRoadMovement
 {
-    private List<Roader> _roaders = new List<Roader>();
-    private ScoreCounter _scoreCounter;
+    private RoaderStorage _storage;
+    private readonly ICoroutineRunner _coroutineRunner;
+    private float _delay = 1f;
 
-    private float _delay = 5f;
+    private float _speedIncrement = 1f;
 
-    //private void Start()
-    //{
-    //    StartCoroutine(IncreasSpeed());
-    //}
-
-    public HandleRoadMovement(ScoreCounter scoreCounter) =>
-        _scoreCounter = scoreCounter;
-
-    public void Init()
+    public HandleRoadMovement(RoaderStorage roaderStorage, ICoroutineRunner coroutineRunner)
     {
-        
+        _storage = roaderStorage;
+        _coroutineRunner = coroutineRunner;
     }
 
-    public void AddRoad(Roader roader)
+    public void StartIncreaseSpeed() =>
+        _coroutineRunner.StartCoroutine(IncreaseSpeedRoutine());
+
+    public void DecreaseSpeed(float decrement)
     {
-        _roaders.Add(roader);
-        roader.RoadMoved += OnRoadMoved;
+        foreach (Roader roader in _storage.ActiveRoads)
+            roader.CurrentSpeed -= decrement;
     }
 
-    public void RemoveRoad(Roader roader)
+    public void ResetSpeed(float defaultSpeed = 100f)
     {
-        _roaders.Remove(roader);
-        roader.RoadMoved -= OnRoadMoved;
-    }
-
-    private void OnRoadMoved() =>
-        _scoreCounter.IncrementScore();
-
-    private IEnumerator IncreasSpeed()
-    {
-        yield return new WaitForSeconds(_delay);
-        IncreaseSpeedOfAllRoads();
-    }
-
-    public void IncreaseSpeedOfAllRoads()
-    {
-        foreach (var roader in _roaders)
+        foreach (Roader roader in _storage.ActiveRoads)
         {
-            roader.IncreaseSpeed(roader.Speed);
+            Debug.Log($"Resetting speed for roader: {roader.name} to {defaultSpeed}");
+            roader.CurrentSpeed = defaultSpeed;
+        }
+    }
+
+
+    private IEnumerator IncreaseSpeedRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(_delay);
+            IncreaseSpeedOfAllRoads(_speedIncrement);
+        }
+    }
+
+    private void IncreaseSpeedOfAllRoads(float increment)
+    {
+        foreach (Roader roader in _storage.ActiveRoads)
+        {
+            roader.CurrentSpeed += increment;
         }
     }
 }

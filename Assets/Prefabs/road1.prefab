@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 3409611907129680808}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -264,7 +264,7 @@ Transform:
   m_GameObject: {fileID: 4084355016407287753}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.64, y: 4, z: -2084.19}
+  m_LocalPosition: {x: 0.64, y: 4, z: -2082.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -568,15 +568,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 432.45007
+      value: 420.58014
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.49566364
+      value: -25.101013
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5205.974
+      value: -15872.388
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -715,9 +715,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5152030654999922427}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2705553276023889501}
     - targetCorrespondingSourceObject: {fileID: -8961359253771211100, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6871880578775310829}
@@ -782,8 +779,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.07945118, y: 0.38974142, z: 0.058151446}
-  m_Center: {x: 0.0020087464, y: 0.15533711, z: -0.004289945}
+  m_Size: {x: 0.098990716, y: 0.38974142, z: 0.057925653}
+  m_Center: {x: 0.012026947, y: 0.15533711, z: -0.004402836}
 --- !u!1 &447293827458023399 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6223792614999182512, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
@@ -910,27 +907,6 @@ MonoBehaviour:
   _verticalMaxBounds: 10
   _horizontalMinBounds: 1
   _horizontalMaxBounds: 10
---- !u!65 &2705553276023889501
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2545896200882041318}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 381.43033, y: 36.7351, z: 6.418457}
-  m_Center: {x: 0.8051605, y: 17.86755, z: -2.7092285}
 --- !u!4 &2891037971478702940 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
@@ -1143,8 +1119,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06905819, y: 0.34851822, z: 0.058151446}
-  m_Center: {x: 0.0099369055, y: 0.15812525, z: -0.004289941}
+  m_Size: {x: 0.080595516, y: 0.34851822, z: 0.058151446}
+  m_Center: {x: 0.0041682413, y: 0.15812525, z: -0.004289941}
 --- !u!1 &9170731056608065202 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5823512228206098949, guid: cd61951c21fd63b4a834d134206e731f, type: 3}
@@ -1169,5 +1145,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.051448107, y: 0.38117427, z: 0.060368143}
-  m_Center: {x: 0.014570251, y: 0.08919892, z: -0.0032987285}
+  m_Size: {x: 0.07052966, y: 0.38117424, z: 0.060368143}
+  m_Center: {x: 0.0050294315, y: 0.08919893, z: -0.0032987285}

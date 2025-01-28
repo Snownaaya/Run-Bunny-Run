@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -32,5 +32,14 @@ public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
     {
         @object.gameObject.SetActive(false);
         _pool.Enqueue(@object);
+    }
+
+    public void Reset()
+    {
+        foreach (var objectSpawn in _pool.ToList())
+        {
+            objectSpawn.gameObject.SetActive(false);
+        }
+        _pool.Clear();
     }
 }

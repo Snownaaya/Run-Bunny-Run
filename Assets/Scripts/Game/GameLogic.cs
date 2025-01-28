@@ -1,19 +1,21 @@
-using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameLogic : MonoBehaviour
+public class GameLogic : MonoBehaviour, ICoroutineRunner
 {
     [SerializeField] private ScoreView _scoreView;
     [SerializeField] private EndScreen _endScreen;
     [SerializeField] private Player _player;
     [SerializeField] private ScoreView scoreView;
+    [SerializeField] private LevelStart _levelStart;
 
-    [SerializeField] private Roader[] _road;
+    [SerializeField] private RoaderStorage _roaderStorage;
 
     private PlayerWallet _wallet;
     private ScoreCounter _scoreCounter;
     private ScorePresenter _scorePresenter;
+
+    private HandleRoadMovement _handleRoadMovement;
 
     private void Awake()
     {
@@ -22,57 +24,55 @@ public class GameLogic : MonoBehaviour
 
         _scorePresenter = new ScorePresenter(_scoreCounter, scoreView);
 
-        foreach (Roader road in _road)
-            road.Initialize(_scoreCounter);
+        _handleRoadMovement = new HandleRoadMovement(_roaderStorage, this);
     }
 
     private void Start()
     {
-        PauseGame();
+        _levelStart.Open();
+        Time.timeScale = 0;
+
+        foreach (Roader road in _roaderStorage.ActiveRoads)
+            road.Initialize(_scoreCounter);
+
+        _handleRoadMovement.StartIncreaseSpeed();
     }
 
     private void OnEnable()
     {
-        _player.GameOver += OnGameOver;
         _scorePresenter.Enable();
-        _endScreen.RestartButtonClicked += OnRestartButtonClicked;
+        _levelStart.StartButtonClicked += OnStartGame;
+        _endScreen.RestartButtonClicked += OnResetGame;
+        _player.GameOver += OnGameOver;
     }
 
     private void OnDisable()
     {
-        _player.GameOver -= OnGameOver;
         _scorePresenter.Disable();
-        _endScreen.RestartButtonClicked -= OnRestartButtonClicked;
+        _levelStart.StartButtonClicked -= OnStartGame;
+        _endScreen.RestartButtonClicked -= OnResetGame;
+        _player.GameOver -= OnGameOver;
     }
 
     private void OnStartGame()
     {
-        ResumeGame();
-    }
-
-    private void OnRestartButtonClicked()
-    {
-        if (Time.timeScale != 1)
-            ResetGame();
+        _levelStart.Close();
+        _handleRoadMovement.ResetSpeed(100f);
+        Time.timeScale = 1;
     }
 
     private void OnGameOver()
     {
         _endScreen.Open();
-        PauseGame();
+        Time.timeScale = 0;
     }
 
-    private void ResetGame()
+    private void OnResetGame()
     {
         _endScreen.Close();
         Time.timeScale = 1;
+        _handleRoadMovement.ResetSpeed(100f);
         int currentIndexScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentIndexScene);
     }
-
-    private void PauseGame() =>
-        Time.timeScale = 0;
-
-    private void ResumeGame() =>
-        Time.timeScale = 1;
 }

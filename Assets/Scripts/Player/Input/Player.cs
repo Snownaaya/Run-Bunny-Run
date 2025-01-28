@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
 
     private Vector2 _moveDirection;
     private Vector2 _jumpDirection;
-    private Vector3 _startPosition;
 
     private bool _isJumping;
 
@@ -51,7 +50,7 @@ public class Player : MonoBehaviour
         _playerMovement.Move();
     }
 
-    private void OnEnable()
+    private void Update()
     {
         _playerMovement.Enable();
         _playerJumper.Enable();

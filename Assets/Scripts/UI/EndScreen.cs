@@ -9,12 +9,14 @@ public class EndScreen : Window
     {
         CanvasGroup.alpha = 1;
         Button.interactable = true;
+        Button.gameObject.SetActive(true);
     }
 
     public override void Close()
     {
         CanvasGroup.alpha = 0;
         Button.interactable = false;
+        Button.gameObject.SetActive(false);
     }
 
     protected override void OnButtonClick() =>

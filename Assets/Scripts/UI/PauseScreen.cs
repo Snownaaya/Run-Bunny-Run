@@ -19,7 +19,7 @@ public class PauseScreen : MonoBehaviour
         {
             Validate();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             enabled = false;
             throw e;

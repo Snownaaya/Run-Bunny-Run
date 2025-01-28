@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Fireflies
   m_EditorClassIdentifier: 
   _fireflies: {fileID: 3599350507692419124, guid: 8f1800359318f214f894d88751097018, type: 3}
-  _count: 2
+  _count: 1
