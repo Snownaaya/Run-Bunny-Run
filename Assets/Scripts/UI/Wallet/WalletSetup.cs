@@ -4,8 +4,7 @@ using Zenject;
 [RequireComponent(typeof(PlayerAudio))]
 public class WalletSetup : MonoBehaviour
 {
-    [Inject]
-    private CoinSpawner _spawner;
+    [Inject] private CoinSpawner[] _spawner;
 
     [SerializeField] private ClampedAmountWithIcon _view;
 
@@ -30,8 +29,8 @@ public class WalletSetup : MonoBehaviour
     {
         if (other.TryGetComponent(out Coin coin))
         {
+            _spawner[0].ReturnObject(coin);
             _model.AddCoin();
-            _spawner.ReturnObject(coin);
             _playerAudio.Play();
         }
     }

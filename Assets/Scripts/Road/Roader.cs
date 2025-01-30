@@ -5,8 +5,6 @@ public class Roader : MonoBehaviour
 {
     [SerializeField] private float _currentSpeed = 100;
 
-    private float _maxSpeed = 180f;
-
     [field: SerializeField] public Transform End { get; protected set; }
     [field: SerializeField] public Transform Begin { get; protected set; }
 
@@ -14,6 +12,7 @@ public class Roader : MonoBehaviour
     private Transform _transform;
     private HandleRoadMovement _handleRoadMovement;
 
+    private float _maxSpeed = 180f;
     private float _distanceTraveled;
 
     public float CurrentSpeed
@@ -58,4 +57,10 @@ public class Roader : MonoBehaviour
 
     public void Initialize(ScoreCounter scoreCounter) =>
         _scoreCounter = scoreCounter;
+
+    public void Reset()
+    {
+        _currentSpeed = 100f;
+        _distanceTraveled = 0f;
+    }
 }

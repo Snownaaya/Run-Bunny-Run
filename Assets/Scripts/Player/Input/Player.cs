@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private PlayerMovement _playerMovement;
     private PlayerJumper _playerJumper;
     private Animator _animator;
+    private Transform _transform;
 
     private Vector2 _moveDirection;
     private Vector2 _jumpDirection;
@@ -28,12 +29,13 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        _transform = transform;
         _playerInput = new PlayerInput();
         _playerCollision = GetComponent<PlayerCollisionHandler>();
         _playerAudio = GetComponent<PlayerAudio>();
         _animator = GetComponent<Animator>();
 
-        _playerMovement = new PlayerMovement(transform, _playerInput, _speed, _moveDirection);
+        _playerMovement = new PlayerMovement(_transform, _playerInput, _speed, _moveDirection);
         _playerJumper = new PlayerJumper(_playerInput, _jumpDirection, _groundMask, _targetPoint, GetComponent<Rigidbody>(), _isJumping,
         _checkRaduis, _jumpForce, _animator, _playerAudio);
         _playerAudio.Initialize(_animator);

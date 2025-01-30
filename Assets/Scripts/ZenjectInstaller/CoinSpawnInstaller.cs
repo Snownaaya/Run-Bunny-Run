@@ -1,12 +1,12 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class CoinSpawnUnstaller : MonoInstaller
+public class CoinSpawnInstaller : MonoInstaller
 {
-    [SerializeField] private List<CoinSpawner> _spawner;
+    [SerializeField] private CoinSpawner[] _spawner;
+
     public override void InstallBindings()
     {
-        Container.Bind<CoinSpawner>().FromComponentInHierarchy().AsTransient();
+        Container.Bind<CoinSpawner[]>().FromInstance(_spawner).AsSingle();
     }
 }

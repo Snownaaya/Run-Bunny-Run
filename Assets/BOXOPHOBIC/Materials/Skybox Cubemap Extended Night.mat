@@ -92,11 +92,11 @@ Material:
     - _DstBlend: 0
     - _EnableFog: 0
     - _EnableRotation: 1
-    - _Exposure: 1.42
+    - _Exposure: 1.71
     - _Float0: -0.21
     - _FogFill: 0
     - _FogHeight: 0
-    - _FogIntensity: 0.486
+    - _FogIntensity: 0
     - _FogMessage: 0
     - _FogPosition: 0
     - _FogSmoothness: 0.01
@@ -110,7 +110,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Rotation: 360
+    - _Rotation: 0
     - _RotationSpeed: 5
     - _Rotationn: 1
     - _SkyboxExtended: 1

@@ -5,9 +5,10 @@ public class HandleRoadMovement
 {
     private RoaderStorage _storage;
     private readonly ICoroutineRunner _coroutineRunner;
-    private float _delay = 1f;
 
+    private float _delay = 1f;
     private float _speedIncrement = 1f;
+    private const float SpeedDecrementFactor = 5f; 
 
     public HandleRoadMovement(RoaderStorage roaderStorage, ICoroutineRunner coroutineRunner)
     {
@@ -21,18 +22,18 @@ public class HandleRoadMovement
     public void DecreaseSpeed(float decrement)
     {
         foreach (Roader roader in _storage.ActiveRoads)
-            roader.CurrentSpeed -= decrement;
+        {
+            roader.CurrentSpeed -= decrement * SpeedDecrementFactor;
+        }
     }
 
     public void ResetSpeed(float defaultSpeed = 100f)
     {
         foreach (Roader roader in _storage.ActiveRoads)
         {
-            Debug.Log($"Resetting speed for roader: {roader.name} to {defaultSpeed}");
             roader.CurrentSpeed = defaultSpeed;
         }
     }
-
 
     private IEnumerator IncreaseSpeedRoutine()
     {
@@ -46,8 +47,6 @@ public class HandleRoadMovement
     private void IncreaseSpeedOfAllRoads(float increment)
     {
         foreach (Roader roader in _storage.ActiveRoads)
-        {
             roader.CurrentSpeed += increment;
-        }
     }
 }

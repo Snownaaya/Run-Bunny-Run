@@ -8,13 +8,6 @@ public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
 
     private Queue<T> _pool = new Queue<T>();
 
-    private Vector3 _startPosition;
-
-    private void Start()
-    {
-        _startPosition = transform.position;
-    }
-
     public T GetObject(T prefab)
     {
         if (_pool.Count > 0)
@@ -34,12 +27,11 @@ public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
         _pool.Enqueue(@object);
     }
 
-    public void Reset()
-    {
-        foreach (var objectSpawn in _pool.ToList())
-        {
-            objectSpawn.gameObject.SetActive(false);
-        }
-        _pool.Clear();
-    }
+    //public void Reset()
+    //{
+    //    foreach (var objectSpawn in _pool.ToList())
+    //        objectSpawn.gameObject.SetActive(false);
+
+    //    _pool.Clear();
+    //}
 }

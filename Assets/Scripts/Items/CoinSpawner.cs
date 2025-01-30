@@ -8,18 +8,15 @@ public class CoinSpawner : ObjectPool<Coin>
     [SerializeField] private int _delay;
     [SerializeField] private Transform[] _points;
 
-    [field: SerializeField] public Coin Coin { get; private set; }
-
     [Header(Position)]
     [SerializeField] private float _verticalMinBounds;
     [SerializeField] private float _verticalMaxBounds;
     [SerializeField] private float _horizontalMinBounds;
     [SerializeField] private float _horizontalMaxBounds;
 
-    private void Start()
-    {
-        StartCoroutine(Spawn());
-    }
+    [field: SerializeField] public Coin Coin { get; private set; }
+
+    private void Start() => StartCoroutine(Spawn());
 
     public IEnumerator Spawn()
     {
@@ -29,13 +26,14 @@ public class CoinSpawner : ObjectPool<Coin>
         {
             Coin coin = GetObject(Coin);
             coin.transform.position = pair.position;
+
             yield return new WaitWhile(() => Coin.MinCoin >= Coin.MaxCoin);
             yield return wait;
+
+            ReturnCoin(coin);
         }
     }
 
-    public void ReturnCoin(Coin coin)
-    {
+    public void ReturnCoin(Coin coin) =>
         ReturnObject(coin);
-    }
 }
