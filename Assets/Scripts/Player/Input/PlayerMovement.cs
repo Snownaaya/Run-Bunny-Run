@@ -1,60 +1,73 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerMovement : IPlayerAction
 {
-    private PlayerInput _playerInput;
-    private Transform _transform;
     private Vector2 _touchpadMoveDirection;
+    private IMoveble _moveble;
+    private Finger _movementFinger;
+    private Vector2 _startTouchPosition; 
 
-    private float _speed;
+    private float _sensitivity = 4f;
 
-    public PlayerMovement(Transform transform, PlayerInput inputPlayer, float speed, Vector2 moveDirection)
+    public PlayerMovement(IMoveble moveble)
     {
-        _playerInput = inputPlayer;
-        _speed = speed;
-        _touchpadMoveDirection = moveDirection;
-        _transform = transform;
+        _moveble = moveble;
+        _touchpadMoveDirection = Vector2.zero;
     }
 
     public void Enable()
     {
-        _playerInput.Enable();
-        _playerInput.Player.Move.performed += OnMoveTouchpad;
-        _playerInput.Player.Move.canceled += OnMoveCanceled;
+        EnhancedTouchSupport.Enable();
+        ETouch.Touch.onFingerDown += OnFingerDown;
+        ETouch.Touch.onFingerMove += OnFingerMove;
+        ETouch.Touch.onFingerUp += OnFingerUp;
     }
 
     public void Disable()
     {
-        _playerInput.Disable();
-        _playerInput.Player.Move.performed -= OnMoveTouchpad;
-        _playerInput.Player.Move.canceled -= OnMoveCanceled;
+        ETouch.Touch.onFingerDown -= OnFingerDown;
+        ETouch.Touch.onFingerMove -= OnFingerMove;
+        ETouch.Touch.onFingerUp -= OnFingerUp;
+        EnhancedTouchSupport.Disable();
     }
 
     public void Move()
     {
-        float scaledMoveSpeed = _speed * Time.deltaTime;
-        Vector3 offset = new Vector3(_touchpadMoveDirection.x, 0f, 0f) * scaledMoveSpeed;
-        _transform.Translate(offset);
+        Vector3 scaleMovement = _moveble.Speed * Time.deltaTime * new Vector3(_touchpadMoveDirection.x, 0, 
+            _touchpadMoveDirection.y);
+        _moveble.Transform.Translate(scaleMovement);
     }
 
-    public void OnMoveTouchpad(InputAction.CallbackContext context)
+    public void OnFingerDown(Finger touchFinger)
     {
-        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.IsPressed())
+        if (_movementFinger == null)
         {
-            _touchpadMoveDirection = Touchscreen.current.primaryTouch.delta.ReadValue();
-        }
-        else if (Mouse.current != null && Mouse.current.leftButton.IsPressed())
-        {
-            _touchpadMoveDirection = Mouse.current.delta.ReadValue();
-        }
-        else
-        {
+            _movementFinger = touchFinger;
+            _startTouchPosition = touchFinger.currentTouch.screenPosition;
             _touchpadMoveDirection = Vector2.zero;
         }
     }
 
-    private void OnMoveCanceled(InputAction.CallbackContext context) =>
-        _touchpadMoveDirection = Vector2.zero; 
+    public void OnFingerMove(Finger touchFinger)
+    {
+        if (_movementFinger == touchFinger)
+        {
+            Vector2 currentPos = touchFinger.currentTouch.screenPosition;
+
+            float deltaX = currentPos.x - _startTouchPosition.x;
+
+            _touchpadMoveDirection = new Vector2(deltaX, 0).normalized * _sensitivity;
+        }
+    }
+
+    public void OnFingerUp(Finger finger)
+    {
+        if (_movementFinger == finger)
+        {
+            _movementFinger = null;
+            _touchpadMoveDirection = Vector2.zero;
+        }
+    }
 }

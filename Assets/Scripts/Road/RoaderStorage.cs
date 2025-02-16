@@ -18,5 +18,6 @@ public class RoaderStorage : MonoBehaviour
             _activeRoads.Remove(road);
     }
 
-    public void ResetStorage() => _activeRoads.Clear();
+    public void ResetStorage() =>
+        _activeRoads.Clear();
 }

@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class Roader : MonoBehaviour
 {
-    [SerializeField] private float _currentSpeed = 100;
+    [SerializeField] private float _speed = 100f;
 
     [field: SerializeField] public Transform End { get; protected set; }
     [field: SerializeField] public Transform Begin { get; protected set; }
 
     private ScoreCounter _scoreCounter;
     private Transform _transform;
-    private HandleRoadMovement _handleRoadMovement;
 
     private float _maxSpeed = 180f;
+    private float _currentSpeed = 100f;
     private float _distanceTraveled;
 
     public float CurrentSpeed
     {
-        get => _currentSpeed;
-        set => _currentSpeed = Mathf.Clamp(value, _currentSpeed, _maxSpeed);
-    }
+        get => _speed;
+        set => _speed = Mathf.Clamp(value, _currentSpeed, _maxSpeed);
+    } 
 
     public event Action RoadMoved;
 
@@ -29,12 +29,9 @@ public class Roader : MonoBehaviour
     private void Update() =>
         Move();
 
-    public void IncreaseSpeed(float increment) =>
-        _currentSpeed += increment;
-
     private void Move()
     {
-        float move = _currentSpeed * Time.deltaTime;
+        float move = _speed * Time.deltaTime;
 
         _transform.Translate(_transform.forward * move);
        CalculateScore();
@@ -46,7 +43,7 @@ public class Roader : MonoBehaviour
         if (_scoreCounter == null)
             return;
 
-        _distanceTraveled += _currentSpeed * Time.deltaTime;
+        _distanceTraveled += _speed * Time.deltaTime;
 
         if (_distanceTraveled >= 1f)
         {
@@ -60,7 +57,7 @@ public class Roader : MonoBehaviour
 
     public void Reset()
     {
-        _currentSpeed = 100f;
+        _speed = 100f;
         _distanceTraveled = 0f;
     }
 }

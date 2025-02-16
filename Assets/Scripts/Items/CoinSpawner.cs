@@ -29,8 +29,6 @@ public class CoinSpawner : ObjectPool<Coin>
 
             yield return new WaitWhile(() => Coin.MinCoin >= Coin.MaxCoin);
             yield return wait;
-
-            ReturnCoin(coin);
         }
     }
 

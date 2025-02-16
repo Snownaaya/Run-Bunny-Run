@@ -1,22 +1,24 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(RoaderStorage), typeof(HandleRoadSpeed))]
 public class RoadSpawner : ObjectPool<Roader>
 {
     [SerializeField] private Roader[] _roadPrefabs;
 
-    [SerializeField] private int _maxRoads = 5;
-    [SerializeField] private float _spawnOffsetZ = 20f;
+    [SerializeField] private int _maxRoads = 8;
 
     private RoaderStorage _storage;
     private Vector3 _beginOffset;
     private Transform _transform;
+    private HandleRoadSpeed _roadMovement;
 
-    private float _spawnInterval = 10f;
+    private float _spawnInterval = 18f;
 
     private void Awake()
     {
         _transform = transform;
+        _roadMovement = GetComponent<HandleRoadSpeed>();
         _storage = GetComponent<RoaderStorage>();
     }
 
@@ -51,6 +53,7 @@ public class RoadSpawner : ObjectPool<Roader>
         Vector3 spawnPosition = CalculateRoadPosition(newRoader);
         newRoader.transform.position = spawnPosition;
         _storage.AddRoad(newRoader);
+        _roadMovement.SetCurrentSpeed(newRoader);
     }
 
     private Roader GetRandomRoad()
@@ -68,7 +71,7 @@ public class RoadSpawner : ObjectPool<Roader>
         return lastRoader.End.position - (newRoader.Begin.position - newRoader.transform.position);
     }
 
-    private void ReturnRoad()
+    public void ReturnRoad()
     {
         Roader firstRoader = _storage.ActiveRoads[0];
         _storage.RemoveRoad(firstRoader);

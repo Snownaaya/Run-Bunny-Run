@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class ObjectPool<T> : MonoBehaviour, IPoolObject<T> where T : MonoBehaviour
 {
     [SerializeField] private Transform _container;
 
@@ -27,11 +26,12 @@ public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
         _pool.Enqueue(@object);
     }
 
-    //public void Reset()
-    //{
-    //    foreach (var objectSpawn in _pool.ToList())
-    //        objectSpawn.gameObject.SetActive(false);
+    public int GetActiveCount() =>
+        _pool.Count;
 
-    //    _pool.Clear();
-    //}
+    public void ClearPool()
+    {
+        if (GetActiveCount() > 0)
+            _pool.Clear();
+    }
 }

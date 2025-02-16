@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
+using Zenject;
 
-public class Obstacle : MonoBehaviour
+public class Obstacle : MonoBehaviour, IInteractable
 {
-    [SerializeField] private float _speedReduction = 1f;
+    [SerializeField] private float _speedReduction;
 
-    private HandleRoadMovement _handleRoadMovement;
+    private HandleRoadSpeed _roadSpeed;
 
-    public void Initialize(HandleRoadMovement handleRoadMovement)
+    private void Awake()
     {
-        _handleRoadMovement = handleRoadMovement;
+        _roadSpeed = FindObjectOfType<HandleRoadSpeed>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Player player))
         {
-            _handleRoadMovement?.DecreaseSpeed(_speedReduction);
+            _roadSpeed.DecreaseSpeed(_speedReduction);
+            print($"{_speedReduction} - скорость понизилась.");
         }
     }
 }

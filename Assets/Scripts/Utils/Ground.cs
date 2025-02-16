@@ -2,27 +2,19 @@
 
 public class Ground : MonoBehaviour
 {
-    private const string Position = nameof(Position);
+    [SerializeField] private Transform[] _points;
 
-    [SerializeField] private Vector3 _size;
+    public Transform[] Points => _points;
 
-    [Header(Position)]
-    [SerializeField] private int _verticalPosition;
-    [SerializeField] private int _horintalPosition;
-
-    public Vector3 GetRandomPosition()
+#if UNITY_EDITOR
+    [ContextMenu("Refresh Child Array")]
+    private void RefreshChildArray()
     {
-        float positionX = Random.Range(-_size.x / _horintalPosition, _size.x / _verticalPosition);
-        float positionZ = Random.Range(-_size.z / _horintalPosition, _size.x / _verticalPosition);
+        int pointCount = transform.childCount;
+        _points = new Transform[pointCount];
 
-        var randomPosition = transform.position + new Vector3(positionX, 0.2f, positionZ);
-
-        return randomPosition;
+        for (int i = 0; i < pointCount; i++)
+            _points[i] = transform.GetChild(i);
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, new Vector3(_size.x, 0.2f, _size.z));
-    }
+#endif
 }

@@ -3,7 +3,7 @@ using System;
 
 [RequireComponent(typeof(Rigidbody), typeof(PlayerInput), typeof(PlayerCollisionHandler))]
 [RequireComponent(typeof(Animator), typeof(PlayerAudio))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IMoveble
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
@@ -12,47 +12,43 @@ public class Player : MonoBehaviour
     [SerializeField] public LayerMask _groundMask;
     [SerializeField] private Transform _targetPoint;
 
-    private PlayerAudio _playerAudio;
-    private PlayerInput _playerInput;
-    private PlayerCollisionHandler _playerCollision;
     private PlayerMovement _playerMovement;
+    private PlayerAudio _playerAudio;
+    private PlayerCollisionHandler _playerCollision;
     private PlayerJumper _playerJumper;
     private Animator _animator;
     private Transform _transform;
 
     private Vector2 _moveDirection;
-    private Vector2 _jumpDirection;
 
     private bool _isJumping;
+
+    public Transform Transform => _transform;
+    public float Speed => _speed;
+
+    public float JumpForce => _jumpForce;
 
     public event Action GameOver;
 
     private void Awake()
     {
         _transform = transform;
-        _playerInput = new PlayerInput();
         _playerCollision = GetComponent<PlayerCollisionHandler>();
         _playerAudio = GetComponent<PlayerAudio>();
         _animator = GetComponent<Animator>();
 
-        _playerMovement = new PlayerMovement(_transform, _playerInput, _speed, _moveDirection);
-        _playerJumper = new PlayerJumper(_playerInput, _jumpDirection, _groundMask, _targetPoint, GetComponent<Rigidbody>(), _isJumping,
-        _checkRaduis, _jumpForce, _animator, _playerAudio);
+        _playerMovement = new PlayerMovement(this);
+        _playerJumper = new PlayerJumper(_groundMask, _targetPoint, GetComponent<Rigidbody>(),
+        this, _checkRaduis, _animator, _playerAudio);
         _playerAudio.Initialize(_animator);
     }
 
     private void FixedUpdate()
     {
-        if (_isJumping && _playerJumper.IsGrounded())
-        {
-            _playerJumper.Jump();
-            _isJumping = false;
-        }
-
         _playerMovement.Move();
     }
 
-    private void Update()
+    private void OnEnable()
     {
         _playerMovement.Enable();
         _playerJumper.Enable();

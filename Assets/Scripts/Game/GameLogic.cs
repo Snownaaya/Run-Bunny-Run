@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,8 @@ public class GameLogic : MonoBehaviour, ICoroutineRunner
     [SerializeField] private Player _player;
     [SerializeField] private ScoreView scoreView;
     [SerializeField] private LevelStart _levelStart;
+    [SerializeField] private RoadSpawner _roadSpawner;
+    [SerializeField] private DecorSpawner _decorSpawner;
 
     [SerializeField] private RoaderStorage _roaderStorage;
 
@@ -15,7 +18,6 @@ public class GameLogic : MonoBehaviour, ICoroutineRunner
     private ScoreCounter _scoreCounter;
     private ScorePresenter _scorePresenter;
 
-    private HandleRoadMovement _handleRoadMovement;
 
     private void Awake()
     {
@@ -23,8 +25,6 @@ public class GameLogic : MonoBehaviour, ICoroutineRunner
         _wallet = new PlayerWallet();
 
         _scorePresenter = new ScorePresenter(_scoreCounter, scoreView);
-
-        _handleRoadMovement = new HandleRoadMovement(_roaderStorage, this);
     }
 
     private void Start()
@@ -34,8 +34,6 @@ public class GameLogic : MonoBehaviour, ICoroutineRunner
 
         foreach (Roader road in _roaderStorage.ActiveRoads)
             road.Initialize(_scoreCounter);
-
-        _handleRoadMovement.StartIncreaseSpeed();
     }
 
     private void OnEnable()
@@ -57,13 +55,13 @@ public class GameLogic : MonoBehaviour, ICoroutineRunner
     private void OnStartGame()
     {
         _levelStart.Close();
-        _handleRoadMovement.ResetSpeed(100f);
         Time.timeScale = 1;
     }
 
     private void OnGameOver()
     {
         _endScreen.Open();
+        _roaderStorage.ResetStorage();
         Time.timeScale = 0;
     }
 
@@ -71,7 +69,8 @@ public class GameLogic : MonoBehaviour, ICoroutineRunner
     {
         _endScreen.Close();
         Time.timeScale = 1;
-        _handleRoadMovement.ResetSpeed(100f);
+        _roadSpawner.ClearPool();
+        _decorSpawner.ClearAllDecor();
         int currentIndexScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentIndexScene);
     }

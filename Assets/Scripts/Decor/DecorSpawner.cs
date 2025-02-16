@@ -1,33 +1,63 @@
-//using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
+using UnityEngine;
 
-//public class DecorSpawner : ObjectPool<Decor>
-//{
-//    [SerializeField] private DecorData _decorData;
-//    [SerializeField] private Ground _ground;
+public class DecorSpawner : ObjectPool<Decor>
+{
+    [SerializeField] private Decor[] _decor;
+    [SerializeField] private Ground _ground;
 
-//    private void Start()
-//    {
-//        Spawn();
-//    }
+    private float _spawnInterval = 10f;
+    private int _maxDecorCount = 4;
 
-//    public void Spawn()
-//    {
-//        if (_decorData.Transform.Count == 0)
-//            return;
+    private List<Decor> _activeDecor = new List<Decor>();
 
-//        for (int i = 0; i < _decorData.Count; i++)
-//        {
-//            Transform randomPrefab = _decorData.Transform[Random.Range(0, _decorData.Transform.Count)];
+    private void Start() =>
+        StartCoroutine(Generate());
 
-//            Decor decor = GetObject(randomPrefab.GetComponent<Decor>());
+    private IEnumerator Generate()
+    {
+        var wait = new WaitForSeconds(_spawnInterval);
 
-//            if (decor == null)
-//            {
-//                decor = Instantiate(randomPrefab, _ground.GetRandomPosition(), Quaternion.identity)
-//                    .gameObject.AddComponent<Decor>();
-//            }
+        while (enabled)
+        {
+            Spawn(_ground);
+            yield return wait;
+        }
+    }
 
-//            decor.Setup(_ground.GetRandomPosition());
-//        }
-//    }
-//}
+    public void RemoveDecor(Decor decorToRemove)
+    {
+        ReturnObject(decorToRemove);
+        _activeDecor.Remove(decorToRemove);
+    }
+
+    private void Spawn(Ground currentGround)
+    {
+        HashSet<int> usedIndices = new HashSet<int>();
+
+        while (_activeDecor.Count < _maxDecorCount && usedIndices.Count < _ground.Points.Length)
+        {
+            int randomPointIndex;
+
+            do
+                randomPointIndex = Random.Range(0, _ground.Points.Length);
+            while (usedIndices.Contains(randomPointIndex));
+
+            usedIndices.Add(randomPointIndex);
+            Transform spawnPoint = _ground.Points[randomPointIndex];
+
+            Decor randomDecore = _decor[Random.Range(0, _decor.Length)];
+            Decor decor = GetObject(randomDecore);
+
+            decor.transform.position = spawnPoint.position;
+            _activeDecor.Add(decor);
+        }
+    }
+
+    public void ClearAllDecor()
+    {
+        while (_activeDecor.Count > 0)
+            RemoveDecor(_activeDecor[0]);
+    }
+}
