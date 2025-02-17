@@ -1,13 +1,6 @@
 {
     "name": "PlayerInput",
-    "maps": [
-        {
-            "name": "Player",
-            "id": "fa7bf494-674b-4190-a2e2-ecffa16c65a7",
-            "actions": [],
-            "bindings": []
-        }
-    ],
+    "maps": [],
     "controlSchemes": [
         {
             "name": "Keyboard and Mouse",

@@ -6,12 +6,13 @@ public class Settings : Window
 {
     public override void Close()
     {
-        throw new System.NotImplementedException();
+        CanvasGroup.alpha = 0f;
     }
 
     public override void Open()
     {
-        throw new System.NotImplementedException();
+        CanvasGroup.alpha = 1f;
+        //Button
     }
 
     protected override void OnButtonClick()

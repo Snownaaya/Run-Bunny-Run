@@ -9,7 +9,7 @@ public class PlayerMovement : IPlayerAction
     private Finger _movementFinger;
     private Vector2 _startTouchPosition; 
 
-    private float _sensitivity = 4f;
+    private float _sensitivity = 6f;
 
     public PlayerMovement(IMoveble moveble)
     {

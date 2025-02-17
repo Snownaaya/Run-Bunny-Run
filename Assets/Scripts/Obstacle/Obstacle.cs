@@ -15,9 +15,6 @@ public class Obstacle : MonoBehaviour, IInteractable
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Player player))
-        {
             _roadSpeed.DecreaseSpeed(_speedReduction);
-            print($"{_speedReduction} - скорость понизилась.");
-        }
     }
 }

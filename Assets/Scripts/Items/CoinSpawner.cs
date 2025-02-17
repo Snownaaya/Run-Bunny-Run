@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing;
 using UnityEngine;
 
 public class CoinSpawner : ObjectPool<Coin>
@@ -8,28 +9,31 @@ public class CoinSpawner : ObjectPool<Coin>
     [SerializeField] private int _delay;
     [SerializeField] private Transform[] _points;
 
-    [Header(Position)]
-    [SerializeField] private float _verticalMinBounds;
-    [SerializeField] private float _verticalMaxBounds;
-    [SerializeField] private float _horizontalMinBounds;
-    [SerializeField] private float _horizontalMaxBounds;
-
     [field: SerializeField] public Coin Coin { get; private set; }
 
-    private void Start() => StartCoroutine(Spawn());
+    private int _count = 5;
+
+    private void Start()
+    {
+        for (int i = 0; i < _count; i++)
+            StartCoroutine(Spawn());
+    }
 
     public IEnumerator Spawn()
     {
         var wait = new WaitForSeconds(_delay);
+        Generate();
 
-        foreach (var pair in _points)
-        {
-            Coin coin = GetObject(Coin);
-            coin.transform.position = pair.position;
+        yield return new WaitWhile(() => Coin.MinCoin >= Coin.MaxCoin);
+        yield return wait;
+    }
 
-            yield return new WaitWhile(() => Coin.MinCoin >= Coin.MaxCoin);
-            yield return wait;
-        }
+    private void Generate()
+    {
+        int randomZposition = Random.Range(0, _points.Length);
+
+        Coin coin = GetObject(Coin);
+        coin.transform.position = _points[randomZposition].position;
     }
 
     public void ReturnCoin(Coin coin) =>

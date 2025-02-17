@@ -8,7 +8,6 @@ public class GameLogic : MonoBehaviour, ICoroutineRunner
     [SerializeField] private EndScreen _endScreen;
     [SerializeField] private Player _player;
     [SerializeField] private ScoreView scoreView;
-    [SerializeField] private LevelStart _levelStart;
     [SerializeField] private RoadSpawner _roadSpawner;
     [SerializeField] private DecorSpawner _decorSpawner;
 
@@ -29,9 +28,6 @@ public class GameLogic : MonoBehaviour, ICoroutineRunner
 
     private void Start()
     {
-        _levelStart.Open();
-        Time.timeScale = 0;
-
         foreach (Roader road in _roaderStorage.ActiveRoads)
             road.Initialize(_scoreCounter);
     }
@@ -39,7 +35,6 @@ public class GameLogic : MonoBehaviour, ICoroutineRunner
     private void OnEnable()
     {
         _scorePresenter.Enable();
-        _levelStart.StartButtonClicked += OnStartGame;
         _endScreen.RestartButtonClicked += OnResetGame;
         _player.GameOver += OnGameOver;
     }
@@ -47,15 +42,8 @@ public class GameLogic : MonoBehaviour, ICoroutineRunner
     private void OnDisable()
     {
         _scorePresenter.Disable();
-        _levelStart.StartButtonClicked -= OnStartGame;
         _endScreen.RestartButtonClicked -= OnResetGame;
         _player.GameOver -= OnGameOver;
-    }
-
-    private void OnStartGame()
-    {
-        _levelStart.Close();
-        Time.timeScale = 1;
     }
 
     private void OnGameOver()

@@ -22,14 +22,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerInput"",
-    ""maps"": [
-        {
-            ""name"": ""Player"",
-            ""id"": ""fa7bf494-674b-4190-a2e2-ecffa16c65a7"",
-            ""actions"": [],
-            ""bindings"": []
-        }
-    ],
+    ""maps"": [],
     ""controlSchemes"": [
         {
             ""name"": ""Keyboard and Mouse"",
@@ -60,8 +53,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Player
-        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -119,44 +110,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         return asset.FindBinding(bindingMask, out action);
     }
-
-    // Player
-    private readonly InputActionMap m_Player;
-    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    public struct PlayerActions
-    {
-        private @PlayerInput m_Wrapper;
-        public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputActionMap Get() { return m_Wrapper.m_Player; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
-        public void AddCallbacks(IPlayerActions instance)
-        {
-            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-        }
-
-        private void UnregisterCallbacks(IPlayerActions instance)
-        {
-        }
-
-        public void RemoveCallbacks(IPlayerActions instance)
-        {
-            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IPlayerActions instance)
-        {
-            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public PlayerActions @Player => new PlayerActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -174,8 +127,5 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             if (m_TouchscreenSchemeIndex == -1) m_TouchscreenSchemeIndex = asset.FindControlSchemeIndex("Touchscreen");
             return asset.controlSchemes[m_TouchscreenSchemeIndex];
         }
-    }
-    public interface IPlayerActions
-    {
     }
 }
