@@ -525,6 +525,30 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: -3278615484307183667, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1900
+      objectReference: {fileID: 0}
+    - target: {fileID: -3278615484307183667, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1900
+      objectReference: {fileID: 0}
+    - target: {fileID: -3278615484307183667, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1900
+      objectReference: {fileID: 0}
+    - target: {fileID: -3272106112100924687, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1900
+      objectReference: {fileID: 0}
+    - target: {fileID: -3272106112100924687, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1900
+      objectReference: {fileID: 0}
+    - target: {fileID: -3272106112100924687, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1900
+      objectReference: {fileID: 0}
     - target: {fileID: -516098083770646512, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -548,6 +572,18 @@ PrefabInstance:
     - target: {fileID: 1148581259341323952, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438656852951536746, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1900
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438656852951536746, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1900
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438656852951536746, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1900
       objectReference: {fileID: 0}
     - target: {fileID: 2438656852951536746, guid: cd287fccd847f0248a62f0bae66ab052, type: 3}
       propertyPath: m_LocalPosition.y
@@ -707,10 +743,6 @@ MonoBehaviour:
   - {fileID: 6250430560648721228}
   - {fileID: 2264388998731300560}
   - {fileID: 8618273400283741053}
-  _verticalMinBounds: 1
-  _verticalMaxBounds: 10
-  _horizontalMinBounds: 1
-  _horizontalMaxBounds: 10
   <Coin>k__BackingField: {fileID: 8446818975350809770, guid: 9c42a710e5cbe604f850e3ca944162ca, type: 3}
 --- !u!4 &1814241481632854441 stripped
 Transform:

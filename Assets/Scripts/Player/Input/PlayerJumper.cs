@@ -6,6 +6,7 @@ using System;
 [Serializable]
 public class PlayerJumper : IPlayerAction
 {
+    private ParticleSystem _particleSystem;
     private LayerMask _groundMask;
     private Transform _targetPoint;
     private Rigidbody _rigidbody;
@@ -14,12 +15,13 @@ public class PlayerJumper : IPlayerAction
 
     private IMoveble _moveble;
     private bool _isJumping;
+    private bool _wasInAir;
     private float _checkRaduis;
 
     private Vector2 _startTouchPosition;
     private float _swipeThreshold = 100f;
 
-    public PlayerJumper(LayerMask groundMask, Transform targetPoint, Rigidbody rigidbody, IMoveble moveble, float checkRaduis, Animator animator, PlayerAudio audio)
+    public PlayerJumper(LayerMask groundMask, Transform targetPoint, Rigidbody rigidbody, IMoveble moveble, float checkRaduis, Animator animator, PlayerAudio audio, ParticleSystem particleSystem)
     {
         _groundMask = groundMask;
         _targetPoint = targetPoint;
@@ -28,6 +30,7 @@ public class PlayerJumper : IPlayerAction
         _checkRaduis = checkRaduis;
         _animator = animator;
         _audio = audio;
+        _particleSystem = particleSystem;
     }
 
     public void Enable()
@@ -44,13 +47,18 @@ public class PlayerJumper : IPlayerAction
         EnhancedTouchSupport.Disable();
     }
 
-    public void Jump()
+    public void CheckLanding()
     {
-        if (IsGrounded())
+        if (!_wasInAir && !IsGrounded())
         {
-            _rigidbody.AddForce(Vector3.up * _moveble.JumpForce, ForceMode.Impulse);
-            _animator.SetTrigger(AnimatorData.Parameters.Jump);
-            _audio.PlayJumpSound();
+            _wasInAir = true;
+            _particleSystem.Stop();
+        }
+        else if (_wasInAir && IsGrounded())
+        {
+            _wasInAir = false;
+            _particleSystem.Play();
+            _audio.PlayFootStep();
         }
     }
 
@@ -61,6 +69,16 @@ public class PlayerJumper : IPlayerAction
     {
         if (IsGrounded() == false)
             _rigidbody.AddForce(Vector3.down * _moveble.JumpForce, ForceMode.Impulse);
+    }
+
+    private void Jump()
+    {
+        if (IsGrounded())
+        {
+            _rigidbody.AddForce(Vector3.up * _moveble.JumpForce, ForceMode.Impulse);
+            _animator.SetTrigger(AnimatorData.Parameters.Jump);
+            _audio.PlayJumpSound();
+        }
     }
 
     private void OnFingerDown(Finger finger)

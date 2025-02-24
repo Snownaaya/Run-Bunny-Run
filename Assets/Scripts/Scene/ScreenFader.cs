@@ -1,13 +1,11 @@
-using System;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ScreenFader : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _fadeCanvasGroup;
-    [SerializeField] private float _fadeDuration = 0.5f;
-
+    [SerializeField] private float _fadeDuration;
 
     public void TransitionToScene(string sceneName) =>
         StartCoroutine(Transition(sceneName));
@@ -17,7 +15,7 @@ public class ScreenFader : MonoBehaviour
         yield return StartCoroutine(FadeOut());
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
-        while (!operation.isDone)
+        while (operation.isDone == false)
         {
             yield return null;
         }

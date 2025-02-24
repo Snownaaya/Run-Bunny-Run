@@ -47,6 +47,6 @@ public class WalletSetup : MonoBehaviour
     private IEnumerator ReturnParticle(PooledParticle pooledParticle)
     {
         yield return new WaitForSeconds(_delay);
-        _coinParticle.ReturnCoinParticle(pooledParticle);
+        _coinParticle.ReturnParticle(pooledParticle);
     }
 }

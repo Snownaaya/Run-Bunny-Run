@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-
-public class Audio : Setting
+﻿public class Audio : Setting
 {
     private const string CanPlayAudioKey = "CanPlayAudio";
 

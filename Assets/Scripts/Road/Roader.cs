@@ -23,8 +23,10 @@ public class Roader : MonoBehaviour
 
     public event Action RoadMoved;
 
-    private void Awake() =>
+    private void Awake()
+    {
         _transform = transform;
+    }
 
     private void Update() =>
         Move();

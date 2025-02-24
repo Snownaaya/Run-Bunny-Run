@@ -7,9 +7,6 @@ public class DecorRemover : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Decor decor))
-        {
             _decorSpawner.RemoveDecor(decor);
-            print($"{_decorSpawner} detected");
-        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Setting : ISetting
@@ -9,7 +8,8 @@ public abstract class Setting : ISetting
     protected Setting(string saveKey) =>
         _saveKey = saveKey;
 
-    public bool IsEnable => Convert.ToBoolean(PlayerPrefs.GetInt(_saveKey, 1));
+    public bool IsEnable =>
+        Convert.ToBoolean(PlayerPrefs.GetInt(_saveKey, 1));
 
     public void Disable() =>
         SetActive(false);

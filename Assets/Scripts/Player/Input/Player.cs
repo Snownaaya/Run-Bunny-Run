@@ -11,11 +11,12 @@ public class Player : MonoBehaviour, IMoveble
 
     [SerializeField] public LayerMask _groundMask;
     [SerializeField] private Transform _targetPoint;
+    [SerializeField] private ParticleSystem _particle;
 
+    private PlayerJumper _playerJumper;
     private PlayerMovement _playerMovement;
     private PlayerAudio _playerAudio;
     private PlayerCollisionHandler _playerCollision;
-    private PlayerJumper _playerJumper;
     private Animator _animator;
     private Transform _transform;
 
@@ -39,13 +40,14 @@ public class Player : MonoBehaviour, IMoveble
 
         _playerMovement = new PlayerMovement(this);
         _playerJumper = new PlayerJumper(_groundMask, _targetPoint, GetComponent<Rigidbody>(),
-        this, _checkRaduis, _animator, _playerAudio);
+        this, _checkRaduis, _animator, _playerAudio, _particle);
         _playerAudio.Initialize(_animator);
     }
 
     private void FixedUpdate()
     {
         _playerMovement.Move();
+        _playerJumper.CheckLanding();
     }
 
     private void OnEnable()
@@ -66,11 +68,5 @@ public class Player : MonoBehaviour, IMoveble
     {
         if (interactable is GameOverZone)
             GameOver?.Invoke();
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, _checkRaduis);
     }
 }

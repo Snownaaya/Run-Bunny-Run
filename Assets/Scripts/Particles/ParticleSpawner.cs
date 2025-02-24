@@ -20,7 +20,7 @@ public abstract class ParticleSpawner : ObjectPool<PooledParticle>
         return spawnedObject;
     }
 
-    public void ReturnCoinParticle(PooledParticle pooledParticle)
+    public void ReturnParticle(PooledParticle pooledParticle)
     {
         ReturnObject(pooledParticle);
         pooledParticle.Stop();
