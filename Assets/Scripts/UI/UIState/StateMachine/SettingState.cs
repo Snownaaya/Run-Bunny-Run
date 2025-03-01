@@ -1,30 +1,36 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public class SettingState : ISwitcher
 {
-    private readonly List<IStates> _states;
+    private readonly Dictionary<Type, IStates> _stateDictionary;
+    private readonly ICoroutineRunner _coroutineRunner;
     private IStates _currentState;
+    private SettingMenu _settingMenu;
 
-    public SettingState(SettingMenu settingMenu)
+    public SettingState(SettingMenu settingMenu, ICoroutineRunner coroutineRunner)
     {
-        _states = new List<IStates>
-        {
-            new PauseState(this, settingMenu),
-            new RestartState(this, settingMenu),
-            new ReturnState(this, settingMenu),
-        };
+        _settingMenu = settingMenu;
+        _coroutineRunner = coroutineRunner;
 
-        _currentState = _states[0];
-        _currentState.Enter();
+        _stateDictionary = new Dictionary<Type, IStates>
+        {
+            { typeof(PauseState), new PauseState(this, settingMenu) },
+            { typeof(ReturnState), new ReturnState(this, settingMenu) },
+            { typeof(RestartState), new RestartState(this, settingMenu, _coroutineRunner) },
+        };
     }
 
     public void SwitchState<T>() where T : IStates
     {
-        IStates states = _states.FirstOrDefault(states => states is T);
+        if (_stateDictionary.TryGetValue(typeof(T), out IStates state))
+        {
+            if (_currentState != null && _currentState.GetType() == typeof(T))
+                return;
 
-        _currentState.Exit();
-        _currentState = states;
-        _currentState.Enter();
+            _currentState?.Exit();
+            _currentState = state;
+            _currentState.Enter();
+        }
     }
 }

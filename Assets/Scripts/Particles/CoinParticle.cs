@@ -1,5 +1,5 @@
 ﻿
-public class CoinParticle : ParticleSpawner
+public class CoinParticle : CoinParticleSpawner
 {
     protected override void PlayParticle(PooledParticle particle) =>
         particle.Play();

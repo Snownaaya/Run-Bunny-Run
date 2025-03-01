@@ -1,24 +1,27 @@
+using UnityEngine;
+
 public class RestartState : MainManuState
 {
-    private const string SceneNameToRestart = "StartScene";
+    private const string StartScene = nameof(StartScene);
 
-    public RestartState(ISwitcher switcher, SettingMenu setting) : base(switcher, setting) { }
+    private ICoroutineRunner _runner;
+
+    public RestartState(ISwitcher switcher, SettingMenu setting, ICoroutineRunner runner) : base(switcher, setting)
+    {
+        _runner = runner;
+    }
 
     public override void Enter()
     {
         base.Enter();
-        SettingMenu.RestartButton.onClick.AddListener(OnRestartClicked);
+
+        Time.timeScale = 1;
+        _runner.StartCoroutine(SettingMenu.ScreenFader.TransitionCoroutine(StartScene));
+        Hide();
     }
 
     public override void Exit()
     {
         base.Exit();
-        SettingMenu.RestartButton.onClick.RemoveListener(OnRestartClicked);
-    }
-
-    private void OnRestartClicked()
-    {
-        StateSwitcher.SwitchState<PauseState>();
-        SettingMenu.ScreenFader.TransitionToScene("StartScene");
     }
 }

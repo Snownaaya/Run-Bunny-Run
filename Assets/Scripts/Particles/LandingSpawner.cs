@@ -1,0 +1,22 @@
+﻿public abstract class LandingSpawner : ObjectPool<PooledParticle>
+{
+    private PooledParticle _pooledParticle;
+
+    public PooledParticle Spawn()
+    {
+        PooledParticle landing = GetObject(_pooledParticle);
+        //landing.transform.position = 
+        PlayParticle(landing);
+        return landing;
+    }
+
+    public void ReturnLanding(PooledParticle pooledParticle)
+    {
+        ReturnObject(pooledParticle);
+        StopParticle(pooledParticle);
+    }
+
+    protected abstract void PlayParticle(PooledParticle particle);
+
+    protected abstract void StopParticle(PooledParticle particle);
+}

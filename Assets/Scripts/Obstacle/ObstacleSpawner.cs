@@ -6,8 +6,7 @@ public class ObstacleSpawner : ObjectPool<Obstacle>
 {
     [SerializeField] private Obstacle _obstaclePrefab;
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private float _spawnDelay = 1f;
-    [SerializeField] private float _returnInterval = 25f;
+    [SerializeField] private float _returnInterval = 60f;
 
     private readonly List<Obstacle> _activeObstacles = new List<Obstacle>();
     private WaitForSeconds _spawnWait;
@@ -15,34 +14,25 @@ public class ObstacleSpawner : ObjectPool<Obstacle>
 
     private void Awake()
     {
-        _spawnWait = new WaitForSeconds(_spawnDelay);
         _returnWait = new WaitForSeconds(_returnInterval);
     }
 
     private void Start()
     {
-        StartCoroutine(SpawnRoutine());
         StartCoroutine(ReturnRoutine());
-    }
-
-    private IEnumerator SpawnRoutine()
-    {
-        while (enabled)
-        {
-            SpawnObstacle();
-            yield return _spawnWait;
-        }
+        SpawnObstacle();
     }
 
     private IEnumerator ReturnRoutine()
     {
         while (enabled)
         {
-            if (_activeObstacles.Count > 0)
+            if (_activeObstacles.Count > 3)
             {
                 ReturnObstacle(_activeObstacles[0]);
                 Debug.Log("Возвращён объект");
             }
+
             yield return _returnWait;
         }
     }

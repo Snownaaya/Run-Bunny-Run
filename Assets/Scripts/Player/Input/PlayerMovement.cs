@@ -7,9 +7,9 @@ public class PlayerMovement : IPlayerAction
     private Vector2 _touchpadMoveDirection;
     private IMoveble _moveble;
     private Finger _movementFinger;
-    private Vector2 _startTouchPosition; 
+    private Vector2 _startTouchPosition;
 
-    private float _sensitivity = 6f;
+    private float _sensitivity = 15f;
 
     public PlayerMovement(IMoveble moveble)
     {
@@ -35,7 +35,7 @@ public class PlayerMovement : IPlayerAction
 
     public void Move()
     {
-        Vector3 scaleMovement = _moveble.Speed * Time.deltaTime * new Vector3(_touchpadMoveDirection.x, 0, 
+        Vector3 scaleMovement = _moveble.Speed * Time.deltaTime * new Vector3(_touchpadMoveDirection.x, 0,
             _touchpadMoveDirection.y);
         _moveble.Transform.Translate(scaleMovement);
     }

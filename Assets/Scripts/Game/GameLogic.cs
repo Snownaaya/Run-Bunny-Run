@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameLogic : MonoBehaviour, ICoroutineRunner
+public class GameLogic : MonoBehaviour
 {
     [SerializeField] private ScoreView _scoreView;
     [SerializeField] private EndScreen _endScreen;

@@ -1,53 +1,28 @@
+using DG.Tweening;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEngine;
 
 public class ScreenFader : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup _fadeCanvasGroup;
+    [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private float _fadeDuration;
 
-    public void TransitionToScene(string sceneName) =>
-        StartCoroutine(Transition(sceneName));
+    private Sequence _animation;
 
-    private IEnumerator Transition(string sceneName)
+    public void TransitionToScene(string sceneName) =>
+        StartCoroutine(TransitionCoroutine(sceneName));
+
+    public IEnumerator TransitionCoroutine(string sceneName)
     {
-        yield return StartCoroutine(FadeOut());
+         yield return _canvasGroup.DOFade(0f, _fadeDuration)
+                  .SetEase(Ease.Linear)
+                  .Play()
+                  .SetAutoKill(true)
+                  .WaitForCompletion();
+
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
-        while (operation.isDone == false)
-        {
-            yield return null;
-        }
-
-        yield return StartCoroutine(FadeIn());
-    }
-
-    private IEnumerator FadeIn()
-    {
-        float timer = 0;
-
-        while (timer < _fadeDuration)
-        {
-            _fadeCanvasGroup.alpha = Mathf.Lerp(1f, 0f, timer / _fadeDuration);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        _fadeCanvasGroup.alpha = 0f;
-    }
-
-    private IEnumerator FadeOut()
-    {
-        float timer = 0;
-
-        while (timer < _fadeDuration)
-        {
-            _fadeCanvasGroup.alpha = Mathf.Lerp(0f, 1f, timer / _fadeDuration);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        _fadeCanvasGroup.alpha = 1f;
+        yield return operation;
     }
 }

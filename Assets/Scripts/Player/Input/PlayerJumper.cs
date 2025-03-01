@@ -12,6 +12,7 @@ public class PlayerJumper : IPlayerAction
     private Rigidbody _rigidbody;
     private Animator _animator;
     private PlayerAudio _audio;
+    private PooledParticle _pooledParticle;
 
     private IMoveble _moveble;
     private bool _isJumping;

@@ -10,20 +10,20 @@ public class CoinSpawner : ObjectPool<Coin>
 
     [field: SerializeField] public Coin Coin { get; private set; }
 
-    private int _count = 5;
+    private int _count = 10;
 
     private void Start()
     {
-        for (int i = 0; i < _count; i++)
-            StartCoroutine(Spawn());
+        StartCoroutine(Spawn());
     }
 
     public IEnumerator Spawn()
     {
         var wait = new WaitForSeconds(_delay);
-        Generate();
 
-        yield return new WaitWhile(() => Coin.MinCoin >= Coin.MaxCoin);
+        for (int i = 0; i < _count; i++)
+            Generate();
+
         yield return wait;
     }
 
