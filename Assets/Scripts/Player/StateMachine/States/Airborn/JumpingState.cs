@@ -1,18 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class JumpingState : MonoBehaviour
+public class JumpingState : AirbornState
 {
-    // Start is called before the first frame update
-    void Start()
+    private JumpingStateConfig _jumpingConfig;
+
+    public JumpingState(ISwitcher switcher, StateMachineData data, Character character, IInputProvider inputProvider) : base(switcher, data, character, inputProvider) =>
+        _jumpingConfig = character.CharacterConfig.AirbornConfig.JumpingConfig;
+
+    public override void Enter()
     {
-        
+        base.Enter();
+
+        Data.YVelocity = _jumpingConfig.StartYVelocity;
+        PlayerAudio.PlayJumpSound();
+        CharacterView.StartJumping();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Exit()
     {
-        
+        base.Exit();
+
+        CharacterView.StopJumping();
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (Data.YVelocity <= 0)
+            Switcher.SwitchState<FallingState>();
     }
 }

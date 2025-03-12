@@ -5,7 +5,7 @@ public class GameLogic : MonoBehaviour
 {
     [SerializeField] private ScoreView _scoreView;
     [SerializeField] private EndScreen _endScreen;
-    [SerializeField] private Player _player;
+    [SerializeField] private Character _player;
     [SerializeField] private ScoreView scoreView;
     [SerializeField] private RoadSpawner _roadSpawner;
     [SerializeField] private DecorSpawner _decorSpawner;

@@ -24,7 +24,7 @@ public class SettingMenu : MonoBehaviour
     {
         _state = new SettingState(this, _coroutineRunner);
         _targetBody = RectTransform.anchoredPosition;
-        _currentPosition = new Vector2(_targetBody.x, Screen.height / 2);
+        _currentPosition = new Vector2(_targetBody.x, Screen.height * 2);
     }
 
     private void OnEnable()

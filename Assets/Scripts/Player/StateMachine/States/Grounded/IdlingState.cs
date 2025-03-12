@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class IdlingState : MonoBehaviour
+﻿public class IdlingState : GroundedState
 {
-    // Start is called before the first frame update
-    void Start()
+    public IdlingState(ISwitcher switcher, StateMachineData data, Character character, IInputProvider inputProvider) : base(switcher, data, character, inputProvider) { }
+
+    public override void Enter()
     {
-        
+        base.Enter();
+
+        Data.Speed = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Exit()
     {
-        
+        base.Exit();
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (IsHorizontalInputZero())
+            return;
+
+        Switcher.SwitchState<RunningState>();
     }
 }

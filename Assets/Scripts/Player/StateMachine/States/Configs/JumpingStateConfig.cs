@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class JumpingStateConfig : MonoBehaviour
+[Serializable]
+public class JumpingStateConfig
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField, Range(0, 10)] private float _maxHeight;
+    [SerializeField, Range(0, 10)] private float _timeToReachMaxHeight;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public float StartYVelocity => 2 * _maxHeight / _timeToReachMaxHeight;
+    public float MaxHeght => _maxHeight;
+    public float TimeToReachMaxHeaght => _timeToReachMaxHeight;
 }

@@ -20,7 +20,7 @@ public class Obstacle : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.TryGetComponent(out Character player))
         {
             _roadSpeed.DecreaseSpeed(_speedReduction);
             _animation.Restart();

@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class AirbornStateConfig : MonoBehaviour
+[Serializable]
+public class AirbornStateConfig
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private JumpingStateConfig _jumpingConfig;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [field: SerializeField, Range(0, 20)] public float Speed { get; private set; }
+    [field: SerializeField, Range(0, 30)] public float HorizontalSpeed { get; private set; }
+    [field: SerializeField, Range(0, 5)] public float MoveDown { get; private set; }
+
+    public JumpingStateConfig JumpingConfig => _jumpingConfig;
+
+    public float BaseGravity =>
+        2f * _jumpingConfig.MaxHeght / (_jumpingConfig.TimeToReachMaxHeaght * _jumpingConfig.TimeToReachMaxHeaght);
 }

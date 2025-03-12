@@ -1,18 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AirbornState : MonoBehaviour
+public abstract class AirbornState : MovementState
 {
-    // Start is called before the first frame update
-    void Start()
+    private readonly AirbornStateConfig _airbornConfig;
+
+    public AirbornState(ISwitcher switcher, StateMachineData data, Character character, IInputProvider inputProvider) : base(switcher, data, character, inputProvider) =>
+        _airbornConfig = character.CharacterConfig.AirbornConfig;
+
+    public override void Enter()
     {
-        
+        base.Enter();
+
+        Data.Speed = _airbornConfig.Speed;
+        CharacterView.StartAirborne();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Exit()
     {
-        
+        base.Exit();
+        CharacterView.StopAirborne();
+    }
+
+    public override void HandleInput()
+    {
+        base.HandleInput();
+
+        if (InputProvider.MoveDown?.WasPressedThisFrame() == true)
+            Data.YVelocity -= _airbornConfig.MoveDown;
+
+        Data.Speed = _airbornConfig.HorizontalSpeed;
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        Data.YVelocity -= _airbornConfig.BaseGravity * Time.deltaTime;
     }
 }

@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class RunningState : MonoBehaviour
+public class RunningState : GroundedState
 {
-    // Start is called before the first frame update
-    void Start()
+    private RunningStateConfig _config;
+
+    public RunningState(ISwitcher switcher, StateMachineData data, Character character, IInputProvider inputProvider) : base(switcher, data, character, inputProvider)
     {
-        
+        _config = character.CharacterConfig.RunningConfig;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+        base.Enter();
+        Data.Speed = _config.Speed;
+
+        CharacterView.StartRunning();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        CharacterView.StopRunning();
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (IsHorizontalInputZero())
+            Switcher.SwitchState<IdlingState>();
     }
 }

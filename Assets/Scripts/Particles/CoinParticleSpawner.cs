@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public abstract class CoinParticleSpawner : ObjectPool<PooledParticle>
 {
     private PooledParticle _pooledParticle;
