@@ -24,23 +24,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     ""name"": ""PlayerInput"",
     ""maps"": [
         {
-            ""name"": ""Character"",
+            ""name"": ""CharacterPC"",
             ""id"": ""567ac48a-a3f3-4a33-91dc-25f5c9796434"",
             ""actions"": [
                 {
-                    ""name"": ""LeftMovePC"",
-                    ""type"": ""Button"",
-                    ""id"": ""84c0fb62-abc3-4521-952d-5e6e7b3505bc"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""RightMovePC"",
-                    ""type"": ""Button"",
-                    ""id"": ""79fa5841-bfb5-40d7-8772-2a6eb4549db0"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""MovePC"",
+                    ""type"": ""Value"",
+                    ""id"": ""01aedc89-c5c3-4226-8986-1553b94c65c4"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -52,7 +43,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""MoveDownPC"",
@@ -61,46 +52,43 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwipeLeft"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""95abd22a-d404-414f-a4f4-a427ea230105"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SwipeRight"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""bb6d7ddd-67eb-4b4a-8fab-86d7f901492e"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SwipeJump"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""76e81553-212e-4357-bf81-bacfbf055bb0"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SwipeDown"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""abbc4fa5-4d7b-4bd8-bec9-f49586c135cd"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
                     ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""fb0855be-8ac9-42a6-a11b-843c117a89e5"",
+                    ""path"": ""1DAxis(whichSideWins=1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovePC"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""8c74652f-71e9-4e94-9768-a9b52bef7ec6"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovePC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""0d969759-73ed-4c5f-8ac1-a63b916df744"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovePC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
                 {
                     ""name"": """",
                     ""id"": ""4298660e-ebae-4017-aeb8-80bc895e519a"",
@@ -114,28 +102,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ccee2fda-90f7-43b6-bda9-e5c86f7c696c"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LeftMovePC"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f703da50-deb4-42fa-b53d-351e551868ae"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RightMovePC"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f0fa8118-cdd6-4b49-a2c9-07e09e27b495"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
@@ -144,48 +110,94 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""MoveDownPC"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""CharacterTouch"",
+            ""id"": ""f20e1fd0-9c2b-4ce6-8ba5-097d89e517b6"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveSwipe"",
+                    ""type"": ""Value"",
+                    ""id"": ""73f125f3-71ad-40f7-b82c-67d87ac816cd"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""cda7f358-e669-4adb-b1ba-43a2e88a8f50"",
-                    ""path"": ""<Touchscreen>/delta/left"",
+                    ""name"": ""JumpSwipe"",
+                    ""type"": ""Value"",
+                    ""id"": ""5ca1c965-5a5e-43ee-a719-75b461d30e31"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DownSwipe"",
+                    ""type"": ""Value"",
+                    ""id"": ""3007f554-99f6-48d1-98ea-3e9eadb4ce52"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""593f59bb-bad9-480f-990b-d98d02431c84"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SwipeLeft"",
+                    ""action"": ""MoveSwipe"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""e98946f3-c2c7-4f91-8275-5fbff6afe2df"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveSwipe"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""68dd8228-7ac1-417e-838e-b6957dbafc43"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveSwipe"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6f98290-91a1-4751-ade3-f16b6aebabb9"",
+                    ""path"": ""<Touchscreen>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JumpSwipe"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ec1ba1ff-f4c2-47c6-bc76-2de201dc3d45"",
-                    ""path"": ""<Touchscreen>/delta/right"",
+                    ""id"": ""8b0badc6-9384-4d04-8ce4-e2c955cdf7b8"",
+                    ""path"": ""<Touchscreen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SwipeRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""764d9a9d-118e-4a23-8664-720a8215470a"",
-                    ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwipeJump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""893c674b-74b9-4541-a724-e353cc9e726a"",
-                    ""path"": ""<Touchscreen>/delta/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwipeDown"",
+                    ""action"": ""DownSwipe"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -222,16 +234,16 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Character
-        m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
-        m_Character_LeftMovePC = m_Character.FindAction("LeftMovePC", throwIfNotFound: true);
-        m_Character_RightMovePC = m_Character.FindAction("RightMovePC", throwIfNotFound: true);
-        m_Character_JumpPC = m_Character.FindAction("JumpPC", throwIfNotFound: true);
-        m_Character_MoveDownPC = m_Character.FindAction("MoveDownPC", throwIfNotFound: true);
-        m_Character_SwipeLeft = m_Character.FindAction("SwipeLeft", throwIfNotFound: true);
-        m_Character_SwipeRight = m_Character.FindAction("SwipeRight", throwIfNotFound: true);
-        m_Character_SwipeJump = m_Character.FindAction("SwipeJump", throwIfNotFound: true);
-        m_Character_SwipeDown = m_Character.FindAction("SwipeDown", throwIfNotFound: true);
+        // CharacterPC
+        m_CharacterPC = asset.FindActionMap("CharacterPC", throwIfNotFound: true);
+        m_CharacterPC_MovePC = m_CharacterPC.FindAction("MovePC", throwIfNotFound: true);
+        m_CharacterPC_JumpPC = m_CharacterPC.FindAction("JumpPC", throwIfNotFound: true);
+        m_CharacterPC_MoveDownPC = m_CharacterPC.FindAction("MoveDownPC", throwIfNotFound: true);
+        // CharacterTouch
+        m_CharacterTouch = asset.FindActionMap("CharacterTouch", throwIfNotFound: true);
+        m_CharacterTouch_MoveSwipe = m_CharacterTouch.FindAction("MoveSwipe", throwIfNotFound: true);
+        m_CharacterTouch_JumpSwipe = m_CharacterTouch.FindAction("JumpSwipe", throwIfNotFound: true);
+        m_CharacterTouch_DownSwipe = m_CharacterTouch.FindAction("DownSwipe", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -290,107 +302,129 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Character
-    private readonly InputActionMap m_Character;
-    private List<ICharacterActions> m_CharacterActionsCallbackInterfaces = new List<ICharacterActions>();
-    private readonly InputAction m_Character_LeftMovePC;
-    private readonly InputAction m_Character_RightMovePC;
-    private readonly InputAction m_Character_JumpPC;
-    private readonly InputAction m_Character_MoveDownPC;
-    private readonly InputAction m_Character_SwipeLeft;
-    private readonly InputAction m_Character_SwipeRight;
-    private readonly InputAction m_Character_SwipeJump;
-    private readonly InputAction m_Character_SwipeDown;
-    public struct CharacterActions
+    // CharacterPC
+    private readonly InputActionMap m_CharacterPC;
+    private List<ICharacterPCActions> m_CharacterPCActionsCallbackInterfaces = new List<ICharacterPCActions>();
+    private readonly InputAction m_CharacterPC_MovePC;
+    private readonly InputAction m_CharacterPC_JumpPC;
+    private readonly InputAction m_CharacterPC_MoveDownPC;
+    public struct CharacterPCActions
     {
         private @PlayerInput m_Wrapper;
-        public CharacterActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @LeftMovePC => m_Wrapper.m_Character_LeftMovePC;
-        public InputAction @RightMovePC => m_Wrapper.m_Character_RightMovePC;
-        public InputAction @JumpPC => m_Wrapper.m_Character_JumpPC;
-        public InputAction @MoveDownPC => m_Wrapper.m_Character_MoveDownPC;
-        public InputAction @SwipeLeft => m_Wrapper.m_Character_SwipeLeft;
-        public InputAction @SwipeRight => m_Wrapper.m_Character_SwipeRight;
-        public InputAction @SwipeJump => m_Wrapper.m_Character_SwipeJump;
-        public InputAction @SwipeDown => m_Wrapper.m_Character_SwipeDown;
-        public InputActionMap Get() { return m_Wrapper.m_Character; }
+        public CharacterPCActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MovePC => m_Wrapper.m_CharacterPC_MovePC;
+        public InputAction @JumpPC => m_Wrapper.m_CharacterPC_JumpPC;
+        public InputAction @MoveDownPC => m_Wrapper.m_CharacterPC_MoveDownPC;
+        public InputActionMap Get() { return m_Wrapper.m_CharacterPC; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CharacterActions set) { return set.Get(); }
-        public void AddCallbacks(ICharacterActions instance)
+        public static implicit operator InputActionMap(CharacterPCActions set) { return set.Get(); }
+        public void AddCallbacks(ICharacterPCActions instance)
         {
-            if (instance == null || m_Wrapper.m_CharacterActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CharacterActionsCallbackInterfaces.Add(instance);
-            @LeftMovePC.started += instance.OnLeftMovePC;
-            @LeftMovePC.performed += instance.OnLeftMovePC;
-            @LeftMovePC.canceled += instance.OnLeftMovePC;
-            @RightMovePC.started += instance.OnRightMovePC;
-            @RightMovePC.performed += instance.OnRightMovePC;
-            @RightMovePC.canceled += instance.OnRightMovePC;
+            if (instance == null || m_Wrapper.m_CharacterPCActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CharacterPCActionsCallbackInterfaces.Add(instance);
+            @MovePC.started += instance.OnMovePC;
+            @MovePC.performed += instance.OnMovePC;
+            @MovePC.canceled += instance.OnMovePC;
             @JumpPC.started += instance.OnJumpPC;
             @JumpPC.performed += instance.OnJumpPC;
             @JumpPC.canceled += instance.OnJumpPC;
             @MoveDownPC.started += instance.OnMoveDownPC;
             @MoveDownPC.performed += instance.OnMoveDownPC;
             @MoveDownPC.canceled += instance.OnMoveDownPC;
-            @SwipeLeft.started += instance.OnSwipeLeft;
-            @SwipeLeft.performed += instance.OnSwipeLeft;
-            @SwipeLeft.canceled += instance.OnSwipeLeft;
-            @SwipeRight.started += instance.OnSwipeRight;
-            @SwipeRight.performed += instance.OnSwipeRight;
-            @SwipeRight.canceled += instance.OnSwipeRight;
-            @SwipeJump.started += instance.OnSwipeJump;
-            @SwipeJump.performed += instance.OnSwipeJump;
-            @SwipeJump.canceled += instance.OnSwipeJump;
-            @SwipeDown.started += instance.OnSwipeDown;
-            @SwipeDown.performed += instance.OnSwipeDown;
-            @SwipeDown.canceled += instance.OnSwipeDown;
         }
 
-        private void UnregisterCallbacks(ICharacterActions instance)
+        private void UnregisterCallbacks(ICharacterPCActions instance)
         {
-            @LeftMovePC.started -= instance.OnLeftMovePC;
-            @LeftMovePC.performed -= instance.OnLeftMovePC;
-            @LeftMovePC.canceled -= instance.OnLeftMovePC;
-            @RightMovePC.started -= instance.OnRightMovePC;
-            @RightMovePC.performed -= instance.OnRightMovePC;
-            @RightMovePC.canceled -= instance.OnRightMovePC;
+            @MovePC.started -= instance.OnMovePC;
+            @MovePC.performed -= instance.OnMovePC;
+            @MovePC.canceled -= instance.OnMovePC;
             @JumpPC.started -= instance.OnJumpPC;
             @JumpPC.performed -= instance.OnJumpPC;
             @JumpPC.canceled -= instance.OnJumpPC;
             @MoveDownPC.started -= instance.OnMoveDownPC;
             @MoveDownPC.performed -= instance.OnMoveDownPC;
             @MoveDownPC.canceled -= instance.OnMoveDownPC;
-            @SwipeLeft.started -= instance.OnSwipeLeft;
-            @SwipeLeft.performed -= instance.OnSwipeLeft;
-            @SwipeLeft.canceled -= instance.OnSwipeLeft;
-            @SwipeRight.started -= instance.OnSwipeRight;
-            @SwipeRight.performed -= instance.OnSwipeRight;
-            @SwipeRight.canceled -= instance.OnSwipeRight;
-            @SwipeJump.started -= instance.OnSwipeJump;
-            @SwipeJump.performed -= instance.OnSwipeJump;
-            @SwipeJump.canceled -= instance.OnSwipeJump;
-            @SwipeDown.started -= instance.OnSwipeDown;
-            @SwipeDown.performed -= instance.OnSwipeDown;
-            @SwipeDown.canceled -= instance.OnSwipeDown;
         }
 
-        public void RemoveCallbacks(ICharacterActions instance)
+        public void RemoveCallbacks(ICharacterPCActions instance)
         {
-            if (m_Wrapper.m_CharacterActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_CharacterPCActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(ICharacterActions instance)
+        public void SetCallbacks(ICharacterPCActions instance)
         {
-            foreach (var item in m_Wrapper.m_CharacterActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_CharacterPCActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_CharacterActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_CharacterPCActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public CharacterActions @Character => new CharacterActions(this);
+    public CharacterPCActions @CharacterPC => new CharacterPCActions(this);
+
+    // CharacterTouch
+    private readonly InputActionMap m_CharacterTouch;
+    private List<ICharacterTouchActions> m_CharacterTouchActionsCallbackInterfaces = new List<ICharacterTouchActions>();
+    private readonly InputAction m_CharacterTouch_MoveSwipe;
+    private readonly InputAction m_CharacterTouch_JumpSwipe;
+    private readonly InputAction m_CharacterTouch_DownSwipe;
+    public struct CharacterTouchActions
+    {
+        private @PlayerInput m_Wrapper;
+        public CharacterTouchActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveSwipe => m_Wrapper.m_CharacterTouch_MoveSwipe;
+        public InputAction @JumpSwipe => m_Wrapper.m_CharacterTouch_JumpSwipe;
+        public InputAction @DownSwipe => m_Wrapper.m_CharacterTouch_DownSwipe;
+        public InputActionMap Get() { return m_Wrapper.m_CharacterTouch; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CharacterTouchActions set) { return set.Get(); }
+        public void AddCallbacks(ICharacterTouchActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CharacterTouchActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CharacterTouchActionsCallbackInterfaces.Add(instance);
+            @MoveSwipe.started += instance.OnMoveSwipe;
+            @MoveSwipe.performed += instance.OnMoveSwipe;
+            @MoveSwipe.canceled += instance.OnMoveSwipe;
+            @JumpSwipe.started += instance.OnJumpSwipe;
+            @JumpSwipe.performed += instance.OnJumpSwipe;
+            @JumpSwipe.canceled += instance.OnJumpSwipe;
+            @DownSwipe.started += instance.OnDownSwipe;
+            @DownSwipe.performed += instance.OnDownSwipe;
+            @DownSwipe.canceled += instance.OnDownSwipe;
+        }
+
+        private void UnregisterCallbacks(ICharacterTouchActions instance)
+        {
+            @MoveSwipe.started -= instance.OnMoveSwipe;
+            @MoveSwipe.performed -= instance.OnMoveSwipe;
+            @MoveSwipe.canceled -= instance.OnMoveSwipe;
+            @JumpSwipe.started -= instance.OnJumpSwipe;
+            @JumpSwipe.performed -= instance.OnJumpSwipe;
+            @JumpSwipe.canceled -= instance.OnJumpSwipe;
+            @DownSwipe.started -= instance.OnDownSwipe;
+            @DownSwipe.performed -= instance.OnDownSwipe;
+            @DownSwipe.canceled -= instance.OnDownSwipe;
+        }
+
+        public void RemoveCallbacks(ICharacterTouchActions instance)
+        {
+            if (m_Wrapper.m_CharacterTouchActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICharacterTouchActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CharacterTouchActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CharacterTouchActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CharacterTouchActions @CharacterTouch => new CharacterTouchActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -409,15 +443,16 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_TouchscreenSchemeIndex];
         }
     }
-    public interface ICharacterActions
+    public interface ICharacterPCActions
     {
-        void OnLeftMovePC(InputAction.CallbackContext context);
-        void OnRightMovePC(InputAction.CallbackContext context);
+        void OnMovePC(InputAction.CallbackContext context);
         void OnJumpPC(InputAction.CallbackContext context);
         void OnMoveDownPC(InputAction.CallbackContext context);
-        void OnSwipeLeft(InputAction.CallbackContext context);
-        void OnSwipeRight(InputAction.CallbackContext context);
-        void OnSwipeJump(InputAction.CallbackContext context);
-        void OnSwipeDown(InputAction.CallbackContext context);
+    }
+    public interface ICharacterTouchActions
+    {
+        void OnMoveSwipe(InputAction.CallbackContext context);
+        void OnJumpSwipe(InputAction.CallbackContext context);
+        void OnDownSwipe(InputAction.CallbackContext context);
     }
 }

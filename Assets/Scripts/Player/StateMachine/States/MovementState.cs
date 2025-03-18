@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class MovementState : IStates, IInputState
@@ -27,26 +28,15 @@ public abstract class MovementState : IStates, IInputState
 
     public virtual void Exit() { }
 
-    public virtual void HandleInput()
-    {
-        if (InputProvider.MoveRight?.WasPressedThisFrame()  == true && Data.CurrentLane < 2)
-            Data.ChangeLane(1);
-        else if (InputProvider.MoveLeft?.WasPressedThisFrame() == true && Data.CurrentLane > 0)
-            Data.ChangeLane(-1);
-    }
+    public virtual void HandleInput() =>
+        Data.XInput = InputProvider.Move;
 
     public virtual void Update()
     {
-        float targetX = (Data.CurrentLane - 1) * _character.LaneDistance; 
-        float currentX = _character.CharacterController.transform.position.x;
-
-        Vector3 moveDirection = new Vector3(targetX, Data.YVelocity, 0f);
-
+        Vector3 moveDirection = new Vector3(Data.XInput, Data.YVelocity, 0f);
         _character.CharacterController.Move(moveDirection * Data.Speed * Time.deltaTime);
-        currentX = targetX;
-        _character.CharacterController.center = _character.CharacterController.center;
     }
 
     protected bool IsHorizontalInputZero() =>
-        Data.Speed == 0;
+        Data.XInput == 0;
 }

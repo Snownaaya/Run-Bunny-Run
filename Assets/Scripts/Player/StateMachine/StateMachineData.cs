@@ -4,14 +4,15 @@ using UnityEngine;
 public class StateMachineData
 {
     public float YVelocity;
+    public float XVelocity;
 
     private float _speed;
-    private float _currentLane = 1;
+    private float _xInput;
 
-    public float CurrentLane
+    public float XInput
     {
-        get => _currentLane;
-        private set => _currentLane = value; 
+        get => _xInput;
+        set => _xInput = Mathf.Clamp(value, -1f, 1f);
     }
 
     public float Speed
@@ -23,11 +24,5 @@ public class StateMachineData
                 throw new ArgumentOutOfRangeException(nameof(_speed));
             _speed = value;
         }
-    }
-
-    public void ChangeLane(float direction)
-    {
-        float newLane = Mathf.Clamp(_currentLane + direction, 0, 2);
-        _currentLane = newLane;
     }
 }

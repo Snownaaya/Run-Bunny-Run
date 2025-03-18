@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerCollisionHandler), typeof(CharacterController), typeof(PlayerAudio))]
 public class Character : MonoBehaviour
@@ -15,7 +16,6 @@ public class Character : MonoBehaviour
     private PlayerCollisionHandler _playerCollision;
     private PlayerInput _input;
     private PlayerAudio _playerAudio;
-
 
     private void Awake()
     {
@@ -42,18 +42,15 @@ public class Character : MonoBehaviour
     {
         _stateMachine.HandleInput();
         _stateMachine.Update();
-        Debug.Log($"{transform.position}");
     }
 
     private void OnEnable()
     {
-        _input.Enable();
         _playerCollision.CollisionDetected += ProccesColision;
     }
 
     private void OnDisable()
     {
-        _input.Disable();
         _playerCollision.CollisionDetected -= ProccesColision;
     }
 

@@ -1,8 +1,9 @@
-﻿using UnityEngine.InputSystem;
+﻿using System.Numerics;
+using UnityEngine.InputSystem;
 
 public interface IInputProvider
 {
-    InputAction MoveRight { get; }
-    InputAction MoveLeft { get; }
+    float Move { get; }
     InputAction MoveDown { get; }
+    InputAction Jump { get; }
 }

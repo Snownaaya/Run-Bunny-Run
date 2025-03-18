@@ -7,7 +7,8 @@ public class KeyboardInputProvider : IInputProvider
     public KeyboardInputProvider(Character character) =>
         _character = character;
 
-    public InputAction MoveRight => _character.PlayerInput.Character.RightMovePC;
-    public InputAction MoveLeft => _character.PlayerInput.Character.LeftMovePC;
-    public InputAction MoveDown => _character.PlayerInput.Character.MoveDownPC;
+    public InputAction MoveDown => _character.PlayerInput.CharacterPC.MoveDownPC;
+    public InputAction Jump => _character.PlayerInput.CharacterPC.JumpPC;
+
+    public float Move => _character.PlayerInput.CharacterPC.MovePC.ReadValue<float>();
 }
