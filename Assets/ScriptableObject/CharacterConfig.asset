@@ -16,7 +16,7 @@ MonoBehaviour:
     <Speed>k__BackingField: 30
   <AirbornConfig>k__BackingField:
     _jumpingConfig:
-      _maxHeight: 0.2
+      _maxHeight: 0.3
       _timeToReachMaxHeight: 0.5
     <Speed>k__BackingField: 1
     <HorizontalSpeed>k__BackingField: 30

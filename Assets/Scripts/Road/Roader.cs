@@ -10,6 +10,7 @@ public class Roader : MonoBehaviour
 
     private ScoreCounter _scoreCounter;
     private Transform _transform;
+    private Vector3 _position;
 
     private float _maxSpeed = 180f;
     private float _currentSpeed = 100f;
@@ -26,6 +27,7 @@ public class Roader : MonoBehaviour
     private void Awake()
     {
         _transform = transform;
+        _transform.position = _position;
     }
 
     private void Update() =>

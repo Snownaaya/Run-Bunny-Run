@@ -11,6 +11,8 @@ public class Character : MonoBehaviour
     [SerializeField] private float _laneDistance = 4;
 
     private IInputProvider _inputProvider;
+    private Vector3 _initialPosition;
+
     private CharacterStateMachine _stateMachine;
     private CharacterController _characterController;
     private PlayerCollisionHandler _playerCollision;
@@ -46,13 +48,18 @@ public class Character : MonoBehaviour
 
     private void OnEnable()
     {
+        _input.Enable();
         _playerCollision.CollisionDetected += ProccesColision;
     }
 
     private void OnDisable()
     {
+        _input.Disable();
         _playerCollision.CollisionDetected -= ProccesColision;
     }
+
+    public void Reset() =>
+        transform.position = _initialPosition;
 
     private void ProccesColision(IInteractable interactable)
     {

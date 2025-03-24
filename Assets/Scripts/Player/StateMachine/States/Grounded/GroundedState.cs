@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public abstract class GroundedState : MovementState
 {
     private GroundCheck _groundCheck;
-    private Vector2 _swipeStart;
 
     public GroundedState(ISwitcher switcher, StateMachineData data, Character character, IInputProvider inputProvider)
         : base(switcher, data, character, inputProvider) =>
@@ -14,13 +13,7 @@ public abstract class GroundedState : MovementState
     {
         base.Enter();
 
-        if (InputProvider is KeyboardInputProvider)
-            PlayerInput.CharacterPC.JumpPC.performed += OnJumpKeyPressed;
-        else if (InputProvider is TouchInputProvider)
-        {
-            PlayerInput.CharacterTouch.JumpSwipe.started += OnSwipeJump;
-            PlayerInput.CharacterTouch.JumpSwipe.canceled += OnSwipeJump;
-        }
+        PlayerInput.Character.Jump.performed += OnJump;
 
         CharacterView.StartGrounded();
     }
@@ -28,19 +21,10 @@ public abstract class GroundedState : MovementState
     public override void Exit()
     {
         base.Exit();
-        if (InputProvider is KeyboardInputProvider)
-            PlayerInput.CharacterPC.JumpPC.performed -= OnJumpKeyPressed;
-        else if (InputProvider is TouchInputProvider)
-        {
-            PlayerInput.CharacterTouch.JumpSwipe.started -= OnSwipeJump;
-            PlayerInput.CharacterTouch.JumpSwipe.canceled -= OnSwipeJump;
-        }
-        CharacterView.StopGrounded();
-    }
 
-    public override void HandleInput()
-    {
-        base.HandleInput();
+        PlayerInput.Character.Jump.performed -= OnJump;
+
+        CharacterView.StopGrounded();
     }
 
     public override void Update()
@@ -50,14 +34,9 @@ public abstract class GroundedState : MovementState
             Switcher.SwitchState<FallingState>();
     }
 
-    private void OnSwipeJump(InputAction.CallbackContext context)
+    private void OnJump(InputAction.CallbackContext context)
     {
-        Vector2 swipeDelta = context.ReadValue<Vector2>();
-
-        if (swipeDelta.y < 50f && Mathf.Abs(swipeDelta.x) < 50f)
+        if (context.phase == InputActionPhase.Performed)
             Switcher.SwitchState<JumpingState>();
     }
-
-    private void OnJumpKeyPressed(InputAction.CallbackContext context) =>
-        Switcher.SwitchState<JumpingState>();
 }

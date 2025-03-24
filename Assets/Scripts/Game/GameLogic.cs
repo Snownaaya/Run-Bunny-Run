@@ -9,6 +9,8 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private ScoreView scoreView;
     [SerializeField] private RoadSpawner _roadSpawner;
     [SerializeField] private DecorSpawner _decorSpawner;
+    [SerializeField] private LandingSpawner _landingSpawner;
+    [SerializeField] private CoinParticleSpawner _coinParticleSpawner;
 
     [SerializeField] private RoaderStorage _roaderStorage;
 
@@ -57,6 +59,11 @@ public class GameLogic : MonoBehaviour
         _endScreen.Close();
         Time.timeScale = 1;
         _roadSpawner.ClearPool();
+        _scoreCounter.Reset();
+        _wallet.Reset();
+        _player.Reset();
+        _landingSpawner.ClearPool();
+        _coinParticleSpawner.ClearPool();
         _decorSpawner.ClearAllDecor();
         int currentIndexScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentIndexScene);

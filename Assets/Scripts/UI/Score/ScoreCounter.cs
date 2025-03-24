@@ -11,4 +11,7 @@ public class ScoreCounter
     {
         ScoreChanged?.Invoke(Score++);
     }
+
+    public void Reset() =>
+        Score = 0;
 }

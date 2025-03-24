@@ -13,13 +13,9 @@ public abstract class AirbornState : MovementState
     public override void Enter()
     {
         base.Enter();
-        if (InputProvider is KeyboardInputProvider)
-            PlayerInput.CharacterPC.MoveDownPC.performed += OnMoveDownPressed;
-        else if (InputProvider is TouchInputProvider)
-        {
-            PlayerInput.CharacterTouch.DownSwipe.started += OnSwipeDown;
-            PlayerInput.CharacterTouch.DownSwipe.canceled += OnSwipeDown;
-        }
+
+        PlayerInput.Character.MoveDown.performed += OnMoveDown;
+
         Data.Speed = _airbornConfig.Speed;
         CharacterView.StartAirborne();
     }
@@ -28,13 +24,7 @@ public abstract class AirbornState : MovementState
     {
         base.Exit();
 
-        if (InputProvider is KeyboardInputProvider)
-            PlayerInput.CharacterPC.MoveDownPC.performed -= OnMoveDownPressed;
-        else if (InputProvider is TouchInputProvider)
-        {
-            PlayerInput.CharacterTouch.DownSwipe.started -= OnSwipeDown;
-            PlayerInput.CharacterTouch.DownSwipe.canceled -= OnSwipeDown;
-        }
+        PlayerInput.Character.MoveDown.performed -= OnMoveDown;
 
         CharacterView.StopAirborne();
     }
@@ -42,7 +32,7 @@ public abstract class AirbornState : MovementState
     public override void HandleInput()
     {
         base.HandleInput();
-        Data.Speed = _airbornConfig.HorizontalSpeed * 2;
+        Data.Speed = _airbornConfig.HorizontalSpeed * 1.5f;
     }
 
     public override void Update()
@@ -51,14 +41,6 @@ public abstract class AirbornState : MovementState
         Data.YVelocity -= _airbornConfig.BaseGravity * Time.deltaTime;
     }
 
-    private void OnMoveDownPressed(InputAction.CallbackContext context) =>
-        Data.YVelocity -= _airbornConfig.MoveDown;
-
-    private void OnSwipeDown(InputAction.CallbackContext context)
-    {
-        Vector2 swipeDelta = context.ReadValue<Vector2>();
-
-        if (swipeDelta.y > -50f && Mathf.Abs(swipeDelta.x) < 50f)
+    private void OnMoveDown(InputAction.CallbackContext context) =>
             Data.YVelocity -= _airbornConfig.MoveDown;
-    }
 }

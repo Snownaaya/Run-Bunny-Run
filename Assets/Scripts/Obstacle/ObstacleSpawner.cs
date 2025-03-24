@@ -28,10 +28,7 @@ public class ObstacleSpawner : ObjectPool<Obstacle>
         while (enabled)
         {
             if (_activeObstacles.Count > 3)
-            {
                 ReturnObstacle(_activeObstacles[0]);
-                Debug.Log("Возвращён объект");
-            }
 
             yield return _returnWait;
         }

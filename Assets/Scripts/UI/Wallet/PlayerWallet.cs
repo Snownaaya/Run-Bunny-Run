@@ -11,4 +11,7 @@ public class PlayerWallet
         Coin += 1;
         CoinChanges?.Invoke();
     }
+
+    public void Reset() =>
+        Coin = 0;
 }

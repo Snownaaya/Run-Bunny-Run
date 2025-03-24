@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TouchInputProvider : IInputProvider
@@ -7,8 +8,8 @@ public class TouchInputProvider : IInputProvider
     public TouchInputProvider(Character character) =>
         _character = character;
 
-    public InputAction MoveDown => _character.PlayerInput.CharacterTouch.DownSwipe;
-    public InputAction Jump => _character.PlayerInput.CharacterTouch.JumpSwipe;
+    public InputAction MoveDown => _character.PlayerInput.Character.MoveDown;
+    public InputAction Jump => _character.PlayerInput.Character.Jump;
 
-    public float Move => _character.PlayerInput.CharacterTouch.MoveSwipe.ReadValue<float>();
+    public float Move => _character.PlayerInput.Character.Move.ReadValue<float>();
 }

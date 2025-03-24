@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class KeyboardInputProvider : IInputProvider
@@ -7,8 +8,8 @@ public class KeyboardInputProvider : IInputProvider
     public KeyboardInputProvider(Character character) =>
         _character = character;
 
-    public InputAction MoveDown => _character.PlayerInput.CharacterPC.MoveDownPC;
-    public InputAction Jump => _character.PlayerInput.CharacterPC.JumpPC;
+    public InputAction MoveDown => _character.PlayerInput.Character.MoveDown;
+    public InputAction Jump => _character.PlayerInput.Character.Jump;
 
-    public float Move => _character.PlayerInput.CharacterPC.MovePC.ReadValue<float>();
+    public float Move => _character.PlayerInput.Character.Move.ReadValue<float>();
 }

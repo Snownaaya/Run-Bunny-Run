@@ -10406,6 +10406,8 @@ MonoBehaviour:
   scoreView: {fileID: 1206780954}
   _roadSpawner: {fileID: 1742166830}
   _decorSpawner: {fileID: 929647313}
+  _landingSpawner: {fileID: 1827167127}
+  _coinParticleSpawner: {fileID: 1827167126}
   _roaderStorage: {fileID: 1742166832}
 --- !u!4 &6070622901901951599
 Transform:
