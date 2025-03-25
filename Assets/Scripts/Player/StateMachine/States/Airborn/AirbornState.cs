@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public abstract class AirbornState : MovementState
 {
@@ -14,7 +13,7 @@ public abstract class AirbornState : MovementState
     {
         base.Enter();
 
-        PlayerInput.Character.MoveDown.performed += OnMoveDown;
+        InputProvider.MoveDownPressed += OnMoveDown;
 
         Data.Speed = _airbornConfig.Speed;
         CharacterView.StartAirborne();
@@ -24,7 +23,7 @@ public abstract class AirbornState : MovementState
     {
         base.Exit();
 
-        PlayerInput.Character.MoveDown.performed -= OnMoveDown;
+        InputProvider.MoveDownPressed -= OnMoveDown;
 
         CharacterView.StopAirborne();
     }
@@ -41,6 +40,6 @@ public abstract class AirbornState : MovementState
         Data.YVelocity -= _airbornConfig.BaseGravity * Time.deltaTime;
     }
 
-    private void OnMoveDown(InputAction.CallbackContext context) =>
+    private void OnMoveDown() =>
             Data.YVelocity -= _airbornConfig.MoveDown;
 }

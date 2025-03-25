@@ -18,7 +18,6 @@ public abstract class MovementState : IStates, IInputState
     public CharacterView CharacterView => _character.CharacterView;
     public PlayerAudio PlayerAudio => _character.PlayerAudio;
     public StateMachineData Data => _data;
-    public PlayerInput PlayerInput => _character.PlayerInput;
     public ISwitcher Switcher => _switcher;
     public IInputProvider InputProvider => _inputProvider;
 

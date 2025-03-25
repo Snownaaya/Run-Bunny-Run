@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 public abstract class GroundedState : MovementState
 {
     private GroundCheck _groundCheck;
@@ -13,7 +10,7 @@ public abstract class GroundedState : MovementState
     {
         base.Enter();
 
-        PlayerInput.Character.Jump.performed += OnJump;
+        InputProvider.JumpPressed += OnJump;
 
         CharacterView.StartGrounded();
     }
@@ -22,7 +19,7 @@ public abstract class GroundedState : MovementState
     {
         base.Exit();
 
-        PlayerInput.Character.Jump.performed -= OnJump;
+        InputProvider.JumpPressed -= OnJump;
 
         CharacterView.StopGrounded();
     }
@@ -34,9 +31,9 @@ public abstract class GroundedState : MovementState
             Switcher.SwitchState<FallingState>();
     }
 
-    private void OnJump(InputAction.CallbackContext context)
+    private void OnJump()
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (_groundCheck.IsTouches)
             Switcher.SwitchState<JumpingState>();
     }
 }

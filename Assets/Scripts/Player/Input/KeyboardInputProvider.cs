@@ -1,15 +1,27 @@
-using UnityEngine;
+using System;
 using UnityEngine.InputSystem;
 
 public class KeyboardInputProvider : IInputProvider
 {
-    private Character _character;
+    private PlayerInput _input = new PlayerInput();
 
-    public KeyboardInputProvider(Character character) =>
-        _character = character;
+    public KeyboardInputProvider()
+    {
+        _input.Enable();
+        Jump.performed += ctx => JumpPressed?.Invoke();
+        MoveDown.performed += ctx => MoveDownPressed?.Invoke();
+    }
 
-    public InputAction MoveDown => _character.PlayerInput.Character.MoveDown;
-    public InputAction Jump => _character.PlayerInput.Character.Jump;
+    ~KeyboardInputProvider()
+    {
+        _input.Disable();
+    }
 
-    public float Move => _character.PlayerInput.Character.Move.ReadValue<float>();
+    public InputAction Jump => _input.Character.Jump;
+    public InputAction MoveDown => _input.Character.MoveDown;
+
+    public event Action JumpPressed;
+    public event Action MoveDownPressed;
+
+    public float Move => _input.Character.Move.ReadValue<float>();
 }

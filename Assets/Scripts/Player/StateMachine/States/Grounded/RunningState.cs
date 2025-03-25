@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 public class RunningState : GroundedState
 {
     private RunningStateConfig _config;

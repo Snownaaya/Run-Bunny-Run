@@ -8,7 +8,6 @@ public class Character : MonoBehaviour
     [SerializeField] private CharacterView _view;
     [SerializeField] private CharacterConfig _characterConfig;
     [SerializeField] private GroundCheck _groundCheck;
-    [SerializeField] private float _laneDistance = 4;
 
     private IInputProvider _inputProvider;
     private Vector3 _initialPosition;
@@ -16,17 +15,15 @@ public class Character : MonoBehaviour
     private CharacterStateMachine _stateMachine;
     private CharacterController _characterController;
     private PlayerCollisionHandler _playerCollision;
-    private PlayerInput _input;
     private PlayerAudio _playerAudio;
 
     private void Awake()
     {
         _view.Initialize();
         _characterController = GetComponent<CharacterController>();
-        _input = new PlayerInput();
         _playerAudio = GetComponent<PlayerAudio>();
         _playerCollision = GetComponent<PlayerCollisionHandler>();
-        _inputProvider = InputProviderFactory.GetInputProvider(this);
+        _inputProvider = InputProviderFactory.GetInputProvider();
         _stateMachine = new CharacterStateMachine(this, _inputProvider);
     }
 
@@ -34,9 +31,8 @@ public class Character : MonoBehaviour
     public CharacterController CharacterController => _characterController;
     public CharacterView CharacterView => _view;
     public GroundCheck GroundCheck => _groundCheck;
-    public PlayerInput PlayerInput => _input;
     public PlayerAudio PlayerAudio => _playerAudio;
-    public float LaneDistance => _laneDistance;
+    public IInputProvider InputProvider => _inputProvider;
 
     public event Action GameOver;
 
@@ -48,13 +44,11 @@ public class Character : MonoBehaviour
 
     private void OnEnable()
     {
-        _input.Enable();
         _playerCollision.CollisionDetected += ProccesColision;
     }
 
     private void OnDisable()
     {
-        _input.Disable();
         _playerCollision.CollisionDetected -= ProccesColision;
     }
 

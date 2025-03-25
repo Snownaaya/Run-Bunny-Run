@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using System;
 
 public interface IInputProvider
 {
     float Move { get; }
-    InputAction MoveDown { get; }
-    InputAction Jump { get; }
+    event Action JumpPressed;
+    event Action MoveDownPressed;
 }
