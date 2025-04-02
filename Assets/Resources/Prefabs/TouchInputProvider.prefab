@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5188236020779715676}
-  - component: {fileID: 8227193754723246680}
+  - component: {fileID: -435953329015713674}
   m_Layer: 0
   m_Name: TouchInputProvider
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8227193754723246680
+--- !u!114 &-435953329015713674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fingerDownDelay: 1.5
-  _fingerMinRejectX: 0.2
-  _fingerMaxMoveRejectX: 0.5
+  _fingerMinRejectX: 50
+  _fingerMaxMoveRejectX: 5

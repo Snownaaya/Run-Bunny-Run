@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class TutorialRoot : MonoBehaviour
+public class TutorialRoot : MonoBehaviour, ITutorialStepCondiction
 {
     private const string MoveTutorialKey = nameof(MoveTutorialKey);
 
@@ -12,12 +12,15 @@ public class TutorialRoot : MonoBehaviour
     private ITutorialObjectEventSource _currentTutorialView;
     private TutorialStepCondiction _stepCondiction;
 
-    public bool Complete => PlayerPrefs.HasKey(MoveTutorialKey);
+    public bool Completed => PlayerPrefs.HasKey(MoveTutorialKey);
 
     private void Start()
     {
         if (SystemInfo.deviceType == DeviceType.Desktop)
         {
+            if (Completed)
+                return;
+
             _currentTutorialView = _pcTutorialView;
             _stepCondiction = _pcTutorialView;
             _pcTutorialView.Enable();
@@ -25,6 +28,9 @@ public class TutorialRoot : MonoBehaviour
     }
         else if (SystemInfo.deviceType == DeviceType.Handheld)
         {
+            if (Completed)
+                return;
+
             _currentTutorialView = _mobileTutorialView;
             _stepCondiction = _mobileTutorialView;
             _mobileTutorialView.Enable();

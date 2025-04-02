@@ -13,6 +13,9 @@ public class MoveTutorialPC : TutorialStepCondiction, ITutorialObjectEventSource
         Completed = true;
     }
 
-    public override void Enable() =>
+    public override void Enable()
+    {
         gameObject.SetActive(true);
+        Completed = false;
+    }
 }

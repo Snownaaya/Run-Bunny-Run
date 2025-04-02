@@ -1,0 +1,9 @@
+<linker>
+  <assembly fullname="Zenject" preserve="all"/>
+  <assembly fullname="DOTween" preserve="all"/>
+  <assembly fullname="Assembly-CSharp">
+    <type fullname="MyGame.GameManager" preserve="all"/>
+    <type fullname="Zenject.ZenjectManagersInstaller" preserve="all"/>
+    <type fullname="TouchInputProvider" preserve="all"/>
+  </assembly>
+</linker>

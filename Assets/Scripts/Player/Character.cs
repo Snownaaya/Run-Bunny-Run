@@ -32,7 +32,6 @@ public class Character : MonoBehaviour
     public CharacterView CharacterView => _view;
     public GroundCheck GroundCheck => _groundCheck;
     public PlayerAudio PlayerAudio => _playerAudio;
-    public IInputProvider InputProvider => _inputProvider;
 
     public event Action GameOver;
 

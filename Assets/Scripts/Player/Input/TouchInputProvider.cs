@@ -7,8 +7,8 @@ using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 public class TouchInputProvider : MonoBehaviour, IInputProvider
 {
     [SerializeField] private float _fingerDownDelay;
-    [SerializeField] private float _fingerMinRejectX = 0.2f; // увеличить, если прыжок не срабатывает
-    [SerializeField] private float _fingerMaxMoveRejectX = 0.5f;
+    [SerializeField] private float _fingerMinRejectX; // увеличить, если прыжок не срабатывает
+    [SerializeField] private float _fingerMaxMoveRejectX;
 
     private Finger _currentFinger;
     private Coroutine _coroutine;

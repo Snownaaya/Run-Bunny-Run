@@ -13,13 +13,14 @@ public class MoveTutorialMobile : TutorialStepCondiction, ITutorialObjectEventSo
     public override void Enable()
     {
         gameObject.SetActive(true);
+        Completed = true;
         StartCoroutine(PlayAnimation());
     }
 
     public override void Disable()
     {
-        if (Completed)
-            gameObject.SetActive(false);
+        gameObject.SetActive(false);
+        Completed = false;
     }
 
     private IEnumerator PlayAnimation()
@@ -31,7 +32,5 @@ public class MoveTutorialMobile : TutorialStepCondiction, ITutorialObjectEventSo
         _view.StartPointerHorizontal();
         yield return new WaitForSeconds(_delay);
         _view.StopPointerHorizontal();
-
-        Completed = true;
     }
 }
