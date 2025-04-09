@@ -6,10 +6,10 @@ public abstract class Window : MonoBehaviour
     [field: SerializeField] public CanvasGroup CanvasGroup { get; private set; }
     [field: SerializeField] public Button Button { get; private set; }
 
-    private void OnEnable() =>
+    protected void OnEnable() =>
         Button.onClick.AddListener(OnButtonClick);
 
-    private void OnDisable() =>
+    protected void OnDisable() =>
         Button.onClick.RemoveListener(OnButtonClick);
 
     protected abstract void OnButtonClick();

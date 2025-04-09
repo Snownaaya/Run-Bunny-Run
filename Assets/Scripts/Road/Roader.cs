@@ -7,12 +7,13 @@ public class Roader : MonoBehaviour
 
     [field: SerializeField] public Transform End { get; protected set; }
     [field: SerializeField] public Transform Begin { get; protected set; }
+    [field: SerializeField] public Transform RevivePoint { get; protected set; }
 
     private ScoreCounter _scoreCounter;
     private Transform _transform;
     private Vector3 _position;
 
-    private float _maxSpeed = 180f;
+    private float _maxSpeed = 150f;
     private float _currentSpeed = 100f;
     private float _distanceTraveled;
 
@@ -20,7 +21,7 @@ public class Roader : MonoBehaviour
     {
         get => _speed;
         set => _speed = Mathf.Clamp(value, _currentSpeed, _maxSpeed);
-    } 
+    }
 
     public event Action RoadMoved;
 
@@ -38,7 +39,7 @@ public class Roader : MonoBehaviour
         float move = _speed * Time.deltaTime;
 
         _transform.Translate(_transform.forward * move);
-       CalculateScore();
+        CalculateScore();
         RoadMoved?.Invoke();
     }
 

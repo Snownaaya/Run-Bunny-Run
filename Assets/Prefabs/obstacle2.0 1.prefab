@@ -248,6 +248,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6719432762598083698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4595945126076546470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5669508521678507871}
+  m_Layer: 0
+  m_Name: RevivePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5669508521678507871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4595945126076546470}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 9.6, z: -900.4}
+  m_LocalScale: {x: 1, y: 1, z: 1.2784454}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7431671623597201680}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4680696104753140267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ce9eaaaf94acbc498dbf9067a2349d6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -300
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ce9eaaaf94acbc498dbf9067a2349d6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1157,6 +1188,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4ce9eaaaf94acbc498dbf9067a2349d6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7609151609831709672}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4ce9eaaaf94acbc498dbf9067a2349d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5669508521678507871}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ce9eaaaf94acbc498dbf9067a2349d6, type: 3}
       insertIndex: -1
@@ -1253,7 +1287,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1293,7 +1327,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1425,6 +1459,7 @@ MonoBehaviour:
   _speed: 100
   <End>k__BackingField: {fileID: 6223214247000431603}
   <Begin>k__BackingField: {fileID: 9152654090016829166}
+  <RevivePoint>k__BackingField: {fileID: 5669508521678507871}
 --- !u!114 &2075546819255428642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1438,7 +1473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 7431671623597201680}
-  _delay: 20
+  _delay: 30
   _points:
   - {fileID: 751109109458549813}
   - {fileID: 8512544829973653892}

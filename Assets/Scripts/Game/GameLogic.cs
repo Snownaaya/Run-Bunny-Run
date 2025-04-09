@@ -1,18 +1,19 @@
-using Assets.Scripts.Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class GameLogic : MonoBehaviour
 {
     [SerializeField] private ScoreView _scoreView;
     [SerializeField] private EndScreen _endScreen;
     [SerializeField] private Character _player;
-    [SerializeField] private ScoreView scoreView;
     [SerializeField] private RoadSpawner _roadSpawner;
     [SerializeField] private DecorSpawner _decorSpawner;
     [SerializeField] private LandingSpawner _landingSpawner;
+    [SerializeField] private RewardedVideoAds _rewardedAds;
     [SerializeField] private CoinParticleSpawner _coinParticleSpawner;
+    [SerializeField] private RevivePanel _revivePanel;
+    [SerializeField] private HandleRoadSpeed _handleRoadSpeed;
+    [SerializeField] private WalletSetup _setup;
 
     [SerializeField] private RoaderStorage _roaderStorage;
 
@@ -20,13 +21,12 @@ public class GameLogic : MonoBehaviour
     private ScoreCounter _scoreCounter;
     private ScorePresenter _scorePresenter;
 
-
     private void Awake()
     {
+        _wallet = _setup.Wallet;
         _scoreCounter = new ScoreCounter();
-        _wallet = new PlayerWallet();
-
-        _scorePresenter = new ScorePresenter(_scoreCounter, scoreView);
+        _scorePresenter = new ScorePresenter(_scoreCounter, _scoreView);
+        _revivePanel.Initialize(_player);
     }
 
     private void Start()
@@ -40,6 +40,9 @@ public class GameLogic : MonoBehaviour
         _scorePresenter.Enable();
         _endScreen.RestartButtonClicked += OnResetGame;
         _player.GameOver += OnGameOver;
+        _revivePanel.OnReviveWithAdRequested += OnReviveWithAdRequested;
+        _revivePanel.OnReviveWithCoinsRequested += OnReviveWithCoinsRequested;
+        _rewardedAds.OnReviveGranted += OnReviveGranted;
     }
 
     private void OnDisable()
@@ -47,13 +50,35 @@ public class GameLogic : MonoBehaviour
         _scorePresenter.Disable();
         _endScreen.RestartButtonClicked -= OnResetGame;
         _player.GameOver -= OnGameOver;
+        _revivePanel.OnReviveWithAdRequested -= OnReviveWithAdRequested;
+        _revivePanel.OnReviveWithCoinsRequested -= OnReviveWithCoinsRequested;
+        _rewardedAds.OnReviveGranted -= OnReviveGranted;
     }
 
     private void OnGameOver()
     {
         _endScreen.Open();
-        _roaderStorage.ResetStorage();
+        _revivePanel.Open();
         Time.timeScale = 0;
+    }
+
+    private void OnReviveWithAdRequested() =>
+        _rewardedAds.ShowRewardedAd();
+
+    private void OnReviveWithCoinsRequested(int coinCost)
+    {
+        if (_wallet.SpendCoins(coinCost))
+            RevivePlayer();
+    }
+
+    private void OnReviveGranted() =>
+        RevivePlayer();
+
+    private void RevivePlayer()
+    {
+        _revivePanel.Close();
+        Time.timeScale = 1f;
+        _player.Revive();
     }
 
     private void OnResetGame()
@@ -64,6 +89,7 @@ public class GameLogic : MonoBehaviour
         _scoreCounter.Reset();
         _wallet.Reset();
         _player.Reset();
+        _roaderStorage.ResetStorage();
         _landingSpawner.ClearPool();
         _coinParticleSpawner.ClearPool();
         _decorSpawner.ClearAllDecor();

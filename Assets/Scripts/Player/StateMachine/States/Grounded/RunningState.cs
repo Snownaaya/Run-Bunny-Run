@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class RunningState : GroundedState
 {
     private RunningStateConfig _config;
@@ -11,7 +13,7 @@ public class RunningState : GroundedState
     {
         base.Enter();
         Data.Speed = _config.Speed;
-
+        Debug.Log("RunningState Enter: Speed = " + Data.Speed);
         CharacterView.StartRunning();
     }
 

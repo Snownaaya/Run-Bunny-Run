@@ -10,21 +10,23 @@ public class CoinSpawner : ObjectPool<Coin>
 
     [field: SerializeField] public Coin Coin { get; private set; }
 
-    private int _count = 10;
+    private int _count = 20;
 
-    private void Start()
-    {
+    private void Start() =>
         StartCoroutine(Spawn());
-    }
 
     public IEnumerator Spawn()
     {
         var wait = new WaitForSeconds(_delay);
 
-        for (int i = 0; i < _count; i++)
-            Generate();
+        while (true)
+        {
+            for (int i = 0; i < _count; i++)
+                Generate();
 
-        yield return wait;
+            yield return wait;
+        }
+
     }
 
     private void Generate()

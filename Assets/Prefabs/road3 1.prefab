@@ -188,6 +188,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5498914025923982510}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6332393310699477013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6875808863585821503}
+  m_Layer: 0
+  m_Name: RevivePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6875808863585821503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6332393310699477013}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6, y: 19.9, z: -12}
+  m_LocalScale: {x: 1, y: 1, z: 1.2784455}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7375185799376199118}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6462817649384171858
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,6 +601,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 946f4cca08bb15f4c9822be21feb344a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2323026072012145282}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 946f4cca08bb15f4c9822be21feb344a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6875808863585821503}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 946f4cca08bb15f4c9822be21feb344a, type: 3}
       insertIndex: -1
@@ -883,6 +917,7 @@ MonoBehaviour:
   _speed: 100
   <End>k__BackingField: {fileID: 6670415453466207823}
   <Begin>k__BackingField: {fileID: 248651965455025310}
+  <RevivePoint>k__BackingField: {fileID: 6875808863585821503}
 --- !u!114 &4911645502992660159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -896,7 +931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 7375185799376199118}
-  _delay: 20
+  _delay: 30
   _points:
   - {fileID: 574962565338663335}
   - {fileID: 4805134336187298587}

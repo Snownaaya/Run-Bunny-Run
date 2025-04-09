@@ -5,7 +5,7 @@ using UnityEngine;
 public class DecorSpawner : ObjectPool<Decor>
 {
     [SerializeField] private Decor[] _decor;
-    [SerializeField] private Ground _ground;
+    [SerializeField] private Water _ground;
 
     private float _spawnInterval = 10f;
     private int _maxDecorCount = 4;
@@ -32,7 +32,7 @@ public class DecorSpawner : ObjectPool<Decor>
         _activeDecor.Remove(decorToRemove);
     }
 
-    private void Spawn(Ground currentGround)
+    private void Spawn(Water currentGround)
     {
         HashSet<int> usedIndices = new HashSet<int>();
 

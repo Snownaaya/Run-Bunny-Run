@@ -139,6 +139,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 28.071198, y: 128.49393, z: 507.3695}
   m_Center: {x: 202.54597, y: 140.87144, z: -919.4432}
+--- !u!1 &3536190248364324721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4334778846876819217}
+  m_Layer: 0
+  m_Name: RevivePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4334778846876819217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536190248364324721}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.67, y: 6, z: -322.71}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8896407853683428514}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4737736990463467862
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 7423137680182991211}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.9, y: 10, z: -1843}
+  m_LocalPosition: {x: -23.9, y: 5, z: -1843}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -521,6 +552,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 16af95e8bd591df47b8dd5838ccfb60f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2652360972028081366}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 16af95e8bd591df47b8dd5838ccfb60f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4334778846876819217}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 16af95e8bd591df47b8dd5838ccfb60f, type: 3}
       insertIndex: -1
@@ -601,8 +635,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.24115878, y: 0.114516385, z: 0.0055246153}
-  m_Center: {x: -0.04577241, y: -0.39513803, z: 0.0064994735}
+  m_Size: {x: 0.24115878, y: 0.114516385, z: 0}
+  m_Center: {x: -0.04577241, y: -0.39513803, z: 0.009261782}
 --- !u!65 &8760793759525870663
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -622,8 +656,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03912101, y: 0.11749307, z: 0.0069727474}
-  m_Center: {x: -0.024662655, y: -0.23980552, z: 0.0069194515}
+  m_Size: {x: 0.03912101, y: 0.11749307, z: 0}
+  m_Center: {x: -0.024662655, y: -0.23980552, z: 0.010405826}
 --- !u!65 &898789234567155799
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -643,8 +677,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.035076357, y: 0.12645702, z: 0.008050648}
-  m_Center: {x: -0.07649192, y: -0.0956083, z: 0.0063314224}
+  m_Size: {x: 0.035076357, y: 0.12645702, z: 0}
+  m_Center: {x: -0.07649192, y: -0.09560831, z: 0.010356748}
 --- !u!65 &5539438655445508506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -664,8 +698,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.033755027, y: 0.12481055, z: 0.00811085}
-  m_Center: {x: -0.021484422, y: 0.060935263, z: 0.007840138}
+  m_Size: {x: 0.033755027, y: 0.12481055, z: 0}
+  m_Center: {x: -0.021484422, y: 0.060935255, z: 0.01189556}
 --- !u!65 &6888022050290371674
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -685,8 +719,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03706361, y: 0.119844824, z: 0.006086289}
-  m_Center: {x: -0.07336027, y: 0.2312245, z: 0.0087761395}
+  m_Size: {x: 0.03706361, y: 0.11984479, z: 0}
+  m_Center: {x: -0.07336027, y: 0.23122452, z: 0.011819283}
 --- !u!65 &303879545689920879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -706,8 +740,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03872522, y: 0.116040654, z: 0.004473892}
-  m_Center: {x: -0.072023764, y: 0.88966805, z: 0.009451078}
+  m_Size: {x: 0.03872522, y: 0.116040654, z: 0}
+  m_Center: {x: -0.072023764, y: 0.88966835, z: 0.011688027}
 --- !u!65 &2835058946723069261
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -727,8 +761,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.031540032, y: 0.12346426, z: 0.0056438874}
-  m_Center: {x: -0.022437466, y: 0.71975434, z: 0.007552729}
+  m_Size: {x: 0.031540032, y: 0.123464316, z: 0}
+  m_Center: {x: -0.022437466, y: 0.71975434, z: 0.01037467}
 --- !u!65 &2246293162778555483
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -748,8 +782,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.033361856, y: 0.112593226, z: 0.0077895117}
-  m_Center: {x: -0.076345086, y: 0.5568375, z: 0.007478346}
+  m_Size: {x: 0.033361856, y: 0.1125932, z: 0}
+  m_Center: {x: -0.076345086, y: 0.55683774, z: 0.011373103}
 --- !u!65 &6947576621017547096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -769,8 +803,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.031195562, y: 0.12216339, z: 0.0041645393}
-  m_Center: {x: -0.018528402, y: 0.39046466, z: 0.009400644}
+  m_Size: {x: 0.031195562, y: 0.12216339, z: 0}
+  m_Center: {x: -0.018528402, y: 0.39046466, z: 0.011482918}
 --- !u!1 &6417507286035327673 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6488760914699140624, guid: 16af95e8bd591df47b8dd5838ccfb60f, type: 3}
@@ -795,8 +829,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.24115878, y: 0.11190389, z: 0.00579464}
-  m_Center: {x: -0.051733285, y: -0.20287602, z: 0.0075708386}
+  m_Size: {x: 0.24115878, y: 0.11190389, z: 0}
+  m_Center: {x: -0.051733285, y: -0.20287602, z: 0.010468157}
 --- !u!65 &1413008055752985
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -816,8 +850,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.028338829, y: 0.12269831, z: 0.01255266}
-  m_Center: {x: -0.028334543, y: 0.30739126, z: 0.005719715}
+  m_Size: {x: 0.028338829, y: 0.12269829, z: 0}
+  m_Center: {x: -0.028334543, y: 0.30739126, z: 0.011996041}
 --- !u!65 &2809527016493520774
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -837,8 +871,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03391578, y: 0.11802552, z: 0.008502372}
-  m_Center: {x: -0.0819896, y: 0.14184046, z: 0.0075311265}
+  m_Size: {x: 0.03391578, y: 0.11802552, z: 0}
+  m_Center: {x: -0.0819896, y: 0.14184046, z: 0.011782315}
 --- !u!65 &6371916997511929511
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -858,8 +892,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03134005, y: 0.12595123, z: 0.0077578765}
-  m_Center: {x: -0.029361436, y: -0.029038887, z: 0.007128296}
+  m_Size: {x: 0.03134005, y: 0.12595123, z: 0}
+  m_Center: {x: -0.029361436, y: -0.029038887, z: 0.011007242}
 --- !u!1 &6573456307221084646 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6357603707445570897, guid: 16af95e8bd591df47b8dd5838ccfb60f, type: 3}
@@ -927,6 +961,7 @@ MonoBehaviour:
   _speed: 100
   <End>k__BackingField: {fileID: 676057247237994570}
   <Begin>k__BackingField: {fileID: 613913408862665646}
+  <RevivePoint>k__BackingField: {fileID: 4334778846876819217}
 --- !u!114 &4187829628709238041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,7 +978,7 @@ MonoBehaviour:
   _obstaclePrefab: {fileID: 9039898967631109274, guid: 51bb8a4e11bbd1d4189871accf3557d5, type: 3}
   _spawnPoints:
   - {fileID: 2640011406022219870}
-  _returnInterval: 60
+  _returnInterval: 30
 --- !u!114 &4724446346320139611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -957,7 +992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _container: {fileID: 8896407853683428514}
-  _delay: 20
+  _delay: 60
   _points:
   - {fileID: 7561062177266594936}
   - {fileID: 1484307181427076911}

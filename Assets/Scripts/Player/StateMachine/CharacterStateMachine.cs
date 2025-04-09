@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class CharacterStateMachine : ISwitcher
 {
@@ -9,6 +10,7 @@ public class CharacterStateMachine : ISwitcher
     private StateMachineData _data;
     private IInputState _currentStates;
     private IInputProvider _inputProvider;
+    private Vector3 _velocity;
 
     public CharacterStateMachine(Character character, IInputProvider inputProvider)
     {
@@ -45,4 +47,7 @@ public class CharacterStateMachine : ISwitcher
 
     public void Update() =>
         _currentStates.Update();
+
+    public void ResetVelocity() =>
+        _velocity = Vector3.zero;
 }

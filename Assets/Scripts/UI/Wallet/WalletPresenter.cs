@@ -9,8 +9,11 @@ public class WalletPresenter
         _model = model;
     }
 
-    public void Enable() =>
+    public void Enable()
+    {
         _model.CoinChanges += OnCoinChanges;
+        OnCoinChanges();
+    }
 
     public void Disable() =>
         _model.CoinChanges -= OnCoinChanges;

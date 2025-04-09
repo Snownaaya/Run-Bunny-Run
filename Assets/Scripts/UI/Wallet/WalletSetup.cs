@@ -25,6 +25,7 @@ public class WalletSetup : MonoBehaviour
 
         _coinParticle.Initialize(_pooledParticle, this);
     }
+    public PlayerWallet Wallet => _model;
 
     private void OnEnable() =>
         _presenter.Enable();

@@ -5,7 +5,7 @@ public class HandleRoadSpeed : MonoBehaviour
 {
     private RoaderStorage _storage;
 
-    private float _delay = 2f;
+    private float _delay = 5f;
     private float _speedIncrement = 1f;
     private float _globalSpeed = 100f;
 
@@ -21,6 +21,11 @@ public class HandleRoadSpeed : MonoBehaviour
         Debug.Log($"Задаю скорость {roader.CurrentSpeed} для {roader.gameObject.name}");
     }
 
+    public void SyncSpeedAfterRevive()
+    {
+        foreach (Roader roader in _storage.ActiveRoads)
+            roader.CurrentSpeed = _globalSpeed;
+    }
 
     public void DecreaseSpeed(float decrement)
     {

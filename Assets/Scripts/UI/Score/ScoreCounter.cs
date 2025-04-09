@@ -7,10 +7,8 @@ public class ScoreCounter
 
     public int Score { get; private set; }
 
-    public void IncrementScore()
-    {
+    public void IncrementScore() =>
         ScoreChanged?.Invoke(Score++);
-    }
 
     public void Reset() =>
         Score = 0;

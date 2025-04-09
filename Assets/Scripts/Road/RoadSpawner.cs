@@ -1,20 +1,19 @@
 using System.Collections;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(RoaderStorage), typeof(HandleRoadSpeed))]
 public class RoadSpawner : ObjectPool<Roader>
 {
     [SerializeField] private Roader[] _roadPrefabs;
-
-    [SerializeField] private int _maxRoads = 8;
+    [SerializeField] private Character _character;
+    [SerializeField] private ClosestRoadTracker _roadTracker;
+    [SerializeField] private int _maxRoads;
+    [SerializeField] private float _spawnTriggerDistance;
 
     private RoaderStorage _storage;
-    private Vector3 _beginOffset;
     private Transform _transform;
     private HandleRoadSpeed _roadMovement;
-
-    private float _spawnInterval = 18f;
+    private bool _hasSpawnedNextRoad;
 
     private void Awake()
     {
@@ -23,38 +22,43 @@ public class RoadSpawner : ObjectPool<Roader>
         _storage = GetComponent<RoaderStorage>();
     }
 
-    private void Start()
-    {
-        StartCoroutine(GeneratorRoad());
-        Spawn();
-    }
+    private void Start() =>
+    Spawn();
 
-    private IEnumerator GeneratorRoad()
+    private void Update()
     {
-        var waitForSecond = new WaitForSeconds(_spawnInterval);
+        if (_storage.ActiveRoads.Count == 0)
+            return;
 
-        while (enabled)
+        Roader lastRoad = _storage.ActiveRoads[^1];
+
+        if (_character.transform.position.z > lastRoad.End.position.z + _spawnTriggerDistance && !_hasSpawnedNextRoad)
         {
             Spawn();
-            yield return waitForSecond;
+            _hasSpawnedNextRoad = true;
         }
+        else if (_character.transform.position.z < lastRoad.End.position.z + _spawnTriggerDistance + _spawnTriggerDistance)
+        {
+            _hasSpawnedNextRoad = false;
+        }
+
+        if (_storage.ActiveRoads.Count >= _maxRoads)
+            ReturnRoad();
     }
+
 
     private void Spawn()
     {
-        if (_storage.ActiveRoads.Count >= _maxRoads)
-            ReturnRoad();
+        Roader randomPrefab = GetRandomRoad();
+        Roader newRoad = GetObject(randomPrefab);
 
-        Roader randomPrefab = GetRandomRoad(); 
-        Roader newRoader = GetObject(randomPrefab); 
-
-        if (newRoader == null)
+        if (newRoad == null)
             return;
 
-        Vector3 spawnPosition = CalculateRoadPosition(newRoader);
-        newRoader.transform.position = spawnPosition;
-        _storage.AddRoad(newRoader);
-        _roadMovement.SetCurrentSpeed(newRoader);
+        Vector3 spawnPosition = CalculateRoadPosition(newRoad);
+        newRoad.transform.position = spawnPosition;
+        _storage.AddRoad(newRoad);
+        _roadMovement.SetCurrentSpeed(newRoad);
     }
 
     private Roader GetRandomRoad()
@@ -63,19 +67,38 @@ public class RoadSpawner : ObjectPool<Roader>
         return _roadPrefabs[randomIndex];
     }
 
-    private Vector3 CalculateRoadPosition(Roader newRoader)
+    private Vector3 CalculateRoadPosition(Roader newRoad)
     {
         if (_storage.ActiveRoads.Count == 0)
             return _transform.position;
 
-        Roader lastRoader = _storage.ActiveRoads[^1];
-        return lastRoader.End.position - (newRoader.Begin.position - newRoader.transform.position);
+        Roader lastRoad = _storage.ActiveRoads[^1];
+        return lastRoad.End.position - (newRoad.Begin.position - newRoad.transform.position);
     }
 
-    public void ReturnRoad()
+    private void ReturnRoad()
     {
-        Roader firstRoader = _storage.ActiveRoads[0];
-        _storage.RemoveRoad(firstRoader);
-        ReturnObject(firstRoader);
+        if (_storage.ActiveRoads.Count == 0)
+            return;
+
+        Roader firstRoad = _storage.ActiveRoads[0];
+        Roader currentRoad = _roadTracker.ClosestRoad;
+
+        if (firstRoad == currentRoad)
+            return;
+
+        _storage.RemoveRoad(firstRoad);
+        ReturnObject(firstRoad);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (_storage == null || _storage.ActiveRoads.Count == 0)
+            return;
+
+        Roader lastRoad = _storage.ActiveRoads[^1];
+        float triggerZ = lastRoad.End.position.z - _spawnTriggerDistance;
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(new Vector3(-100, 0, triggerZ), new Vector3(100, 0, triggerZ));
     }
 }

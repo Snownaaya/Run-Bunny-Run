@@ -15,8 +15,6 @@ public class ScorePresenter
     public void Disable() =>
         _scoreCounter.ScoreChanged -= OnScoreChanged;
 
-    private void OnScoreChanged(int amount)
-    {
+    private void OnScoreChanged(int amount) =>
         _scoreView.UpdateDisplay(amount);
-    }
 }

@@ -8,10 +8,13 @@ public class Obstacle : MonoBehaviour, IInteractable
 
     private HandleRoadSpeed _roadSpeed;
     private Tween _animation;
+    private Transform _transform;
 
     private void Awake()
     {
-        _animation = transform
+        _transform = transform;
+
+        _animation = _transform
             .DOShakePosition(0.1f, 0.1f)
             .SetAutoKill(false);
 
