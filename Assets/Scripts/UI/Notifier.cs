@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class Notifier : MonoBehaviour
 {
+    [SerializeField] private GameLogic _gameLogic;
+
     [SerializeField] private int _duration;
-    [SerializeField] private RevivePanel _panel;
 
     private int _minDuration = 1;
 
@@ -19,6 +21,6 @@ public class Notifier : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
-        _panel.Open();
+        _gameLogic.OnGameOver();
     }
 }

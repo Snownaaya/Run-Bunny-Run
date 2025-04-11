@@ -13,6 +13,8 @@ public class RoadSpawner : ObjectPool<Roader>
     private RoaderStorage _storage;
     private Transform _transform;
     private HandleRoadSpeed _roadMovement;
+    private ScoreCounter _scoreCounter;
+
     private bool _hasSpawnedNextRoad;
 
     private void Awake()
@@ -22,8 +24,10 @@ public class RoadSpawner : ObjectPool<Roader>
         _storage = GetComponent<RoaderStorage>();
     }
 
-    private void Start() =>
-    Spawn();
+    private void Start()
+    {
+         Spawn();
+    }
 
     private void Update()
     {
@@ -46,6 +50,8 @@ public class RoadSpawner : ObjectPool<Roader>
             ReturnRoad();
     }
 
+    public void Initialize(ScoreCounter scoreCounter) =>
+        _scoreCounter = scoreCounter;
 
     private void Spawn()
     {
@@ -57,6 +63,7 @@ public class RoadSpawner : ObjectPool<Roader>
 
         Vector3 spawnPosition = CalculateRoadPosition(newRoad);
         newRoad.transform.position = spawnPosition;
+        newRoad.Initialize(_scoreCounter);
         _storage.AddRoad(newRoad);
         _roadMovement.SetCurrentSpeed(newRoad);
     }
@@ -88,17 +95,7 @@ public class RoadSpawner : ObjectPool<Roader>
             return;
 
         _storage.RemoveRoad(firstRoad);
+        firstRoad.Reset();
         ReturnObject(firstRoad);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (_storage == null || _storage.ActiveRoads.Count == 0)
-            return;
-
-        Roader lastRoad = _storage.ActiveRoads[^1];
-        float triggerZ = lastRoad.End.position.z - _spawnTriggerDistance;
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(new Vector3(-100, 0, triggerZ), new Vector3(100, 0, triggerZ));
     }
 }

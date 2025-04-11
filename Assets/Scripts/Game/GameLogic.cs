@@ -14,8 +14,8 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private RevivePanel _revivePanel;
     [SerializeField] private HandleRoadSpeed _handleRoadSpeed;
     [SerializeField] private WalletSetup _setup;
-
     [SerializeField] private RoaderStorage _roaderStorage;
+    [SerializeField] private LeaderBoard _leaderBoard;
 
     private PlayerWallet _wallet;
     private ScoreCounter _scoreCounter;
@@ -27,12 +27,8 @@ public class GameLogic : MonoBehaviour
         _scoreCounter = new ScoreCounter();
         _scorePresenter = new ScorePresenter(_scoreCounter, _scoreView);
         _revivePanel.Initialize(_player);
-    }
-
-    private void Start()
-    {
-        foreach (Roader road in _roaderStorage.ActiveRoads)
-            road.Initialize(_scoreCounter);
+        _roadSpawner.Initialize(_scoreCounter);
+        _leaderBoard.Initialize(_scoreCounter);
     }
 
     private void OnEnable()
@@ -55,10 +51,11 @@ public class GameLogic : MonoBehaviour
         _rewardedAds.OnReviveGranted -= OnReviveGranted;
     }
 
-    private void OnGameOver()
+    public void OnGameOver()
     {
         _endScreen.Open();
         _revivePanel.Open();
+        _leaderBoard.AdLeaderBoard();
         Time.timeScale = 0;
     }
 

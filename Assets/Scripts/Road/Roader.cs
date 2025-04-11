@@ -16,6 +16,7 @@ public class Roader : MonoBehaviour
     private float _maxSpeed = 150f;
     private float _currentSpeed = 100f;
     private float _distanceTraveled;
+    private float _speedScore = 10;
 
     public float CurrentSpeed
     {
@@ -48,7 +49,7 @@ public class Roader : MonoBehaviour
         if (_scoreCounter == null)
             return;
 
-        _distanceTraveled += _speed * Time.deltaTime;
+        _distanceTraveled += _speedScore * Time.deltaTime;
 
         if (_distanceTraveled >= 1f)
         {

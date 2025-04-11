@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using DG.Tweening;
-using Zenject;
 
 public class Obstacle : MonoBehaviour, IInteractable
 {

@@ -29,7 +29,6 @@ public abstract class MainManuState : IStates
             .Append(SettingMenu.ReturnButton.transform.DOScale(1f, 1f).From(0f).SetEase(Ease.OutCirc))
             .SetUpdate(true)
             .Restart();
-
     }
 
     public void Hide()

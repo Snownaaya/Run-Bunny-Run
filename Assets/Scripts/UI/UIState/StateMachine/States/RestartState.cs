@@ -17,6 +17,7 @@ public class RestartState : MainManuState
 
         Time.timeScale = 1;
         _runner.StartCoroutine(SettingMenu.ScreenFader.TransitionCoroutine(StartScene));
+
         Hide();
     }
 

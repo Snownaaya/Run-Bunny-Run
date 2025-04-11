@@ -35,14 +35,6 @@ public class HandleRoadSpeed : MonoBehaviour
             roader.CurrentSpeed = _globalSpeed;
     }
 
-    public void ResetSpeed(float defaultSpeed)
-    {
-        _globalSpeed = defaultSpeed;
-
-        foreach (Roader roader in _storage.ActiveRoads)
-            roader.CurrentSpeed = _globalSpeed;
-    }
-
     private IEnumerator IncreaseSpeedRoutine()
     {
         while (enabled)

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class RevivePanel : Window
 {
     [SerializeField] private Button _reviveWithCoinsButton;
+
     [SerializeField] private int _coinCost;
 
     private Character _player;
