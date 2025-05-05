@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using YG;
 
 public class InputProviderFactory
 {
@@ -13,20 +14,19 @@ public class InputProviderFactory
 
     public static IInputProvider GetInputProvider()
     {
-        if (Application.platform == RuntimePlatform.WebGLPlayer)
-        {
-            if (SystemInfo.deviceType == DeviceType.Handheld && _touchInputProviderPrefab != null)
-                return Object.Instantiate(_touchInputProviderPrefab);
-            else
-                return new KeyboardInputProvider();
-        }
-        else if (SystemInfo.deviceType == DeviceType.Handheld && _touchInputProviderPrefab != null)
-        {
-            return Object.Instantiate(_touchInputProviderPrefab);
-        }
-        else
-        {
+#if UNITY_EDITOR
+        return new KeyboardInputProvider();
+#else
+        if (Application.platform != RuntimePlatform.WebGLPlayer)
             return new KeyboardInputProvider();
-        }
+
+        if (YandexGame.savesData == null || YandexGame.EnvironmentData == null || YandexGame.EnvironmentData.isDesktop)
+            return new KeyboardInputProvider();
+
+        if ((YandexGame.EnvironmentData.isMobile || YandexGame.EnvironmentData.isTablet) && _touchInputProviderPrefab != null)
+            return Object.Instantiate(_touchInputProviderPrefab);
+
+        return new KeyboardInputProvider();
+#endif
     }
 }

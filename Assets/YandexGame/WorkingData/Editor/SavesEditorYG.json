@@ -1,13 +1,13 @@
 {
-    "idSave": 2,
-    "isFirstSession": false,
-    "language": "ru",
-    "promptDone": false,
-    "money": 1,
-    "newPlayerName": "Hello!",
-    "openLevels": [
-        false,
-        true,
-        false
-    ]
+  "idSave": 229,
+  "isFirstSession": false,
+  "language": "ru",
+  "promptDone": false,
+  "money": 1,
+  "newPlayerName": "Hello!",
+  "openLevels": [
+    false,
+    true,
+    false
+  ]
 }

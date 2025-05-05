@@ -1,4 +1,4 @@
-using UnityEngine;
+using Assets.Scripts.Utils;
 
 public class ReturnState : MainManuState
 {
@@ -8,7 +8,7 @@ public class ReturnState : MainManuState
     {
         base.Enter();
 
-        Time.timeScale = 1;
+        TimeHandler.Instance.Play();
         SettingMenu.CanvasGroup.alpha = 0f;
         SettingMenu.CanvasGroup.interactable = false;
         SettingMenu.CanvasGroup.blocksRaycasts = false;

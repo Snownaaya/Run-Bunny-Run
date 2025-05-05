@@ -314,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 3643351633129913439}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 13.6, z: -459}
+  m_LocalPosition: {x: 1, y: 13.6, z: -155.2}
   m_LocalScale: {x: 1, y: 1, z: 1.2784455}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1103,9 +1103,6 @@ PrefabInstance:
       addedObject: {fileID: 9185065865523997170}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 20e075563bb2b82438e51ceabc5b9b8a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3014910745944808251}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 20e075563bb2b82438e51ceabc5b9b8a, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6059054861317486814}
     - targetCorrespondingSourceObject: {fileID: -8961359253771211100, guid: 20e075563bb2b82438e51ceabc5b9b8a, type: 3}
       insertIndex: -1
@@ -1398,25 +1395,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a715f6b3d770d444be18475c78253e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
+  _speed: 90
+  _scoreCounter: {fileID: 11400000, guid: 3495f514fbdd26f4e8b3dbd56d8efde5, type: 2}
+  <ChanceFromDistance>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 0.4741358
+      outSlope: 0.4741358
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 83.64624
+      value: 40.159676
+      inSlope: -0.058014676
+      outSlope: -0.058014676
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 150
+      value: 1
+      inSlope: -0.59016514
+      outSlope: -0.59016514
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   <End>k__BackingField: {fileID: 461763963945566235}
   <Begin>k__BackingField: {fileID: 2364820709375894128}
   <RevivePoint>k__BackingField: {fileID: 5543215119510379801}
---- !u!114 &3014910745944808251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5198959947040110823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97a0b7588c2df704cbe2ba82afa2b3bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _container: {fileID: 4858744264005214813}
-  _delay: 30
-  _points:
+  <CoinSpawnPoints>k__BackingField:
+  - {fileID: 4858744264005214813}
   - {fileID: 2337972925691236265}
   - {fileID: 7504579303368108383}
   - {fileID: 3042846248345634283}
@@ -1424,7 +1442,8 @@ MonoBehaviour:
   - {fileID: 270816543506244980}
   - {fileID: 3434647918982256456}
   - {fileID: 2527689171056744099}
-  <Coin>k__BackingField: {fileID: 8446818975350809770, guid: 9c42a710e5cbe604f850e3ca944162ca, type: 3}
+  - {fileID: 324139565413865490}
+  - {fileID: 8197373944690415174}
 --- !u!114 &6059054861317486814
 MonoBehaviour:
   m_ObjectHideFlags: 0

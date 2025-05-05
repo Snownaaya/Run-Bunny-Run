@@ -3,17 +3,19 @@ using UnityEngine;
 
 public class Roader : MonoBehaviour
 {
-    [SerializeField] private float _speed = 100f;
+    [SerializeField] private float _speed = 90f;
+    [SerializeField] private ScoreCounter _scoreCounter;
 
+    [field: SerializeField] public AnimationCurve ChanceFromDistance { get; private set; }
     [field: SerializeField] public Transform End { get; protected set; }
     [field: SerializeField] public Transform Begin { get; protected set; }
     [field: SerializeField] public Transform RevivePoint { get; protected set; }
+    [field: SerializeField] public Transform[] CoinSpawnPoints { get; protected set; }
 
-    private ScoreCounter _scoreCounter;
     private Transform _transform;
     private Vector3 _position;
 
-    private float _maxSpeed = 150f;
+    private float _maxSpeed = 140f;
     private float _currentSpeed = 100f;
     private float _distanceTraveled;
     private float _speedScore = 10;
@@ -57,9 +59,6 @@ public class Roader : MonoBehaviour
             _distanceTraveled = 0f;
         }
     }
-
-    public void Initialize(ScoreCounter scoreCounter) =>
-        _scoreCounter = scoreCounter;
 
     public void Reset()
     {

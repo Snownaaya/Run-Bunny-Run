@@ -1,33 +1,36 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(RoaderStorage), typeof(HandleRoadSpeed))]
+[RequireComponent(typeof(RoaderStorage), typeof(HandleRoadSpeed), typeof (CoinSpawner))]
 public class RoadSpawner : ObjectPool<Roader>
 {
     [SerializeField] private Roader[] _roadPrefabs;
     [SerializeField] private Character _character;
     [SerializeField] private ClosestRoadTracker _roadTracker;
+
     [SerializeField] private int _maxRoads;
     [SerializeField] private float _spawnTriggerDistance;
 
     private RoaderStorage _storage;
     private Transform _transform;
     private HandleRoadSpeed _roadMovement;
-    private ScoreCounter _scoreCounter;
+    //private ScoreCounter _scoreCounter;
+    private CoinSpawner _coinSpawner;
 
     private bool _hasSpawnedNextRoad;
 
     private void Awake()
     {
         _transform = transform;
+        _coinSpawner = GetComponent<CoinSpawner>();
         _roadMovement = GetComponent<HandleRoadSpeed>();
         _storage = GetComponent<RoaderStorage>();
     }
 
-    private void Start()
-    {
+    private void Start() =>
          Spawn();
-    }
 
     private void Update()
     {
@@ -50,8 +53,8 @@ public class RoadSpawner : ObjectPool<Roader>
             ReturnRoad();
     }
 
-    public void Initialize(ScoreCounter scoreCounter) =>
-        _scoreCounter = scoreCounter;
+    //public void Initialize(ScoreCounter scoreCounter) =>
+    //    _scoreCounter = scoreCounter;
 
     private void Spawn()
     {
@@ -63,15 +66,31 @@ public class RoadSpawner : ObjectPool<Roader>
 
         Vector3 spawnPosition = CalculateRoadPosition(newRoad);
         newRoad.transform.position = spawnPosition;
-        newRoad.Initialize(_scoreCounter);
+        //newRoad.Initialize(_scoreCounter);
         _storage.AddRoad(newRoad);
         _roadMovement.SetCurrentSpeed(newRoad);
+        _coinSpawner.Generate(newRoad, newRoad.CoinSpawnPoints);
     }
 
     private Roader GetRandomRoad()
     {
-        int randomIndex = Random.Range(0, _roadPrefabs.Length);
-        return _roadPrefabs[randomIndex];
+        List<float> chances = new List<float>();
+
+        for (int i = 0; i < _roadPrefabs.Length; i++)
+            chances.Add(_roadPrefabs[i].ChanceFromDistance.Evaluate(_character.transform.position.z));
+
+        float randomIndex = Random.Range(0, chances.Sum());
+        float sum = 0;
+
+        for (int i = 0; i < chances.Count; i++)
+        {
+            sum += chances[i];
+
+            if (randomIndex < sum)
+                return _roadPrefabs[i];
+        }
+
+        return _roadPrefabs[_roadPrefabs.Length - 1];
     }
 
     private Vector3 CalculateRoadPosition(Roader newRoad)

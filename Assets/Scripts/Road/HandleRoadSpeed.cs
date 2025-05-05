@@ -15,11 +15,8 @@ public class HandleRoadSpeed : MonoBehaviour
     private void Start() =>
         StartCoroutine(IncreaseSpeedRoutine());
 
-    public void SetCurrentSpeed(Roader roader)
-    {
+    public void SetCurrentSpeed(Roader roader) =>
         roader.CurrentSpeed = GetCurrentSpeed();
-        Debug.Log($"Задаю скорость {roader.CurrentSpeed} для {roader.gameObject.name}");
-    }
 
     public void SyncSpeedAfterRevive()
     {

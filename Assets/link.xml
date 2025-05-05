@@ -1,10 +1,6 @@
 <linker>
-  <assembly fullname="Zenject" preserve="all"/>
   <assembly fullname="DOTween" preserve="all"/>
   <assembly fullname="Assembly-CSharp">
-    <type fullname="Zenject.CoinSpawnInstaller" preserve="all"/>
-    <type fullname="CustomManagersInstaller" preserve="all"/>
-    <type fullname="CustomProjectContext" preserve="all"/>
     <type fullname="Obstacle" preserve="all"/>
     <type fullname="MainManuState" preserve="all"/>
   </assembly>

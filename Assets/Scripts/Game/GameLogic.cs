@@ -1,3 +1,4 @@
+using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,20 +16,17 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private HandleRoadSpeed _handleRoadSpeed;
     [SerializeField] private WalletSetup _setup;
     [SerializeField] private RoaderStorage _roaderStorage;
-    [SerializeField] private LeaderBoard _leaderBoard;
+    [SerializeField] private ScoreCounter _scoreCounter;
 
     private PlayerWallet _wallet;
-    private ScoreCounter _scoreCounter;
     private ScorePresenter _scorePresenter;
 
     private void Awake()
     {
         _wallet = _setup.Wallet;
-        _scoreCounter = new ScoreCounter();
         _scorePresenter = new ScorePresenter(_scoreCounter, _scoreView);
         _revivePanel.Initialize(_player);
-        _roadSpawner.Initialize(_scoreCounter);
-        _leaderBoard.Initialize(_scoreCounter);
+        //_roadSpawner.Initialize(_scoreCounter);
     }
 
     private void OnEnable()
@@ -55,8 +53,7 @@ public class GameLogic : MonoBehaviour
     {
         _endScreen.Open();
         _revivePanel.Open();
-        _leaderBoard.AdLeaderBoard();
-        Time.timeScale = 0;
+        TimeHandler.Instance.Pause();
     }
 
     private void OnReviveWithAdRequested() =>
@@ -74,14 +71,14 @@ public class GameLogic : MonoBehaviour
     private void RevivePlayer()
     {
         _revivePanel.Close();
-        Time.timeScale = 1f;
+        TimeHandler.Instance.Play();
         _player.Revive();
     }
 
     private void OnResetGame()
     {
         _endScreen.Close();
-        Time.timeScale = 1;
+        TimeHandler.Instance.Play();
         _roadSpawner.ClearPool();
         _scoreCounter.Reset();
         _wallet.Reset();

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class RevivePanel : Window
 {
     [SerializeField] private Button _reviveWithCoinsButton;
+    [SerializeField] private SettingMenu _settingMenu;
 
     [SerializeField] private int _coinCost;
 
@@ -21,6 +22,7 @@ public class RevivePanel : Window
         base.OnEnable();
         Button.onClick.AddListener(OnReviveWithAdClick);
         _reviveWithCoinsButton.onClick.AddListener(OnReviveWithCoinsClick);
+        _settingMenu.PauseButton.interactable = true;
     }
 
 
@@ -37,6 +39,7 @@ public class RevivePanel : Window
         CanvasGroup.interactable = false;
         CanvasGroup.blocksRaycasts = false;
         CanvasGroup.gameObject.SetActive(false);
+        _settingMenu.PauseButton.interactable = true;
     }
 
     public override void Open()
@@ -45,6 +48,7 @@ public class RevivePanel : Window
         CanvasGroup.interactable = true;
         CanvasGroup.blocksRaycasts = true;
         CanvasGroup.gameObject.SetActive(true);
+        _settingMenu.PauseButton.interactable = false;
     }
 
     protected override void OnButtonClick() =>

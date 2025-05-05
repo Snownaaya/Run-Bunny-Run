@@ -13,14 +13,14 @@ public class MoveTutorialMobile : TutorialStepCondiction, ITutorialObjectEventSo
     public override void Enable()
     {
         gameObject.SetActive(true);
-        Completed = true;
+        Completed = false;
         StartCoroutine(PlayAnimation());
     }
 
     public override void Disable()
     {
+        Completed = true;
         gameObject.SetActive(false);
-        Completed = false;
     }
 
     private IEnumerator PlayAnimation()

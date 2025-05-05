@@ -1,4 +1,4 @@
-using UnityEngine;
+using Assets.Scripts.Utils;
 
 public class PauseState : MainManuState
 {
@@ -8,7 +8,7 @@ public class PauseState : MainManuState
     {
         base.Enter();
 
-        Time.timeScale = 0;
+        TimeHandler.Instance.Pause();
         SettingMenu.CanvasGroup.alpha = 1f;
         SettingMenu.CanvasGroup.interactable = true;
         SettingMenu.CanvasGroup.blocksRaycasts = true;

@@ -11,7 +11,7 @@ namespace Assets.Scripts.Audio
         [SerializeField] private AudioMixer _mixer;
 
         private float _minValueMusic = -80f;
-        private float _maxValueMusic = 20f;
+        private float _maxValueMusic = -16f;
 
         private void OnEnable() =>
             _volumeAudio.onValueChanged.AddListener(SetVolume);

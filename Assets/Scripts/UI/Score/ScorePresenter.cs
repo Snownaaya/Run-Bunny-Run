@@ -1,9 +1,9 @@
 public class ScorePresenter
 {
-    private ScoreCounter _scoreCounter;
+    private IScoreCounter _scoreCounter;
     private IView _scoreView;
 
-    public ScorePresenter(ScoreCounter scoreCounter, IView scoreView)
+    public ScorePresenter(IScoreCounter scoreCounter, IView scoreView)
     {
         _scoreCounter = scoreCounter;
         _scoreView = scoreView;

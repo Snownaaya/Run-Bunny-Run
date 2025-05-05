@@ -1,40 +1,22 @@
-using System.Collections;
 using UnityEngine;
 
 public class CoinSpawner : ObjectPool<Coin>
 {
     private const string Position = nameof(Position);
 
-    [SerializeField] private int _delay;
-    [SerializeField] private Transform[] _points;
-
     [field: SerializeField] public Coin Coin { get; private set; }
 
-    private int _count = 20;
+    private int _count = 15;
 
-    private void Start() =>
-        StartCoroutine(Spawn());
-
-    public IEnumerator Spawn()
+    public void Generate(Roader roader, Transform[] coinPoints)
     {
-        var wait = new WaitForSeconds(_delay);
-
-        while (true)
+        for (int i = 0; i < _count; i++)
         {
-            for (int i = 0; i < _count; i++)
-                Generate();
-
-            yield return wait;
+            int randomZposition = Random.Range(0, coinPoints.Length);
+            Coin coin = GetObject(Coin);
+            coin.transform.SetParent(roader.transform);
+            coin.transform.position = roader.CoinSpawnPoints[randomZposition].position;
         }
-
-    }
-
-    private void Generate()
-    {
-        int randomZposition = Random.Range(0, _points.Length);
-
-        Coin coin = GetObject(Coin);
-        coin.transform.position = _points[randomZposition].position;
     }
 
     public void ReturnCoin(Coin coin) =>

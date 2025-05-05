@@ -1,4 +1,4 @@
-using UnityEngine;
+using Assets.Scripts.Utils;
 
 public class RestartState : MainManuState
 {
@@ -15,7 +15,7 @@ public class RestartState : MainManuState
     {
         base.Enter();
 
-        Time.timeScale = 1;
+        TimeHandler.Instance.Play();
         _runner.StartCoroutine(SettingMenu.ScreenFader.TransitionCoroutine(StartScene));
 
         Hide();

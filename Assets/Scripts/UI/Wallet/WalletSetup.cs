@@ -1,11 +1,10 @@
 using System.Collections;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(PlayerAudio))]
 public class WalletSetup : MonoBehaviour
 {
-    [Inject] private CoinSpawner[] _spawner;
+    [SerializeField] private CoinSpawner _spawner;
 
     [SerializeField] private ClampedAmountWithIcon _view;
     [SerializeField] private CoinParticle _coinParticle;
@@ -40,7 +39,7 @@ public class WalletSetup : MonoBehaviour
             PooledParticle pooledParticle = _coinParticle.Spawn();
             _playerAudio.Play();
             _model.AddCoin();
-            _spawner[0].ReturnCoin(coin);
+            _spawner.ReturnCoin(coin);
             StartCoroutine(ReturnParticle(pooledParticle));
         }
     }

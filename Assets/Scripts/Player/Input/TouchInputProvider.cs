@@ -73,7 +73,7 @@ public class TouchInputProvider : MonoBehaviour, IInputProvider
 
         while (_currentFinger.isActive)
         {
-            Move = _currentFinger.screenPosition.x - startFingerPosition.x;
+            Move = startFingerPosition.x - _currentFinger.screenPosition.x;
             Move = Mathf.Clamp(Move, -_fingerMaxMoveRejectX, _fingerMaxMoveRejectX);
 
             yield return null;

@@ -5,7 +5,6 @@ using System;
 public class RewardedVideoAds : MonoBehaviour
 {
     [SerializeField] private Notifier _notifier;
-    [SerializeField] private SettingMenu _settingMenu;
 
     private int _advertisingId = 0;
 
@@ -23,22 +22,14 @@ public class RewardedVideoAds : MonoBehaviour
         YandexGame.ErrorVideoEvent -= OnErrorVideoEvent;
     }
 
-    public void ShowRewardedAd()
-    {
-        _settingMenu.PauseButton.interactable = false;
+    public void ShowRewardedAd() =>
         YandexGame.RewVideoShow(_advertisingId);
-    }
 
-    private void OnErrorVideoEvent()
-    {
-        _settingMenu.PauseButton.interactable = true;
+    private void OnErrorVideoEvent() =>
         _notifier.gameObject.SetActive(true);
-    }
 
     private void OnRewarded(int id)
     {
-        _settingMenu.PauseButton.interactable = true;
-
         if (id == _advertisingId)
             OnReviveGranted?.Invoke();
     }

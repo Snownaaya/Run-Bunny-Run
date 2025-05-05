@@ -7,7 +7,6 @@ namespace Assets.Scripts.Audio
         [SerializeField] private AudioSource _backgroundMusic;
 
         public static BackgroundMusic Instance;
-        public bool IsMusicPlaying => _backgroundMusic.isPlaying;
 
         private void Awake()
         {

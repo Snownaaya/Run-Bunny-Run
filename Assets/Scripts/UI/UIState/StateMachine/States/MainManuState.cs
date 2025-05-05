@@ -23,7 +23,7 @@ public abstract class MainManuState : IStates
         _animation = DOTween.Sequence();
 
         _animation
-            .Append(SettingMenu.CanvasGroup.transform.DOScale(1f, 0.5f).From(0f).SetEase(Ease.Linear))
+            .Append(SettingMenu.CanvasGroup.transform.DOScale(1.337628f, 0.5f).From(0f).SetEase(Ease.Linear))
             .Join(SettingMenu.RectTransform.DOAnchorPos(SettingMenu.TargetBody, 1f).From(SettingMenu.CurrentPosition))
             .Append(SettingMenu.RestartButton.transform.DOScale(1f, 1f).From(0f).SetEase(Ease.OutCirc))
             .Append(SettingMenu.ReturnButton.transform.DOScale(1f, 1f).From(0f).SetEase(Ease.OutCirc))
